@@ -140,16 +140,16 @@ public class ScreenAdmin extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/8.png"))); // NOI18N
-        jLabel4.setText("Menu1");
+        jLabel4.setText("Gestion Comptes");
 
         javax.swing.GroupLayout menu1Layout = new javax.swing.GroupLayout(menu1);
         menu1.setLayout(menu1Layout);
         menu1Layout.setHorizontalGroup(
             menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu1Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+            .addGroup(menu1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         menu1Layout.setVerticalGroup(
             menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,13 +369,11 @@ public class ScreenAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel Menu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel menu1;
     private javax.swing.JPanel menu2;
     private javax.swing.JPanel menu3;
