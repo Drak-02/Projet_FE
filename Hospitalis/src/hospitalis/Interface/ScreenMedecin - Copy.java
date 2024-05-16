@@ -4,8 +4,6 @@
  */
 package hospitalis.Interface;
 import hospitalis.Interface.componentAD.Menu1A;
-import hospitalis.Interface.componentAD.Menu1AS;
-import hospitalis.Interface.componentAD.Menu1AT;
 import java.awt.Color;
 
 /**
@@ -15,14 +13,14 @@ import java.awt.Color;
 
 
 
-public class ScreenAdmin extends javax.swing.JFrame {
+public class ScreenMedecin extends javax.swing.JFrame {
 
     /**
      * Creates new form ScreenAdmin
      */
     Color DefaultColor, ClickedColor ;
     
-    public ScreenAdmin() {
+    public ScreenMedecin() {
         initComponents();
         DefaultColor = new Color(204,204,204);
         ClickedColor = new Color (0,204,204);
@@ -31,7 +29,8 @@ public class ScreenAdmin extends javax.swing.JFrame {
         menu1.setBackground(DefaultColor);
         menu2.setBackground(DefaultColor);
         menu3.setBackground(DefaultColor);
-        //        
+        menu4.setBackground(DefaultColor);
+               
     }
 
     /**
@@ -45,7 +44,6 @@ public class ScreenAdmin extends javax.swing.JFrame {
 
         Header = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         Menu = new javax.swing.JPanel();
         menu2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -53,6 +51,8 @@ public class ScreenAdmin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         menu3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        menu4 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         CenterPanel = new javax.swing.JPanel();
 
@@ -63,27 +63,21 @@ public class ScreenAdmin extends javax.swing.JFrame {
 
         jLabel1.setText("Name Application");
 
-        jLabel7.setText("Menu");
-
         javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
         Header.setLayout(HeaderLayout);
         HeaderLayout.setHorizontalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HeaderLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderLayout.createSequentialGroup()
+                .addContainerGap(462, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(349, 349, 349)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(431, Short.MAX_VALUE))
+                .addGap(396, 396, 396))
         );
         HeaderLayout.setVerticalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         getContentPane().add(Header, java.awt.BorderLayout.PAGE_START);
@@ -94,26 +88,23 @@ public class ScreenAdmin extends javax.swing.JFrame {
         menu2.setBackground(new java.awt.Color(204, 204, 204));
         menu2.setPreferredSize(new java.awt.Dimension(178, 50));
         menu2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu2MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu2MousePressed(evt);
             }
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/serv.png"))); // NOI18N
-        jLabel2.setText("Gestion Services");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/8.png"))); // NOI18N
+        jLabel2.setText("Menu2");
 
         javax.swing.GroupLayout menu2Layout = new javax.swing.GroupLayout(menu2);
         menu2.setLayout(menu2Layout);
         menu2Layout.setHorizontalGroup(
             menu2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menu2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
         menu2Layout.setVerticalGroup(
             menu2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,16 +129,16 @@ public class ScreenAdmin extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/8.png"))); // NOI18N
-        jLabel4.setText("Gestion Comptes");
+        jLabel4.setText("Menu1");
 
         javax.swing.GroupLayout menu1Layout = new javax.swing.GroupLayout(menu1);
         menu1.setLayout(menu1Layout);
         menu1Layout.setHorizontalGroup(
             menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menu1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu1Layout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
         menu1Layout.setVerticalGroup(
             menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,32 +151,58 @@ public class ScreenAdmin extends javax.swing.JFrame {
         menu3.setBackground(new java.awt.Color(204, 204, 204));
         menu3.setPreferredSize(new java.awt.Dimension(178, 50));
         menu3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu3MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu3MousePressed(evt);
             }
         });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/traiter.png"))); // NOI18N
-        jLabel5.setText("Gestion Traitement");
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/8.png"))); // NOI18N
+        jLabel5.setText("Menu 3");
 
         javax.swing.GroupLayout menu3Layout = new javax.swing.GroupLayout(menu3);
         menu3.setLayout(menu3Layout);
         menu3Layout.setHorizontalGroup(
             menu3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menu3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu3Layout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
         menu3Layout.setVerticalGroup(
             menu3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        menu4.setBackground(new java.awt.Color(204, 204, 204));
+        menu4.setPreferredSize(new java.awt.Dimension(178, 50));
+        menu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menu4MousePressed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/8.png"))); // NOI18N
+        jLabel6.setText("Menu 4");
+
+        javax.swing.GroupLayout menu4Layout = new javax.swing.GroupLayout(menu4);
+        menu4.setLayout(menu4Layout);
+        menu4Layout.setHorizontalGroup(
+            menu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu4Layout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
+        );
+        menu4Layout.setVerticalGroup(
+            menu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -196,8 +213,9 @@ public class ScreenAdmin extends javax.swing.JFrame {
             .addGroup(MenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(menu2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                    .addComponent(menu3, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
+                    .addComponent(menu2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menu3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menu4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(MenuLayout.createSequentialGroup()
@@ -212,7 +230,9 @@ public class ScreenAdmin extends javax.swing.JFrame {
                 .addComponent(menu2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(menu3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(282, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(menu4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(198, Short.MAX_VALUE))
             .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(MenuLayout.createSequentialGroup()
                     .addGap(22, 22, 22)
@@ -239,7 +259,6 @@ public class ScreenAdmin extends javax.swing.JFrame {
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MousePressed
@@ -247,6 +266,7 @@ public class ScreenAdmin extends javax.swing.JFrame {
         menu1.setBackground(ClickedColor);
         menu2.setBackground(DefaultColor);
         menu3.setBackground(DefaultColor);
+        menu4.setBackground(DefaultColor);
         
     }//GEN-LAST:event_menu1MousePressed
 
@@ -255,6 +275,7 @@ public class ScreenAdmin extends javax.swing.JFrame {
         menu1.setBackground(DefaultColor);
         menu2.setBackground(ClickedColor);
         menu3.setBackground(DefaultColor);
+        menu4.setBackground(DefaultColor);
     }//GEN-LAST:event_menu2MousePressed
 
     private void menu3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu3MousePressed
@@ -262,7 +283,17 @@ public class ScreenAdmin extends javax.swing.JFrame {
         menu1.setBackground(DefaultColor);
         menu2.setBackground(DefaultColor);
         menu3.setBackground(ClickedColor);
+        menu4.setBackground(DefaultColor);
     }//GEN-LAST:event_menu3MousePressed
+
+    private void menu4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu4MousePressed
+        // TODO add your handling code here:
+        menu1.setBackground(DefaultColor);
+        menu2.setBackground(DefaultColor);
+        menu3.setBackground(DefaultColor);
+        menu4.setBackground(ClickedColor);
+        
+    }//GEN-LAST:event_menu4MousePressed
 
     private void menu1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MouseReleased
         // TODO add your handling code here:
@@ -277,22 +308,6 @@ public class ScreenAdmin extends javax.swing.JFrame {
         CenterPanel.add(menuA).setVisible(true);
         
     }//GEN-LAST:event_menu1MouseClicked
-
-    private void menu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu2MouseClicked
-        // TODO add your handling code here:
-        Menu1AS menuA = new Menu1AS();
-        
-        CenterPanel.removeAll();
-        CenterPanel.add(menuA).setVisible(true);
-    }//GEN-LAST:event_menu2MouseClicked
-
-    private void menu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu3MouseClicked
-        // TODO add your handling code here:
-        Menu1AT menuA = new Menu1AT();
-        
-        CenterPanel.removeAll();
-        CenterPanel.add(menuA).setVisible(true);
-    }//GEN-LAST:event_menu3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -311,20 +326,21 @@ public class ScreenAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ScreenAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ScreenMedecin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ScreenAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ScreenMedecin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ScreenAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ScreenMedecin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ScreenAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ScreenMedecin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ScreenAdmin().setVisible(true);
+                new ScreenMedecin().setVisible(true);
             }
         });
     }
@@ -337,10 +353,11 @@ public class ScreenAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel menu1;
     private javax.swing.JPanel menu2;
     private javax.swing.JPanel menu3;
+    private javax.swing.JPanel menu4;
     // End of variables declaration//GEN-END:variables
 }
