@@ -8,6 +8,6 @@ package hospitalis.Model;
  *
  * @author badra
  */
-public class Utilisateur {
+public class Calender {
     
 }

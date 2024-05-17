@@ -9,5 +9,17 @@ package hospitalis.Model;
  * @author badra
  */
 public class Dossiers {
+    //Attribues
+    protected String idDossier;
+    protected String infosD;
+    protected String prescription;
+        
+    //Constructor
+    public Dossiers(){
+        
+    }
+    
+    //Methode
+    
     
 }
