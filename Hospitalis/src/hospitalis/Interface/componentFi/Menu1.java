@@ -44,7 +44,7 @@ public class Menu1 extends javax.swing.JInternalFrame {
         jdate = new com.toedter.calendar.JDateChooser();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jdetail = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(810, 434));
@@ -93,9 +93,9 @@ public class Menu1 extends javax.swing.JInternalFrame {
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton3.setText("Imprimer");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        jdetail.setColumns(20);
+        jdetail.setRows(5);
+        jScrollPane2.setViewportView(jdetail);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,7 +178,7 @@ public class Menu1 extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     public javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
     public com.toedter.calendar.JDateChooser jdate;
+    public javax.swing.JTextArea jdetail;
     // End of variables declaration//GEN-END:variables
 }
