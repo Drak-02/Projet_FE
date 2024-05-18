@@ -8,16 +8,14 @@ package hospitalis.Model;
  *
  * @author badra
  */
-public class Medecin extends Utilisateurs{
+public class Medecin {
     
     //Attributs
     protected String specialite;
     protected Calender calendrier;
     
     //Constructor
-    public Medecin (){
-        
-    }
+
     
     //Methode
     

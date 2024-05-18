@@ -4,7 +4,10 @@
  */
 package hospitalis;
 
+import hospitalis.Controleur.Authentification;
 import hospitalis.Controleur.ControleurBDD;
+import java.sql.Connection;
+
 
 /**
  *
@@ -21,7 +24,13 @@ public class Hospitalis {
         String url = "jdbc:mysql://localhost:3306/mabase";
         String username = "root";
         String password = "";        
+        //Ceci permet d'établir la connection  à la base de donnée
         ControleurBDD BDD = new ControleurBDD(url,username,password);
+        // Ici on obtient la connexion existant a la base de données
+        Connection connection = BDD.getConnection();
+        //La connection est base a la base de données pour les vérification 
+        Authentification authentifier = new Authentification(connection);
+        authentifier.afficherFenetreAuthentication();
     }
     
 }

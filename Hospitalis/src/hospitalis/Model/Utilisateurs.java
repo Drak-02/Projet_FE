@@ -1,5 +1,6 @@
 package hospitalis.Model;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,71 +8,137 @@ import java.sql.Statement;
 
 import hospitalis.Controleur.ControleurBDD;
 
-public abstract class Utilisateurs {
-    // Attributs
-    protected String idUtilisateur;
-    protected String nom;
-    protected String prenom;
-    protected String role;
-    protected String password;
-    protected String dateNaissance;
-    protected int contact;
-    protected String matricule; 
-
-
-        String url = "jdbc:mysql://localhost:3306/mabase";
-        String username = "root";
-        String passworddb = "";
+public class Utilisateurs {
     
+    // Attributs
+    private String nom;
+    private String prenom;
+    private String role;
+    private String password;
+    private String dateNaissance;
+    private int contact;
+    private String matricule;
+    private Connection connection; // Ajout de l'attribut de connexion
+    private String idUtilisateur;
 
-    //Constructor
-    public Utilisateurs(){
-        
+    public void setIdUtilisateur(String idUtilisateur) {
+        this.idUtilisateur = idUtilisateur;
     }
-    public Utilisateurs(String nom, String password){
-        this.nom  = nom;
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setPassword(String password) {
         this.password = password;
     }
 
+    public void setDateNaissance(String dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
+    public void setContact(int contact) {
+        this.contact = contact;
+    }
+
+    public void setMatricule(String matricule) {
+        this.matricule = matricule;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
+    public String getIdUtilisateur() {
+        return idUtilisateur;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getDateNaissance() {
+        return dateNaissance;
+    }
+
+    public int getContact() {
+        return contact;
+    }
+
+    public String getMatricule() {
+        return matricule;
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
     
-    //Method*
-    //S'authentifier
-    public boolean SeConnecter(String nom, String password){
+
+    // Constructeur
+    public Utilisateurs(Connection connection) {
+        this.connection = connection;
+    }
+
+    public Utilisateurs(String nom, String password) {
+        this.nom = nom;
+        this.password = password;
+    }
+
+    // Méthode d'authentification
+    public boolean seConnecter() {
         boolean isAthentification = false;
-        @SuppressWarnings("unused")
         String authSql = "SELECT role ,matricule, password FROM users WHERE matricule=? AND password=?";
-        ControleurBDD connection = new ControleurBDD(url, username, passworddb);
 
-        try  {
-            PreparedStatement prepare = connection.getConnection().prepareStatement(authSql);
-
-            prepare.setString(1,this.matricule);
+        try (PreparedStatement prepare = connection.prepareStatement(authSql)) {
+            prepare.setString(1, this.matricule);
             prepare.setString(2, this.password);
 
             try (ResultSet resultSet = prepare.executeQuery()) {
-                if(resultSet.next()){
+                if (resultSet.next()) {
                     isAthentification = true;
-                    this.role = resultSet.getString("role"); //Permet de récuperer le rôle et de le stocke sur role
-
-                }else{
+                    this.role = resultSet.getString("role");
+                } else {
                     isAthentification = false;
                     System.out.println("Authentification échouée");
                 }
-                
-            } catch (Exception e) {
-                // TODO: handle exception
-                e.printStackTrace();
-
             }
-            prepare.clearParameters();
-        } catch (Exception e) {
-            // TODO: handle exception
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        if(isAthentification)
-            return true;//SI l'authentification est réussi return true pour aller chercher le roler de l'utilisateur
-        return false;
-    }
-    //****************************************************** */
-    // Ajouter utilisateur par Administrateur
 
+        return isAthentification;
+    }
+    
+    //****************************************************** */
+    /*
+    Lors de la creation de l'instance utilisateur il faut fournir la conexion existants a la base de données
+    ControleurBDD controleurBDD = new ControleurBDD(url, username, passworddb);
+    Connection connection = controleurBDD.getConnection();
+        ou bien par 
+    Utilisateurs utilisateur = new Utilisateurs(connection);
+
+    */
+    
+    // Autres méthodes de manipulation des utilisateurs
+    
 }

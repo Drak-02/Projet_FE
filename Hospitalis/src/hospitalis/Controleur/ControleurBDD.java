@@ -41,7 +41,7 @@ public class ControleurBDD {
     public Connection getConnection(){
         return connection;   
     }
-    /*0 *
+    
     // Synchronized for got one instance 
     public static synchronized ControleurBDD  instance(String url,String user,String pass){
         if( instance == null){
@@ -49,7 +49,7 @@ public class ControleurBDD {
         }
         return instance ;
     }
-    */
+    
     public void closeConnection() {
         try {
             if (connection != null && !connection.isClosed()) {
