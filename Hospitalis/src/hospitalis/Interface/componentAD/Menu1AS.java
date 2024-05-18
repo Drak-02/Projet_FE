@@ -15,13 +15,21 @@ public class Menu1AS extends javax.swing.JInternalFrame {
     /**
      * Creates new form Menu1A
      */
+    private static Menu1AS instance;
+
     public Menu1AS() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0,0));
         BasicInternalFrameUI ui= (BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
     }
-
+    // me permet d'avoir une seule instance dans l'utilisation
+    public static Menu1AS getInstance(){
+        if(instance == null){
+            instance = new Menu1AS();
+        }
+        return instance;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

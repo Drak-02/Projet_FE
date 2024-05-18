@@ -15,11 +15,18 @@ public class Menu1A extends javax.swing.JInternalFrame {
     /**
      * Creates new form Menu1A
      */
+    private static Menu1A instance;
     public Menu1A() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0,0));
         BasicInternalFrameUI ui= (BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
+    }
+    public static Menu1A getInstance(){
+        if(instance == null){
+            instance = new Menu1A();
+        }
+        return instance;
     }
 
     /**

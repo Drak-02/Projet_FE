@@ -28,13 +28,21 @@ public class ScreenStock extends javax.swing.JFrame {
         DefaultColor = new Color(204,204,204);
         ClickedColor = new Color (0,204,204);
         
-        //[204,204,204] [0,204,204]
+        //[204,204,204] [0,204,204] // Initialisation des color de menu
         menu1.setBackground(DefaultColor);
         menu2.setBackground(DefaultColor);
         menu3.setBackground(DefaultColor);
         menu4.setBackground(DefaultColor);
-        
-               
+        // Ajouter 
+        CenterPanel.setLayout(new java.awt.CardLayout());
+        CenterPanel.add(new Menu1S(), "Menu1S");
+        CenterPanel.add(new Menu1S2(), "Menu1S2");
+        CenterPanel.add(new Menu1S3(), "Menu1S3");
+        CenterPanel.add(new Menu1S4(), "Menu1S4");
+          
+        //Initial panel
+        java.awt.CardLayout cl = (java.awt.CardLayout) CenterPanel.getLayout();
+        cl.show(CenterPanel, "Menu1S");
     }
 
     /**
@@ -48,6 +56,7 @@ public class ScreenStock extends javax.swing.JFrame {
 
         Header = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         Menu = new javax.swing.JPanel();
         menu2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -65,23 +74,31 @@ public class ScreenStock extends javax.swing.JFrame {
         Header.setBackground(new java.awt.Color(0, 204, 255));
         Header.setPreferredSize(new java.awt.Dimension(1000, 70));
 
-        jLabel1.setText("Name Application");
+        jLabel1.setText("Name HOSPITAL");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Gestion des Stockes");
 
         javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
         Header.setLayout(HeaderLayout);
         HeaderLayout.setHorizontalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderLayout.createSequentialGroup()
-                .addContainerGap(462, Short.MAX_VALUE)
+            .addGroup(HeaderLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(396, 396, 396))
+                .addGap(225, 225, 225)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(357, Short.MAX_VALUE))
         );
         HeaderLayout.setVerticalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         getContentPane().add(Header, java.awt.BorderLayout.PAGE_START);
@@ -391,6 +408,7 @@ public class ScreenStock extends javax.swing.JFrame {
     private javax.swing.JPanel Menu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

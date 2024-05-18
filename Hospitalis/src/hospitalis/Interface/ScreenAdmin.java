@@ -7,6 +7,8 @@ import hospitalis.Interface.componentAD.Menu1A;
 import hospitalis.Interface.componentAD.Menu1AS;
 import hospitalis.Interface.componentAD.Menu1AT;
 import java.awt.Color;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
@@ -31,7 +33,28 @@ public class ScreenAdmin extends javax.swing.JFrame {
         menu1.setBackground(DefaultColor);
         menu2.setBackground(DefaultColor);
         menu3.setBackground(DefaultColor);
-        //        
+        // 
+        CenterPanel.setLayout(new java.awt.CardLayout());
+        CenterPanel.add(new Menu1A(), "Menu1S");
+        CenterPanel.add(new  Menu1AS(), "Menu1S2");
+        CenterPanel.add(new Menu1AT(), "Menu1S3");
+    }
+    // Initialize components here as in your original code
+
+   public JPanel getMenu1() {
+        return menu1;
+    }
+
+    public JPanel getMenu2() {
+        return menu2;
+    }
+
+    public JPanel getMenu3() {
+        return menu3;
+    }
+
+    public JPanel getCenterPanel() {
+        return CenterPanel;
     }
 
     /**
@@ -94,9 +117,6 @@ public class ScreenAdmin extends javax.swing.JFrame {
         menu2.setBackground(new java.awt.Color(204, 204, 204));
         menu2.setPreferredSize(new java.awt.Dimension(178, 50));
         menu2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu2MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu2MousePressed(evt);
             }
@@ -125,14 +145,8 @@ public class ScreenAdmin extends javax.swing.JFrame {
 
         menu1.setBackground(new java.awt.Color(204, 204, 204));
         menu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu1MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu1MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                menu1MouseReleased(evt);
             }
         });
 
@@ -147,7 +161,7 @@ public class ScreenAdmin extends javax.swing.JFrame {
             .addGroup(menu1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         menu1Layout.setVerticalGroup(
             menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,9 +174,6 @@ public class ScreenAdmin extends javax.swing.JFrame {
         menu3.setBackground(new java.awt.Color(204, 204, 204));
         menu3.setPreferredSize(new java.awt.Dimension(178, 50));
         menu3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu3MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu3MousePressed(evt);
             }
@@ -178,8 +189,8 @@ public class ScreenAdmin extends javax.swing.JFrame {
             menu3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menu3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         menu3Layout.setVerticalGroup(
             menu3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,8 +207,8 @@ public class ScreenAdmin extends javax.swing.JFrame {
             .addGroup(MenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(menu2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                    .addComponent(menu3, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
+                    .addComponent(menu2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menu3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(MenuLayout.createSequentialGroup()
@@ -264,36 +275,6 @@ public class ScreenAdmin extends javax.swing.JFrame {
         menu3.setBackground(ClickedColor);
     }//GEN-LAST:event_menu3MousePressed
 
-    private void menu1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MouseReleased
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_menu1MouseReleased
-
-    private void menu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MouseClicked
-        // TODO add your handling code here:
-        Menu1A menuA = new Menu1A();
-        
-        CenterPanel.removeAll();
-        CenterPanel.add(menuA).setVisible(true);
-        
-    }//GEN-LAST:event_menu1MouseClicked
-
-    private void menu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu2MouseClicked
-        // TODO add your handling code here:
-        Menu1AS menuA = new Menu1AS();
-        
-        CenterPanel.removeAll();
-        CenterPanel.add(menuA).setVisible(true);
-    }//GEN-LAST:event_menu2MouseClicked
-
-    private void menu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu3MouseClicked
-        // TODO add your handling code here:
-        Menu1AT menuA = new Menu1AT();
-        
-        CenterPanel.removeAll();
-        CenterPanel.add(menuA).setVisible(true);
-    }//GEN-LAST:event_menu3MouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -339,8 +320,8 @@ public class ScreenAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel menu1;
-    private javax.swing.JPanel menu2;
-    private javax.swing.JPanel menu3;
+    public javax.swing.JPanel menu1;
+    public javax.swing.JPanel menu2;
+    public javax.swing.JPanel menu3;
     // End of variables declaration//GEN-END:variables
 }

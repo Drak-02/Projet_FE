@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-import hospitalis.Controleur.ControleurBDD;
 
 public class Utilisateurs {
     
@@ -97,13 +95,9 @@ public class Utilisateurs {
     // Constructeur
     public Utilisateurs(Connection connection) {
         this.connection = connection;
+        System.out.println("Appel a utilisateur");
     }
-
-    public Utilisateurs(String nom, String password) {
-        this.nom = nom;
-        this.password = password;
-    }
-
+    
     // Méthode d'authentification
     public boolean seConnecter() {
         boolean isAthentification = false;
