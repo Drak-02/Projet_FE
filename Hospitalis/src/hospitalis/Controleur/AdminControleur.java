@@ -4,11 +4,13 @@
  */
 package hospitalis.Controleur;
 
+import hospitalis.Controleur.MenuAdmin.Menu1AControleur;
+import hospitalis.Controleur.MenuAdmin.Menu1ASControleur;
+import hospitalis.Controleur.MenuAdmin.Menu1ATControleur;
 import hospitalis.Interface.ScreenAdmin;
 import hospitalis.Interface.componentAD.Menu1A;
 import hospitalis.Interface.componentAD.Menu1AS;
 import hospitalis.Interface.componentAD.Menu1AT;
-import hospitalis.Model.UserAdmin;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
@@ -20,12 +22,13 @@ import java.sql.Connection;
  */
 public  class AdminControleur implements MouseListener {
     //Attributs
-    private ScreenAdmin screenAdmin;
-    private UserAdmin userAdmin;
-    private Connection connection;
-    private Menu1A menu1A;
+    private final ScreenAdmin screenAdmin;
+    private final Connection connection;
+    
+    private Menu1A menu1A;    
     private Menu1AS menu1AS;
     private Menu1AT menu1AT;
+    
     
     //Constructeur
     public AdminControleur(Connection connection){
@@ -47,20 +50,32 @@ public  class AdminControleur implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-    if(e.getSource() == screenAdmin.menu1){
-        menu1A = Menu1A.getInstance(); // Utilisation de l'instance singleton
-        screenAdmin.getCenterPanel().removeAll();
-        screenAdmin.getCenterPanel().add(menu1A).setVisible(true);
-    }else if(e.getSource() == screenAdmin.menu2){
-        menu1AS = Menu1AS.getInstance(); // Utilisation de l'instance singleton
-        screenAdmin.getCenterPanel().removeAll();
-        screenAdmin.getCenterPanel().add(menu1AS).setVisible(true);
-    }else if(e.getSource() == screenAdmin.menu3){
-        menu1AT = Menu1AT.getInstance(); // Utilisation de l'instance singleton
-        screenAdmin.getCenterPanel().removeAll();
-        screenAdmin.getCenterPanel().add(menu1AT).setVisible(true);
+        if(e.getSource() == screenAdmin.menu1){
+            menu1A = Menu1A.getInstance(); // Utilisation de l'instance singleton
+            screenAdmin.getCenterPanel().removeAll();
+            //Appel le contrôleur de menu1
+            Menu1AControleur menu1AControleur = new Menu1AControleur(connection);
+            menu1AControleur.setMenu(menu1A);
+            screenAdmin.getCenterPanel().add(menu1A);
+            menu1AControleur.afficherMenu1();
+
+        }else if(e.getSource() == screenAdmin.menu2){
+            menu1AS = Menu1AS.getInstance(); // Utilisation de l'instance singleton
+            screenAdmin.getCenterPanel().removeAll();
+
+            Menu1ASControleur menu1ASControleur = new Menu1ASControleur(connection);
+            menu1ASControleur.setMenu(menu1AS);
+            screenAdmin.getCenterPanel().add(menu1AS);
+            menu1ASControleur.afficherMenu();
+        }else if(e.getSource() == screenAdmin.menu3){
+            menu1AT = Menu1AT.getInstance(); // Utilisation de l'instance singleton
+            screenAdmin.getCenterPanel().removeAll();
+
+            Menu1ATControleur menu1ASControleur = new Menu1ATControleur(connection);
+            menu1ASControleur.setMenu(menu1AT);
+            screenAdmin.getCenterPanel().add(menu1AT);
+            menu1ASControleur.afficherMenu();    }
     }
-}
 
     @Override
     public void mousePressed(MouseEvent e) {

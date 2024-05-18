@@ -4,32 +4,30 @@
  */
 package hospitalis.Controleur.MenuAdmin;
 
-import hospitalis.Interface.componentAD.Menu1A;
+import hospitalis.Interface.componentAD.Menu1AS;
 import java.sql.Connection;
 /**
  *
  * @author badra
  */
-public class Menu1AControleur {
-    //
+public class Menu1ASControleur {
+     
     private Connection connection;
-    private Menu1A menu1A;
+    private Menu1AS menu;
     //
-    public Menu1AControleur(Connection connection){
+    public Menu1ASControleur(Connection connection){
         this.connection = connection;
     }
-    //
-
-    public void setMenu(Menu1A menu1A) {
-        this.menu1A = menu1A;
+    
+    public void setMenu(Menu1AS menu1A) {
+        this.menu= menu1A;
     }
-    public void afficherMenu1(){
-        if(menu1A.isVisible()){
-            menu1A.setVisible(false);
+    public void afficherMenu(){
+       if(menu.isVisible()){
+            menu.setVisible(false);
         }else{
-            menu1A.setVisible(true);
+            menu.setVisible(true);
         }
-        
     }
-  
+    
 }
