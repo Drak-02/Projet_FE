@@ -43,7 +43,7 @@ public class ControleurBDD {
     }
     
     // Synchronized for got one instance 
-    public static synchronized ControleurBDD  instance(String url,String user,String pass){
+    public static synchronized ControleurBDD  getInstance(String url,String user,String pass){
         if( instance == null){
             instance = new ControleurBDD(url, user, pass);
         }

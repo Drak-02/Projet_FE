@@ -48,7 +48,7 @@ public class Authentification implements ActionListener {
     // Effectuez la redirection en fonction du rôle
     // Exemple : new chemin().setVisible(true); et envoyer la connection a la base de données
     switch (role) {
-        case "admin":
+        case "Administrateur":
             // Redirection pour l'administrateur
             AdminControleur adminControleur = new AdminControleur(connection);
             adminControleur.afficherScreenAdmin();

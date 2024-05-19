@@ -4,6 +4,7 @@
  */
 package hospitalis.Controleur.MenuAdmin;
 
+import hospitalis.Interface.componentAD.Menu1A;
 import hospitalis.Interface.componentAD.Menu1AS;
 import java.sql.Connection;
 /**

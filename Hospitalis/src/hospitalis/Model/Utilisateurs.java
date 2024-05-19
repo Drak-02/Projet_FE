@@ -14,10 +14,46 @@ public class Utilisateurs {
     private String role;
     private String password;
     private String dateNaissance;
-    private int contact;
     private String matricule;
     private Connection connection; // Ajout de l'attribut de connexion
     private String idUtilisateur;
+    private int telephone;
+    private String email;
+    private String sexe;
+    private String specialite;
+
+    public void setSpecialite(String specialite) {
+        this.specialite = specialite;
+    }
+
+    public String getSpecialite() {
+        return specialite;
+    }
+
+    public void setTelephone(int telephone) {
+        this.telephone = telephone;
+    }
+
+    public void setEmail(String mail) {
+        this.email = mail;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+
+    public int getTelephone() {
+        return telephone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+    
 
     public void setIdUtilisateur(String idUtilisateur) {
         this.idUtilisateur = idUtilisateur;
@@ -43,9 +79,6 @@ public class Utilisateurs {
         this.dateNaissance = dateNaissance;
     }
 
-    public void setContact(int contact) {
-        this.contact = contact;
-    }
 
     public void setMatricule(String matricule) {
         this.matricule = matricule;
@@ -79,10 +112,6 @@ public class Utilisateurs {
         return dateNaissance;
     }
 
-    public int getContact() {
-        return contact;
-    }
-
     public String getMatricule() {
         return matricule;
     }
@@ -101,7 +130,7 @@ public class Utilisateurs {
     // Méthode d'authentification
     public boolean seConnecter() {
         boolean isAthentification = false;
-        String authSql = "SELECT role ,matricule, password FROM users WHERE matricule=? AND password=?";
+        String authSql = "SELECT role ,matricule, password FROM utilisateurs WHERE matricule=? AND password=?";
 
         try (PreparedStatement prepare = connection.prepareStatement(authSql)) {
             prepare.setString(1, this.matricule);
@@ -122,6 +151,52 @@ public class Utilisateurs {
 
         return isAthentification;
     }
+    public boolean ajouterCompte(Connection connection) {
+        System.out.println("Appel a jouter utilisateur");
+        boolean matriExiste = false;
+        String verifiSql = "SELECT COUNT(*) FROM utilisateurs WHERE matricule = ?";
+
+        // Vérifier si le matricule existe déjà
+        try (PreparedStatement verifi = connection.prepareStatement(verifiSql)) {
+            verifi.setString(1, matricule);
+            try (ResultSet resultSet = verifi.executeQuery()) {
+                if (resultSet.next()) {
+                    matriExiste = resultSet.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (matriExiste) {
+            
+            System.out.println("Le matricule existe déjà dans la base de données.");
+            return false;
+        } else {
+            // Insérer le nouvel utilisateur si le matricule n'existe pas
+            String insertQuery = "INSERT INTO utilisateurs (matricule, nom, prenom, dateNaissance, password, telephone, specialite, email, role, sexe) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+                preparedStatement.setString(1, matricule);
+                preparedStatement.setString(2, nom);
+                preparedStatement.setString(3, prenom);
+                preparedStatement.setString(4, dateNaissance);
+                preparedStatement.setString(5, password);
+                preparedStatement.setInt(6, telephone);
+                preparedStatement.setString(7, specialite);
+                preparedStatement.setString(8, email);
+                preparedStatement.setString(9, role);
+                preparedStatement.setString(10, sexe);
+
+                preparedStatement.executeUpdate();
+                System.out.println("Utilisateur ajouté avec succès");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                }
+            }
+        return true;
+    }
+
     
     //****************************************************** */
     /*
