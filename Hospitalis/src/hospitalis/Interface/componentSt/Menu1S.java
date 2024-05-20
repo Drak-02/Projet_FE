@@ -4,7 +4,6 @@
  */
 package hospitalis.Interface.componentSt;
 
-import hospitalis.Interface.componentAD.*;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -16,13 +15,27 @@ public class Menu1S extends javax.swing.JInternalFrame {
     /**
      * Creates new form Menu1A
      */
+    private static Menu1S instance;
+    
     public Menu1S() {
         initComponents();
-        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0,0));
-        BasicInternalFrameUI ui= (BasicInternalFrameUI)this.getUI();
+        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
+        System.out.println("Creation de menu1Stock");
         ui.setNorthPane(null);
     }
 
+    public static Menu1S getInstance() {
+        if (instance == null) {
+            synchronized (Menu1S.class) {
+                if (instance == null) {
+                    instance = new Menu1S();
+                    System.out.println("Instance de Menu1S créée");
+                }
+            }
+        }
+        return instance;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,9 +53,9 @@ public class Menu1S extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         ipArt = new javax.swing.JTextField();
         ipQuant = new javax.swing.JTextField();
-        btajouter = new javax.swing.JButton();
+        btadd = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbenregistre = new javax.swing.JTable();
+        jtables = new javax.swing.JTable();
         jSeparator2 = new javax.swing.JSeparator();
         jtype = new javax.swing.JComboBox<>();
         sdate = new com.toedter.calendar.JDateChooser();
@@ -62,18 +75,18 @@ public class Menu1S extends javax.swing.JInternalFrame {
 
         ipQuant.setPreferredSize(new java.awt.Dimension(190, 22));
 
-        btajouter.setText("Ajouter");
+        btadd.setText("Ajouter");
 
-        tbenregistre.setModel(new javax.swing.table.DefaultTableModel(
+        jtables.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
-                "Article", "Quantité", "Date", "Type"
+                "Article", "Type", "Quantité", "Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Long.class, java.lang.Object.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -87,7 +100,7 @@ public class Menu1S extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tbenregistre);
+        jScrollPane1.setViewportView(jtables);
 
         jtype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Médicament", "Matriel" }));
 
@@ -106,7 +119,7 @@ public class Menu1S extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btajouter))
+                        .addComponent(btadd))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +127,7 @@ public class Menu1S extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2))
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(ipQuant, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                            .addComponent(ipQuant, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
                             .addComponent(ipArt, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                         .addGap(38, 38, 38)
                         .addComponent(jLabel3)
@@ -144,11 +157,12 @@ public class Menu1S extends javax.swing.JInternalFrame {
                             .addComponent(ipQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(sdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addComponent(btajouter)
+                .addComponent(btadd)
                 .addGap(39, 39, 39)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -156,7 +170,7 @@ public class Menu1S extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btajouter;
+    public javax.swing.JButton btadd;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     public javax.swing.JTextField ipArt;
@@ -167,8 +181,8 @@ public class Menu1S extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JComboBox<String> jtype;
-    private com.toedter.calendar.JDateChooser sdate;
-    public javax.swing.JTable tbenregistre;
+    public javax.swing.JTable jtables;
+    public javax.swing.JComboBox<String> jtype;
+    public com.toedter.calendar.JDateChooser sdate;
     // End of variables declaration//GEN-END:variables
 }

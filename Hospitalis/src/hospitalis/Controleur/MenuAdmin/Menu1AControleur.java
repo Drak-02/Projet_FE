@@ -38,7 +38,8 @@ public class Menu1AControleur implements MouseListener ,ListSelectionListener {
         this.menu1A.jtables.getSelectionModel().addListSelectionListener(this);
         chargementDeUsers();
     }
-
+    
+    //Contrôle la creation des instances lors de l'arriver pour ne pas créer a chaque fois une autre instance ( surcharge).
     public static Menu1AControleur getInstance(Connection connection, Menu1A menu1A) {
         if (instanceM1 == null) {
             synchronized (Menu1AControleur.class) {

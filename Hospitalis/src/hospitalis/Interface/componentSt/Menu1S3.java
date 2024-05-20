@@ -16,13 +16,24 @@ public class Menu1S3 extends javax.swing.JInternalFrame {
     /**
      * Creates new form Menu1A
      */
+    private static Menu1S3 instance;
     public Menu1S3() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0,0));
         BasicInternalFrameUI ui= (BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
     }
-
+    public static Menu1S3 getInstance() {
+        if (instance == null) {
+            synchronized (Menu1S3.class) {
+                if (instance == null) {
+                    instance = new Menu1S3();
+                    System.out.println("Appel a linstance de MenuS3");
+                }
+            }
+        }
+        return instance;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

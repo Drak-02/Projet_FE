@@ -16,17 +16,22 @@ public class AdminControleur implements MouseListener {
     private final ScreenAdmin screenAdmin;
     private final Connection connection;
     
+    
     private Menu1A menu1A;    
     private Menu1AS menu1AS;
     private Menu1AT menu1AT;
     
-    private Menu1AControleur menu1AControleur;
+    //Permet de stocke lors des switchs vers les differents panel
+    private final Menu1AControleur menu1AControleur;
+    private final Menu1ASControleur menu1ASControleur;
+    private final Menu1ATControleur menu1ATControleur;
     
 
     // Constructeur
     public AdminControleur(Connection connection) {
         this.connection = connection;
         screenAdmin = new ScreenAdmin();
+        
         this.screenAdmin.menu1.addMouseListener(this);
         this.screenAdmin.menu2.addMouseListener(this);
         this.screenAdmin.menu3.addMouseListener(this);
@@ -37,6 +42,9 @@ public class AdminControleur implements MouseListener {
         this.menu1AT = Menu1AT.getInstance();
         
         this.menu1AControleur = Menu1AControleur.getInstance(connection, menu1A);
+        this.menu1ASControleur = Menu1ASControleur.getInstance(connection, menu1AS);
+        this.menu1ATControleur = Menu1ATControleur.getInstance(connection, menu1AT);
+
     }
 
     // Méthode
@@ -68,16 +76,15 @@ public class AdminControleur implements MouseListener {
     }
 
     private void showMenu1AS() {
-        Menu1ASControleur menu1ASControleur = new Menu1ASControleur(connection);
-        menu1ASControleur.setMenu(menu1AS);
+        System.out.println("Appel a getInstance menu1AS");
+        //Menu1A menu1A = Menu1A.getInstance(); // Using the singleton instance
         screenAdmin.getCenterPanel().add(menu1AS);
         menu1ASControleur.afficherMenu();
     }
 
     private void showMenu1AT() {
-        Menu1AT menu1AT = Menu1AT.getInstance(); // Using the singleton instance
-        Menu1ATControleur menu1ATControleur = new Menu1ATControleur(connection);
-        menu1ATControleur.setMenu(menu1AT);
+         System.out.println("Appel a getInstance menu1AT");
+        //Menu1A menu1A = Menu1A.getInstance(); // Using the singleton instance
         screenAdmin.getCenterPanel().add(menu1AT);
         menu1ATControleur.afficherMenu();
     }

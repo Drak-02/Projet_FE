@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/badra/Desktop/Projet%20de%20Fin%20d'étude/Hospitalis/src/hospitalis/Interface/componentAD/Menu1A.java</file>
-            <file>file:/C:/Users/badra/Desktop/Projet%20de%20Fin%20d'étude/Hospitalis/src/hospitalis/Hospitalis.java</file>
-            <file>file:/C:/Users/badra/Desktop/Projet%20de%20Fin%20d'étude/Hospitalis/src/hospitalis/Model/Utilisateurs.java</file>
-            <file>file:/C:/Users/badra/Desktop/Projet%20de%20Fin%20d'étude/Hospitalis/src/hospitalis/Controleur/MenuAdmin/Menu1AControleur.java</file>
+            <file>file:/C:/Users/badra/Desktop/Projet%20de%20Fin%20d'étude/Hospitalis/src/hospitalis/Controleur/StockeControleur.java</file>
+            <file>file:/C:/Users/badra/Desktop/Projet%20de%20Fin%20d'étude/Hospitalis/src/hospitalis/Interface/ScreenAdmin.java</file>
+            <file>file:/C:/Users/badra/Desktop/Projet%20de%20Fin%20d'étude/Hospitalis/src/hospitalis/Controleur/MenuStocke/ControleurMenu1S.java</file>
+            <file>file:/C:/Users/badra/Desktop/Projet%20de%20Fin%20d'étude/Hospitalis/src/hospitalis/Controleur/MenuStocke/ControleurMenu1S3.java</file>
+            <file>file:/C:/Users/badra/Desktop/Projet%20de%20Fin%20d'étude/Hospitalis/src/hospitalis/Interface/ScreenStock.java</file>
             <file>file:/C:/Users/badra/Desktop/Projet%20de%20Fin%20d'étude/Hospitalis/src/hospitalis/Controleur/AdminControleur.java</file>
         </group>
     </open-files>

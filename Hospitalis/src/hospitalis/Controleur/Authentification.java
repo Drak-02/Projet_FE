@@ -63,10 +63,10 @@ public class Authentification implements ActionListener {
             // Redirection pour le service finance
             screenAuthentification.dispose();            
             break;
-        case "stocke":
+        case "Stocke":
             // Redirection pour le service stocke
             StockeControleur stockeControleur = new StockeControleur(connection);
-            stockeControleur.afficherStocke();
+            stockeControleur.afficherStockeScreen();
             screenAuthentification.dispose();            
             break;
         case "accueil":

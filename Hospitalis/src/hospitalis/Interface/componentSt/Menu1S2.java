@@ -4,7 +4,6 @@
  */
 package hospitalis.Interface.componentSt;
 
-import hospitalis.Interface.componentAD.*;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -16,13 +15,24 @@ public class Menu1S2 extends javax.swing.JInternalFrame {
     /**
      * Creates new form Menu1A
      */
+    private static Menu1S2 instance;
     public Menu1S2() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0,0));
         BasicInternalFrameUI ui= (BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
     }
-
+    public static Menu1S2 getInstance() {
+        if (instance == null) {
+            synchronized (Menu1S2.class) {
+                if (instance == null) {
+                    instance = new Menu1S2();
+                    System.out.println("Appel a linstance de MenuS2");
+                }
+            }
+        }
+        return instance;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,7 +47,6 @@ public class Menu1S2 extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jtniveau = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(810, 534));
@@ -47,7 +56,7 @@ public class Menu1S2 extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "N°", "Atricle", "Type", "Quantité"
+                "N°", "Atricle", "Type", "Quantité Total"
             }
         ) {
             Class[] types = new Class [] {
@@ -80,7 +89,6 @@ public class Menu1S2 extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -90,10 +98,8 @@ public class Menu1S2 extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addGap(23, 23, 23)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(254, Short.MAX_VALUE))
         );
 
         pack();
@@ -105,7 +111,6 @@ public class Menu1S2 extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
     public javax.swing.JTable jtniveau;
     // End of variables declaration//GEN-END:variables
 }
