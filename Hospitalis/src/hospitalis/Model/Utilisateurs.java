@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Utilisateurs {
@@ -17,7 +19,7 @@ public class Utilisateurs {
     private String matricule;
     private Connection connection; // Ajout de l'attribut de connexion
     private String idUtilisateur;
-    private int telephone;
+    private long telephone;
     private String email;
     private String sexe;
     private String specialite;
@@ -30,7 +32,7 @@ public class Utilisateurs {
         return specialite;
     }
 
-    public void setTelephone(int telephone) {
+    public void setTelephone(long telephone) {
         this.telephone = telephone;
     }
 
@@ -42,7 +44,7 @@ public class Utilisateurs {
         this.sexe = sexe;
     }
 
-    public int getTelephone() {
+    public long getTelephone() {
         return telephone;
     }
 
@@ -182,13 +184,15 @@ public class Utilisateurs {
                 preparedStatement.setString(3, prenom);
                 preparedStatement.setString(4, dateNaissance);
                 preparedStatement.setString(5, password);
-                preparedStatement.setInt(6, telephone);
+                preparedStatement.setLong(6, telephone);
                 preparedStatement.setString(7, specialite);
                 preparedStatement.setString(8, email);
                 preparedStatement.setString(9, role);
                 preparedStatement.setString(10, sexe);
 
                 preparedStatement.executeUpdate();
+                getAllUsers(connection);
+
                 System.out.println("Utilisateur ajouté avec succès");
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -196,7 +200,69 @@ public class Utilisateurs {
             }
         return true;
     }
+    //Récuperation des données de la base de
+    public static List<Utilisateurs> getAllUsers(Connection connection) {
+        List<Utilisateurs> userList = new ArrayList<>();
+        String query = "SELECT matricule, nom, prenom, dateNaissance,password, telephone, email, specialite, role, sexe FROM utilisateurs";
 
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Utilisateurs user = new Utilisateurs(connection);
+                user.setMatricule(resultSet.getString("matricule"));
+                user.setNom(resultSet.getString("nom"));
+                user.setPrenom(resultSet.getString("prenom"));
+                user.setDateNaissance(resultSet.getString("dateNaissance"));
+                user.setPassword(resultSet.getString("password"));
+                user.setTelephone(resultSet.getLong("telephone"));
+                user.setEmail(resultSet.getString("email"));
+                user.setSpecialite(resultSet.getString("specialite"));
+                user.setRole(resultSet.getString("role"));
+                user.setSexe(resultSet.getString("sexe"));
+                userList.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userList;
+    }
+    public boolean modifierCompte(Connection connection) {
+        try {
+            String query = "UPDATE utilisateurs SET nom = ?, prenom = ?, dateNaissance = ?, password = ?, telephone = ?, specialite = ?, email = ?, role = ?, sexe = ? WHERE matricule = ?";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, this.nom);
+            pstmt.setString(2, this.prenom);
+            pstmt.setString(3, this.dateNaissance);
+            pstmt.setString(4, this.password);
+            pstmt.setLong(5, this.telephone);
+            pstmt.setString(6, this.specialite);
+            pstmt.setString(7, this.email);
+            pstmt.setString(8, this.role);
+            pstmt.setString(9, this.sexe);
+            pstmt.setString(10, this.matricule);
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean supprimerCompte(Connection connection) {
+        try {
+            String query = "DELETE FROM utilisateurs WHERE matricule = ?";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, matricule);
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+}
     
     //****************************************************** */
     /*
@@ -210,4 +276,3 @@ public class Utilisateurs {
     
     // Autres méthodes de manipulation des utilisateurs
     
-}

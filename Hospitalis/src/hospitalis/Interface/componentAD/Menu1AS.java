@@ -24,9 +24,14 @@ public class Menu1AS extends javax.swing.JInternalFrame {
         ui.setNorthPane(null);
     }
     // me permet d'avoir une seule instance dans l'utilisation
-    public static Menu1AS getInstance(){
-        if(instance == null){
-            instance = new Menu1AS();
+    public static Menu1AS getInstance() {
+        if (instance == null) {
+            synchronized (Menu1AS.class) {
+                if (instance == null) {
+                    instance = new Menu1AS();
+                    System.out.println("Appel a linstance de Menu1A");
+                }
+            }
         }
         return instance;
     }
@@ -44,13 +49,13 @@ public class Menu1AS extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        ipcodeService = new javax.swing.JTextField();
-        ipNom = new javax.swing.JTextField();
+        codeService = new javax.swing.JTextField();
+        NomService = new javax.swing.JTextField();
         btmodifier = new javax.swing.JButton();
         btajouter = new javax.swing.JButton();
         btsupprimer = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbenregistre = new javax.swing.JTable();
+        jtables = new javax.swing.JTable();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane3 = new javax.swing.JScrollPane();
         jdes = new javax.swing.JTextArea();
@@ -64,9 +69,9 @@ public class Menu1AS extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Description:");
 
-        ipcodeService.setPreferredSize(new java.awt.Dimension(190, 22));
+        codeService.setPreferredSize(new java.awt.Dimension(190, 22));
 
-        ipNom.setPreferredSize(new java.awt.Dimension(190, 22));
+        NomService.setPreferredSize(new java.awt.Dimension(190, 22));
 
         btmodifier.setText("Modifié");
 
@@ -74,7 +79,7 @@ public class Menu1AS extends javax.swing.JInternalFrame {
 
         btsupprimer.setText("Supprimer");
 
-        tbenregistre.setModel(new javax.swing.table.DefaultTableModel(
+        jtables.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null}
             },
@@ -97,8 +102,8 @@ public class Menu1AS extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbenregistre.setShowGrid(true);
-        jScrollPane1.setViewportView(tbenregistre);
+        jtables.setShowGrid(true);
+        jScrollPane1.setViewportView(jtables);
 
         jdes.setColumns(20);
         jdes.setRows(5);
@@ -121,8 +126,8 @@ public class Menu1AS extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3))
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ipcodeService, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                            .addComponent(ipNom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(codeService, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                            .addComponent(NomService, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane3))
                         .addGap(264, 264, 264)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,13 +146,13 @@ public class Menu1AS extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(ipcodeService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(codeService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btmodifier))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btajouter)
                     .addComponent(jLabel2)
-                    .addComponent(ipNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NomService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -158,8 +163,8 @@ public class Menu1AS extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -167,13 +172,13 @@ public class Menu1AS extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JTextField NomService;
     public javax.swing.JButton btajouter;
     public javax.swing.JButton btmodifier;
     public javax.swing.JButton btsupprimer;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    public javax.swing.JTextField ipNom;
-    public javax.swing.JTextField ipcodeService;
+    public javax.swing.JTextField codeService;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -181,6 +186,6 @@ public class Menu1AS extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator2;
     public javax.swing.JTextArea jdes;
-    public javax.swing.JTable tbenregistre;
+    public javax.swing.JTable jtables;
     // End of variables declaration//GEN-END:variables
 }

@@ -69,13 +69,13 @@ public class Menu1A extends javax.swing.JInternalFrame {
         inputSpe = new javax.swing.JTextField();
         inputMai = new javax.swing.JTextField();
         boutonHomme = new javax.swing.JRadioButton();
-        Femme = new javax.swing.JRadioButton();
+        boutonFemme = new javax.swing.JRadioButton();
         inputRole = new javax.swing.JComboBox<>();
         btmodifier = new javax.swing.JButton();
         btajouter = new javax.swing.JButton();
         btsupprimer = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbenregistre = new javax.swing.JTable();
+        jtables = new javax.swing.JTable();
         jSeparator2 = new javax.swing.JSeparator();
         inputNaiss = new com.toedter.calendar.JDateChooser();
 
@@ -133,11 +133,11 @@ public class Menu1A extends javax.swing.JInternalFrame {
         buttonGroup1.add(boutonHomme);
         boutonHomme.setText("Homme");
 
-        buttonGroup1.add(Femme);
-        Femme.setText("Femme");
-        Femme.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(boutonFemme);
+        boutonFemme.setText("Femme");
+        boutonFemme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FemmeActionPerformed(evt);
+                boutonFemmeActionPerformed(evt);
             }
         });
 
@@ -149,7 +149,7 @@ public class Menu1A extends javax.swing.JInternalFrame {
 
         btsupprimer.setText("Supprimer");
 
-        tbenregistre.setModel(new javax.swing.table.DefaultTableModel(
+        jtables.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null}
             },
@@ -158,7 +158,7 @@ public class Menu1A extends javax.swing.JInternalFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false
@@ -172,8 +172,8 @@ public class Menu1A extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbenregistre.setShowGrid(true);
-        jScrollPane1.setViewportView(tbenregistre);
+        jtables.setShowGrid(true);
+        jScrollPane1.setViewportView(jtables);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -226,7 +226,7 @@ public class Menu1A extends javax.swing.JInternalFrame {
                                 .addGap(23, 23, 23)
                                 .addComponent(boutonHomme, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(Femme, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(boutonFemme, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -267,7 +267,7 @@ public class Menu1A extends javax.swing.JInternalFrame {
                             .addComponent(jLabel8)
                             .addComponent(inputSpe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(boutonHomme)
-                            .addComponent(Femme))
+                            .addComponent(boutonFemme))
                         .addGap(15, 15, 15))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(inputPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,13 +302,13 @@ public class Menu1A extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_inputMaiActionPerformed
 
-    private void FemmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemmeActionPerformed
+    private void boutonFemmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonFemmeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_FemmeActionPerformed
+    }//GEN-LAST:event_boutonFemmeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JRadioButton Femme;
+    public javax.swing.JRadioButton boutonFemme;
     public javax.swing.JRadioButton boutonHomme;
     public javax.swing.JButton btajouter;
     public javax.swing.JButton btmodifier;
@@ -336,6 +336,6 @@ public class Menu1A extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
-    public javax.swing.JTable tbenregistre;
+    public javax.swing.JTable jtables;
     // End of variables declaration//GEN-END:variables
 }

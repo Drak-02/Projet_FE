@@ -23,7 +23,7 @@ public class Hospitalis {
     public static void main(String[] args) {
         // TODO code application logic here
         //Vérification de la connection a la Base de données
-        String url = "jdbc:mysql://localhost:3306/basetuto";
+        String url = "jdbc:mysql://localhost:3306/test";
         String username = "root";
         String password = "";        
         //Ceci permet d'établir la connection  à la base de donnée
