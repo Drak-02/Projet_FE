@@ -7,6 +7,7 @@ import hospitalis.Interface.componentAc.Menu1;
 import hospitalis.Interface.componentAc.Menu2;
 import hospitalis.Interface.componentAc.Menu3;
 import java.awt.Color;
+import javax.swing.JPanel;
 
 /**
  *
@@ -87,9 +88,6 @@ public class ScreenAccueil extends javax.swing.JFrame {
         menu2.setBackground(new java.awt.Color(204, 204, 204));
         menu2.setPreferredSize(new java.awt.Dimension(178, 50));
         menu2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu2MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu2MousePressed(evt);
             }
@@ -117,9 +115,6 @@ public class ScreenAccueil extends javax.swing.JFrame {
 
         menu1.setBackground(new java.awt.Color(204, 204, 204));
         menu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu1MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu1MousePressed(evt);
             }
@@ -156,9 +151,6 @@ public class ScreenAccueil extends javax.swing.JFrame {
         menu3.setBackground(new java.awt.Color(204, 204, 204));
         menu3.setPreferredSize(new java.awt.Dimension(178, 50));
         menu3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu3MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu3MousePressed(evt);
             }
@@ -269,30 +261,22 @@ public class ScreenAccueil extends javax.swing.JFrame {
         // TODO add your handling code here:
        
     }//GEN-LAST:event_menu1MouseReleased
+    public JPanel getMenu1() {
+        return menu1;
+    }
 
-    private void menu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MouseClicked
-        // TODO add your handling code here:
-        Menu1 menuA = new Menu1();
-        
-        CenterPanel.removeAll();
-        CenterPanel.add(menuA).setVisible(true);
-        
-    }//GEN-LAST:event_menu1MouseClicked
- 
-    private void menu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu2MouseClicked
-        // TODO add your handling code here:
-        Menu2 menuB = new Menu2();
-        CenterPanel.removeAll();
-        CenterPanel.add(menuB).setVisible(true);
-    }//GEN-LAST:event_menu2MouseClicked
+    public JPanel getMenu2() {
+        return menu2;
+    }
 
-    private void menu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu3MouseClicked
-        // TODO add your handling code here:
-        Menu3 menuB = new Menu3();
-        CenterPanel.removeAll();
-        CenterPanel.add(menuB).setVisible(true);
-    }//GEN-LAST:event_menu3MouseClicked
-    /**
+    public JPanel getMenu3() {
+        return menu3;
+    }
+    
+    public JPanel getCenterPanel() {
+        return CenterPanel;
+    }
+        /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -337,8 +321,8 @@ public class ScreenAccueil extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel4;
     public javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel menu1;
-    private javax.swing.JPanel menu2;
-    private javax.swing.JPanel menu3;
+    public javax.swing.JPanel menu1;
+    public javax.swing.JPanel menu2;
+    public javax.swing.JPanel menu3;
     // End of variables declaration//GEN-END:variables
 }

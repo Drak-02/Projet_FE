@@ -43,8 +43,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" pref="142" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="225" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" pref="257" max="-2" attributes="0"/>
                   <EmptySpace pref="357" max="32767" attributes="0"/>
               </Group>
@@ -54,16 +54,21 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLabel3" max="32767" attributes="0"/>
-                      <Component id="jPanel2" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel1" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Name HOSPITAL"/>
+          </Properties>
+        </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -75,44 +80,6 @@
             <Property name="text" type="java.lang.String" value="Gestion des Stockes"/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JPanel" name="jPanel2">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="cc" red="33" type="rgb"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jPanel2MouseClicked"/>
-          </Events>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                      <Component id="jLabel7" min="-2" pref="97" max="-2" attributes="0"/>
-                      <EmptySpace pref="38" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel7">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Name Appli"/>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="Menu">
@@ -183,11 +150,9 @@
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu2MouseClicked"/>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu2MousePressed"/>
           </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -230,12 +195,10 @@
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu1MouseClicked"/>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu1MousePressed"/>
             <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu1MouseReleased"/>
           </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -281,11 +244,9 @@
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu3MouseClicked"/>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu3MousePressed"/>
           </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -327,11 +288,9 @@
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu4MouseClicked"/>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu4MousePressed"/>
           </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">

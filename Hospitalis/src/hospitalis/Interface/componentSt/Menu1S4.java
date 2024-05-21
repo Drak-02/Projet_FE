@@ -4,6 +4,7 @@
  */
 package hospitalis.Interface.componentSt;
 
+import hospitalis.Interface.componentAD.*;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -15,24 +16,11 @@ public class Menu1S4 extends javax.swing.JInternalFrame {
     /**
      * Creates new form Menu1A
      */
-    private static Menu1S4 instance;
-    
     public Menu1S4() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0,0));
         BasicInternalFrameUI ui= (BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
-    }
-    public static Menu1S4 getInstance() {
-        if (instance == null) {
-            synchronized (Menu1S4.class) {
-                if (instance == null) {
-                    instance = new Menu1S4();
-                    System.out.println("Appel a linstance de MenuS4");
-                }
-            }
-        }
-        return instance;
     }
 
     /**

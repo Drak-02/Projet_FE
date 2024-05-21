@@ -24,14 +24,9 @@ public class Menu1AT extends javax.swing.JInternalFrame {
         ui.setNorthPane(null);
     }
     
-    public static Menu1AT getInstance() {
-        if (instance == null) {
-            synchronized (Menu1AS.class) {
-                if (instance == null) {
-                    instance = new Menu1AT();
-                    System.out.println("Appel a linstance de Menu1A");
-                }
-            }
+    public static Menu1AT getInstance(){
+        if(instance == null){
+            instance = new Menu1AT();
         }
         return instance;
     }
@@ -57,7 +52,7 @@ public class Menu1AT extends javax.swing.JInternalFrame {
         btajouter = new javax.swing.JButton();
         btsupprimer = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtables = new javax.swing.JTable();
+        tbenregistre = new javax.swing.JTable();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
         jdes = new javax.swing.JTextArea();
@@ -85,7 +80,7 @@ public class Menu1AT extends javax.swing.JInternalFrame {
 
         btsupprimer.setText("Supprimer");
 
-        jtables.setModel(new javax.swing.table.DefaultTableModel(
+        tbenregistre.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
@@ -108,8 +103,8 @@ public class Menu1AT extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jtables.setShowGrid(true);
-        jScrollPane1.setViewportView(jtables);
+        tbenregistre.setShowGrid(true);
+        jScrollPane1.setViewportView(tbenregistre);
 
         jdes.setColumns(20);
         jdes.setRows(5);
@@ -119,6 +114,13 @@ public class Menu1AT extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jSeparator2)))
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +135,7 @@ public class Menu1AT extends javax.swing.JInternalFrame {
                     .addComponent(ipcodeT, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42))
                     .addGroup(layout.createSequentialGroup()
@@ -145,14 +147,6 @@ public class Menu1AT extends javax.swing.JInternalFrame {
                     .addComponent(btmodifier, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btajouter, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jSeparator2)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,8 +181,8 @@ public class Menu1AT extends javax.swing.JInternalFrame {
                 .addGap(71, 71, 71)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         pack();
@@ -211,7 +205,7 @@ public class Menu1AT extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
-    public javax.swing.JTextArea jdes;
-    public javax.swing.JTable jtables;
+    private javax.swing.JTextArea jdes;
+    public javax.swing.JTable tbenregistre;
     // End of variables declaration//GEN-END:variables
 }

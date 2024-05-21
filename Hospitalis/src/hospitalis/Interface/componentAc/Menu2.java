@@ -11,7 +11,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author pc
  */
 public class Menu2 extends javax.swing.JInternalFrame {
-
+    private static Menu2 instance ;
     /**
      * Creates new form Menu2
      */
@@ -21,7 +21,19 @@ public class Menu2 extends javax.swing.JInternalFrame {
         BasicInternalFrameUI ui= (BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
     }
-
+    public static Menu2 getInstance() {
+        if (instance == null) {
+            synchronized (Menu2.class) {
+                if (instance == null) {
+                    instance = new Menu2();
+                    System.out.println("Appel a linstance de Menu2");
+                }
+            }
+        }
+        return instance;
+            
+        }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,34 +46,34 @@ public class Menu2 extends javax.swing.JInternalFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        inputidpatient = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        inputnompatient = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        inputprenompatient = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        inputetatcivil = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        inputtelephone = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btsupp = new javax.swing.JButton();
+        btmodi = new javax.swing.JButton();
+        btajout = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        inputsexeH = new javax.swing.JRadioButton();
+        inputsexe = new javax.swing.JRadioButton();
 
         setPreferredSize(new java.awt.Dimension(510, 432));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Id patient:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        inputidpatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                inputidpatientActionPerformed(evt);
             }
         });
 
@@ -71,9 +83,9 @@ public class Menu2 extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("prenom:");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        inputprenompatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                inputprenompatientActionPerformed(evt);
             }
         });
 
@@ -84,17 +96,17 @@ public class Menu2 extends javax.swing.JInternalFrame {
         jLabel6.setText("etat civil:");
         jLabel6.setPreferredSize(new java.awt.Dimension(190, 22));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celibataire", "Marié", "Divorcé", "Veuf" }));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(190, 22));
+        inputetatcivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celibataire", "Marié", "Divorcé", "Veuf" }));
+        inputetatcivil.setPreferredSize(new java.awt.Dimension(190, 22));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Télephone:");
         jLabel4.setPreferredSize(new java.awt.Dimension(190, 22));
 
-        jTextField5.setPreferredSize(new java.awt.Dimension(190, 22));
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        inputtelephone.setPreferredSize(new java.awt.Dimension(190, 22));
+        inputtelephone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                inputtelephoneActionPerformed(evt);
             }
         });
 
@@ -120,22 +132,22 @@ public class Menu2 extends javax.swing.JInternalFrame {
         jTable1.setShowGrid(true);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("Supprimer");
+        btsupp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btsupp.setText("Supprimer");
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setText("Modifier");
+        btmodi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btmodi.setText("Modifier");
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("Ajouter");
+        btajout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btajout.setText("Ajouter");
 
         jLabel7.setText("Sexe:");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Masculin");
+        buttonGroup1.add(inputsexeH);
+        inputsexeH.setText("Masculin");
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Feminin");
+        buttonGroup1.add(inputsexe);
+        inputsexe.setText("Feminin");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,50 +162,50 @@ public class Menu2 extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                                .addComponent(inputnompatient)
                                 .addGap(114, 114, 114))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(inputidpatient, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(147, 147, 147)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(6, 6, 6)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
+                                .addComponent(jTextField4))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)
-                                .addComponent(jTextField3)))
+                                .addComponent(inputprenompatient)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(inputetatcivil, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(inputtelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(108, 108, 108)
-                        .addComponent(jButton1)
+                        .addComponent(btsupp)
                         .addGap(122, 122, 122)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(121, 121, 121)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btmodi, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(99, 99, 99)
+                        .addComponent(btajout, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(271, 271, 271)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton1)
+                .addComponent(inputsexeH)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputsexe, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -204,34 +216,34 @@ public class Menu2 extends javax.swing.JInternalFrame {
                         .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputidpatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputprenompatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputetatcivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputnompatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputtelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jRadioButton1)
-                        .addComponent(jRadioButton2)))
+                        .addComponent(inputsexeH)
+                        .addComponent(inputsexe)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btsupp)
+                    .addComponent(btmodi)
+                    .addComponent(btajout, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -240,26 +252,32 @@ public class Menu2 extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void inputidpatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputidpatientActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_inputidpatientActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void inputprenompatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputprenompatientActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_inputprenompatientActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void inputtelephoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputtelephoneActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_inputtelephoneActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btajout;
+    public javax.swing.JButton btmodi;
+    public javax.swing.JButton btsupp;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    public javax.swing.JButton jButton1;
-    public javax.swing.JButton jButton2;
-    public javax.swing.JButton jButton3;
-    public javax.swing.JComboBox<String> jComboBox1;
+    public javax.swing.JComboBox<String> inputetatcivil;
+    public javax.swing.JTextField inputidpatient;
+    public javax.swing.JTextField inputnompatient;
+    public javax.swing.JTextField inputprenompatient;
+    public javax.swing.JRadioButton inputsexe;
+    public javax.swing.JRadioButton inputsexeH;
+    public javax.swing.JTextField inputtelephone;
     public javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -267,14 +285,8 @@ public class Menu2 extends javax.swing.JInternalFrame {
     public javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     public javax.swing.JLabel jLabel7;
-    public javax.swing.JRadioButton jRadioButton1;
-    public javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable1;
-    public javax.swing.JTextField jTextField1;
-    public javax.swing.JTextField jTextField2;
-    public javax.swing.JTextField jTextField3;
     public javax.swing.JTextField jTextField4;
-    public javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }

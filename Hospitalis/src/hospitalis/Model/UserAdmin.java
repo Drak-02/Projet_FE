@@ -9,7 +9,5 @@ package hospitalis.Model;
  * @author badra
  */
 public class UserAdmin {
-    //
-    //
-    // 
+    
 }

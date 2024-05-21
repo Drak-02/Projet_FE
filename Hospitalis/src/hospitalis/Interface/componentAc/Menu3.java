@@ -11,6 +11,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author pc
  */
 public class Menu3 extends javax.swing.JInternalFrame {
+    private static Menu3 instance;
 
     /**
      * Creates new form Menu3
@@ -20,6 +21,17 @@ public class Menu3 extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0,0));
         BasicInternalFrameUI ui= (BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
+    }
+    
+    public static Menu3 getInstance(){
+        if( instance==null){
+          //  synchronized (Menu2.class) {
+                if (instance == null) {
+                    instance = new Menu3();
+                    System.out.println("Appel a linstance de Menu2");
+                }
+        }
+        return instance;
     }
 
     /**
@@ -32,16 +44,16 @@ public class Menu3 extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        inputnumchambre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        inputdispochambre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        inputtypechambre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btsupp = new javax.swing.JButton();
+        btmodi = new javax.swing.JButton();
+        btajout = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(810, 434));
 
@@ -75,14 +87,14 @@ public class Menu3 extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("Supprimer");
+        btsupp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btsupp.setText("Supprimer");
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setText("Modifier");
+        btmodi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btmodi.setText("Modifier");
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("Ajouter");
+        btajout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btajout.setText("Ajouter");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,23 +104,23 @@ public class Menu3 extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputnumchambre, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(100, 100, 100)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputdispochambre, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputtypechambre, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
             .addGroup(layout.createSequentialGroup()
                 .addGap(186, 186, 186)
-                .addComponent(jButton1)
+                .addComponent(btsupp)
                 .addGap(106, 106, 106)
-                .addComponent(jButton2)
+                .addComponent(btmodi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btajout, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(124, 124, 124))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -118,16 +130,16 @@ public class Menu3 extends javax.swing.JInternalFrame {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputnumchambre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputdispochambre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputtypechambre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btsupp)
+                    .addComponent(btmodi)
+                    .addComponent(btajout))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))
         );
@@ -137,16 +149,16 @@ public class Menu3 extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton jButton1;
-    public javax.swing.JButton jButton2;
-    public javax.swing.JButton jButton3;
+    public javax.swing.JButton btajout;
+    public javax.swing.JButton btmodi;
+    public javax.swing.JButton btsupp;
+    public javax.swing.JTextField inputdispochambre;
+    public javax.swing.JTextField inputnumchambre;
+    public javax.swing.JTextField inputtypechambre;
     public javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable1;
-    public javax.swing.JTextField jTextField1;
-    public javax.swing.JTextField jTextField2;
-    public javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

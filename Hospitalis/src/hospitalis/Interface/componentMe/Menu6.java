@@ -11,7 +11,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author pc
  */
 public class Menu6 extends javax.swing.JInternalFrame {
-
+    private static Menu6 instance;
     /**
      * Creates new form Menu6
      */
@@ -20,6 +20,17 @@ public class Menu6 extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0,0));
         BasicInternalFrameUI ui= (BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
+    }
+    public static Menu6 getInstance() {
+        if (instance == null) {
+            synchronized (Menu6.class) {
+                if (instance == null) {
+                    instance = new Menu6();
+                    System.out.println("Appel a linstance de Menu6");
+                }
+            }
+        }
+        return instance;
     }
 
     /**
@@ -34,15 +45,15 @@ public class Menu6 extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btsupp = new javax.swing.JButton();
+        btajout = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setPreferredSize(new java.awt.Dimension(810, 434));
 
@@ -85,11 +96,11 @@ public class Menu6 extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("Supprimer");
+        btsupp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btsupp.setText("Supprimer");
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setText("Ajouter");
+        btajout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btajout.setText("Ajouter");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,18 +122,18 @@ public class Menu6 extends javax.swing.JInternalFrame {
                         .addGap(161, 161, 161)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(75, 75, 75))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(112, 112, 112)
-                        .addComponent(jButton1)
+                        .addComponent(btsupp)
                         .addGap(122, 122, 122)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(btajout, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(183, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
@@ -132,22 +143,21 @@ public class Menu6 extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btsupp)
+                    .addComponent(btajout))
                 .addGap(21, 21, 21)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -160,8 +170,9 @@ public class Menu6 extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    public javax.swing.JButton btajout;
+    public javax.swing.JButton btsupp;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     public javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabel3;
@@ -169,7 +180,6 @@ public class Menu6 extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     public javax.swing.JTextField jTextField1;
-    public javax.swing.JTextField jTextField2;
     public javax.swing.JTextField jTextField3;
     public javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables

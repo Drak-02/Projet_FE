@@ -6,6 +6,8 @@ package hospitalis;
 
 import hospitalis.Controleur.Authentification;
 import hospitalis.Controleur.ControleurBDD;
+import hospitalis.Controleur.MenuAccueil.Menu1Controleur;
+import hospitalis.Interface.componentAc.Menu1;
 import java.sql.Connection;
 
 
@@ -21,7 +23,7 @@ public class Hospitalis {
     public static void main(String[] args) {
         // TODO code application logic here
         //Vérification de la connection a la Base de données
-        String url = "jdbc:mysql://localhost:3306/test";
+        String url = "jdbc:mysql://localhost:3306/basetuto";
         String username = "root";
         String password = "";        
         //Ceci permet d'établir la connection  à la base de donnée
@@ -31,6 +33,8 @@ public class Hospitalis {
         //La connection est base a la base de données pour les vérification 
         Authentification authentifier = new Authentification(connection);
         authentifier.afficherFenetreAuthentication();
+        
+    
     }
     
 }

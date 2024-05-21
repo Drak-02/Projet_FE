@@ -11,7 +11,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author pc
  */
 public class Menu4 extends javax.swing.JInternalFrame {
-
+    private static Menu4 instance;
     /**
      * Creates new form Menu4
      */
@@ -20,6 +20,17 @@ public class Menu4 extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0,0));
         BasicInternalFrameUI ui= (BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
+    }
+    public static Menu4 getInstance() {
+        if (instance == null) {
+            synchronized (Menu4.class) {
+                if (instance == null) {
+                    instance = new Menu4();
+                    //System.out.println("Appel a linstance de Menu1");
+                }
+            }
+        }
+        return instance;
     }
 
     /**
@@ -33,9 +44,9 @@ public class Menu4 extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btsupp = new javax.swing.JButton();
+        btmodi = new javax.swing.JButton();
+        btajout = new javax.swing.JButton();
         jTextField5 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jTextField3 = new javax.swing.JTextField();
@@ -76,14 +87,14 @@ public class Menu4 extends javax.swing.JInternalFrame {
         jTable1.setShowGrid(true);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("Supprimer");
+        btsupp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btsupp.setText("Supprimer");
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setText("Modifier");
+        btmodi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btmodi.setText("Modifier");
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("Ajouter");
+        btajout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btajout.setText("Ajouter");
 
         jTextField5.setPreferredSize(new java.awt.Dimension(190, 22));
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
@@ -147,11 +158,11 @@ public class Menu4 extends javax.swing.JInternalFrame {
             .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addGap(135, 135, 135)
-                .addComponent(jButton1)
+                .addComponent(btsupp)
                 .addGap(128, 128, 128)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btmodi, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(85, 85, 85)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btajout, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -179,7 +190,7 @@ public class Menu4 extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -231,9 +242,9 @@ public class Menu4 extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btmodi)
+                    .addComponent(btsupp)
+                    .addComponent(btajout, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                 .addContainerGap())
@@ -260,9 +271,9 @@ public class Menu4 extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton jButton1;
-    public javax.swing.JButton jButton2;
-    public javax.swing.JButton jButton3;
+    public javax.swing.JButton btajout;
+    public javax.swing.JButton btmodi;
+    public javax.swing.JButton btsupp;
     public javax.swing.JComboBox<String> jComboBox1;
     public javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel2;

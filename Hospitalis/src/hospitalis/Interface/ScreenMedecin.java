@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hospitalis.Interface;
-import hospitalis.Interface.componentAD.Menu1A;
 import hospitalis.Interface.componentMe.Menu1;
 import hospitalis.Interface.componentMe.Menu2;
 import hospitalis.Interface.componentMe.Menu3;
@@ -11,6 +10,7 @@ import hospitalis.Interface.componentMe.Menu4;
 import hospitalis.Interface.componentMe.Menu5;
 import hospitalis.Interface.componentMe.Menu6;
 import java.awt.Color;
+import javax.swing.JPanel;
 
 /**
  *
@@ -98,9 +98,6 @@ public class ScreenMedecin extends javax.swing.JFrame {
         menu2.setBackground(new java.awt.Color(204, 204, 204));
         menu2.setPreferredSize(new java.awt.Dimension(178, 50));
         menu2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu2MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu2MousePressed(evt);
             }
@@ -126,9 +123,6 @@ public class ScreenMedecin extends javax.swing.JFrame {
 
         menu1.setBackground(new java.awt.Color(204, 204, 204));
         menu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu1MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu1MousePressed(evt);
             }
@@ -160,9 +154,6 @@ public class ScreenMedecin extends javax.swing.JFrame {
         menu3.setBackground(new java.awt.Color(204, 204, 204));
         menu3.setPreferredSize(new java.awt.Dimension(178, 50));
         menu3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu3MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu3MousePressed(evt);
             }
@@ -192,9 +183,6 @@ public class ScreenMedecin extends javax.swing.JFrame {
         menu4.setBackground(new java.awt.Color(204, 204, 204));
         menu4.setPreferredSize(new java.awt.Dimension(178, 50));
         menu4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu4MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu4MousePressed(evt);
             }
@@ -224,9 +212,6 @@ public class ScreenMedecin extends javax.swing.JFrame {
         menu5.setBackground(new java.awt.Color(204, 204, 204));
         menu5.setPreferredSize(new java.awt.Dimension(178, 50));
         menu5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu5MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu5MousePressed(evt);
             }
@@ -256,9 +241,6 @@ public class ScreenMedecin extends javax.swing.JFrame {
         menu6.setBackground(new java.awt.Color(204, 204, 204));
         menu6.setPreferredSize(new java.awt.Dimension(178, 50));
         menu6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu6MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu6MousePressed(evt);
             }
@@ -388,15 +370,31 @@ public class ScreenMedecin extends javax.swing.JFrame {
        
     }//GEN-LAST:event_menu1MouseReleased
 
-    private void menu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MouseClicked
-        // TODO add your handling code here:
-        Menu1 menuA = new Menu1();
-        
-        CenterPanel.removeAll();
-        CenterPanel.add(menuA).setVisible(true);
-        
-    }//GEN-LAST:event_menu1MouseClicked
+    public JPanel getMenu1() {
+        return menu1;
+    }
 
+    public JPanel getMenu2() {
+        return menu2;
+    }
+
+    public JPanel getMenu3() {
+        return menu3;
+    }
+    public JPanel getMenu4() {
+        return menu4;
+    }
+    public JPanel getMenu5() {
+        return menu5;
+    }
+    public JPanel getMenu6() {
+        return menu6;
+    }
+    
+    public JPanel getCenterPanel() {
+        return CenterPanel;
+    }
+    
     private void menu5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu5MousePressed
         // TODO add your handling code here:
         menu1.setBackground(DefaultColor);
@@ -406,41 +404,6 @@ public class ScreenMedecin extends javax.swing.JFrame {
         menu5.setBackground(ClickedColor);
         menu6.setBackground(DefaultColor);
     }//GEN-LAST:event_menu5MousePressed
-
-    private void menu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu5MouseClicked
-        // TODO add your handling code here:
-        Menu5 menu5a = new Menu5();
-        CenterPanel.removeAll();
-        CenterPanel.add(menu5a).setVisible(true);
-    }//GEN-LAST:event_menu5MouseClicked
-
-    private void menu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu2MouseClicked
-        // TODO add your handling code here:
-        Menu2 menu2a = new Menu2();
-        CenterPanel.removeAll();
-        CenterPanel.add(menu2a).setVisible(true);
-    }//GEN-LAST:event_menu2MouseClicked
-
-    private void menu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu3MouseClicked
-        // TODO add your handling code here:
-        Menu3 menu3a = new Menu3();
-        CenterPanel.removeAll();
-        CenterPanel.add(menu3a).setVisible(true);
-    }//GEN-LAST:event_menu3MouseClicked
-
-    private void menu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu4MouseClicked
-        // TODO add your handling code here:
-        Menu4 menu4a = new Menu4();
-        CenterPanel.removeAll();
-        CenterPanel.add(menu4a).setVisible(true);
-    }//GEN-LAST:event_menu4MouseClicked
-
-    private void menu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu6MouseClicked
-        // TODO add your handling code here:
-        Menu6 menu6a = new Menu6();
-        CenterPanel.removeAll();
-        CenterPanel.add(menu6a).setVisible(true);
-    }//GEN-LAST:event_menu6MouseClicked
 
     private void menu6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu6MousePressed
         // TODO add your handling code here:
@@ -491,7 +454,7 @@ public class ScreenMedecin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CenterPanel;
     private javax.swing.JPanel Header;
-    private javax.swing.JPanel Menu;
+    public javax.swing.JPanel Menu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -500,10 +463,10 @@ public class ScreenMedecin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel menu1;
-    private javax.swing.JPanel menu2;
-    private javax.swing.JPanel menu3;
-    private javax.swing.JPanel menu4;
+    public javax.swing.JPanel menu1;
+    public javax.swing.JPanel menu2;
+    public javax.swing.JPanel menu3;
+    public javax.swing.JPanel menu4;
     public javax.swing.JPanel menu5;
     public javax.swing.JPanel menu6;
     // End of variables declaration//GEN-END:variables

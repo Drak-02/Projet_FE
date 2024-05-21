@@ -12,7 +12,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author badra
  */
 public class Menu1 extends javax.swing.JInternalFrame {
-
+    private static Menu1 instance;
     /**
      * Creates new form Menu1A
      */
@@ -21,6 +21,17 @@ public class Menu1 extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0,0));
         BasicInternalFrameUI ui= (BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
+    }
+    public static Menu1 getInstance() {
+        if (instance == null) {
+            synchronized (Menu1.class) {
+                if (instance == null) {
+                    instance = new Menu1();
+                    System.out.println("Appel a linstance de Menu1");
+                }
+            }
+        }
+        return instance;
     }
 
     /**
@@ -38,9 +49,9 @@ public class Menu1 extends javax.swing.JInternalFrame {
         jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btajout = new javax.swing.JButton();
+        btimpri = new javax.swing.JButton();
+        btmodi = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jpres = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
@@ -85,19 +96,19 @@ public class Menu1 extends javax.swing.JInternalFrame {
         jTable1.setShowGrid(true);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("Ajouter");
+        btajout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btajout.setText("Ajouter");
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setText("Imprimer");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btimpri.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btimpri.setText("Imprimer");
+        btimpri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btimpriActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("Modifier");
+        btmodi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btmodi.setText("Modifier");
 
         jpres.setColumns(20);
         jpres.setRows(5);
@@ -123,12 +134,8 @@ public class Menu1 extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(45, 45, 45)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27))
@@ -144,9 +151,9 @@ public class Menu1 extends javax.swing.JInternalFrame {
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(138, 138, 138)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                            .addComponent(jButton2)))
+                            .addComponent(btajout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btmodi, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                            .addComponent(btimpri)))
                     .addComponent(btcherche))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -160,7 +167,7 @@ public class Menu1 extends javax.swing.JInternalFrame {
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                    .addComponent(btajout)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,9 +180,9 @@ public class Menu1 extends javax.swing.JInternalFrame {
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(jButton3)
+                        .addComponent(btmodi)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2))
+                        .addComponent(btimpri))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -195,9 +202,9 @@ public class Menu1 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btimpriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btimpriActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btimpriActionPerformed
 
     private void ipchercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipchercherActionPerformed
         // TODO add your handling code here:
@@ -205,11 +212,11 @@ public class Menu1 extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btajout;
     public javax.swing.JButton btcherche;
+    public javax.swing.JButton btimpri;
+    public javax.swing.JButton btmodi;
     public javax.swing.JTextField ipchercher;
-    public javax.swing.JButton jButton1;
-    public javax.swing.JButton jButton2;
-    public javax.swing.JButton jButton3;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;

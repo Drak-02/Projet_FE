@@ -11,7 +11,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author pc
  */
 public class Menu3 extends javax.swing.JInternalFrame {
-
+    private static Menu3 instance;
     /**
      * Creates new form Menu3
      */
@@ -20,6 +20,17 @@ public class Menu3 extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0,0));
         BasicInternalFrameUI ui= (BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
+    }
+    public static Menu3 getInstance() {
+        if (instance == null) {
+            synchronized (Menu3.class) {
+                if (instance == null) {
+                    instance = new Menu3();
+                    System.out.println("Appel a l'instance de Menu3");
+                }
+            }
+        }
+        return instance;
     }
 
     /**

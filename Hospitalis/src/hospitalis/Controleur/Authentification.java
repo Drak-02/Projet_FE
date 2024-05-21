@@ -48,7 +48,7 @@ public class Authentification implements ActionListener {
     // Effectuez la redirection en fonction du rôle
     // Exemple : new chemin().setVisible(true); et envoyer la connection a la base de données
     switch (role) {
-        case "Administrateur":
+        case "Administrateur" :
             // Redirection pour l'administrateur
             AdminControleur adminControleur = new AdminControleur(connection);
             adminControleur.afficherScreenAdmin();
@@ -57,21 +57,27 @@ public class Authentification implements ActionListener {
             break;
         case "medecin":
             // Redirection pour le médecin
+            MedecinControleur medecinControleur = new MedecinControleur(connection);
+            medecinControleur.afficherScreenMedecin();
+            System.out.println("Medecin authentification réussi");
             screenAuthentification.dispose();
             break;
         case "finance":
             // Redirection pour le service finance
+            FinanceControleur financeControleur = new FinanceControleur(connection);
+            financeControleur.afficherScreenFinance();
             screenAuthentification.dispose();            
             break;
-        case "Stocke":
+        case "stocke":
             // Redirection pour le service stocke
             StockeControleur stockeControleur = new StockeControleur(connection);
-            stockeControleur.afficherStockeScreen();
+            stockeControleur.afficherStocke();
             screenAuthentification.dispose();            
             break;
         case "accueil":
-            // Redirection pour le service accueil
-             screenAuthentification.dispose();           
+            AccueilControleur accueilControleur = new AccueilControleur(connection);
+            accueilControleur.afficherScreenAccueil();      
+            screenAuthentification.dispose();           
             break;
         default:
             // Gérer le cas où le rôle n'est pas reconnu

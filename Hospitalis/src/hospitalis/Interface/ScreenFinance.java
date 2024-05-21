@@ -3,11 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hospitalis.Interface;
-import hospitalis.Interface.componentAD.Menu1A;
+
 import hospitalis.Interface.componentFi.Menu1;
 import hospitalis.Interface.componentFi.Menu2;
 import hospitalis.Interface.componentFi.Menu3;
 import java.awt.Color;
+import javax.swing.JPanel;
 
 /**
  *
@@ -33,6 +34,21 @@ public class ScreenFinance extends javax.swing.JFrame {
         menu2.setBackground(DefaultColor);
         menu3.setBackground(DefaultColor);
                
+    }
+     public JPanel getMenu1() {
+        return menu1;
+    }
+
+    public JPanel getMenu2() {
+        return menu2;
+    }
+
+    public JPanel getMenu3() {
+        return menu3;
+    }
+    
+    public JPanel getCenterPanel() {
+        return CenterPanel;
     }
 
     /**
@@ -330,9 +346,9 @@ public class ScreenFinance extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel menu1;
-    private javax.swing.JPanel menu2;
-    private javax.swing.JPanel menu3;
+    public javax.swing.JPanel menu1;
+    public javax.swing.JPanel menu2;
+    public javax.swing.JPanel menu3;
     // End of variables declaration//GEN-END:variables
 
     

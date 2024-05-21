@@ -28,15 +28,15 @@
               <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
               <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTextField1" min="-2" pref="101" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+              <Component id="jDateChooser1" min="-2" pref="121" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
               <Component id="jLabel12" min="-2" pref="47" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jTextField2" min="-2" pref="103" max="-2" attributes="0"/>
+              <Component id="inputheure" min="-2" pref="103" max="-2" attributes="0"/>
               <EmptySpace pref="187" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jButton3" min="-2" pref="93" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="88" max="-2" attributes="0"/>
+                  <Component id="btmodi" min="-2" pref="93" max="-2" attributes="0"/>
+                  <Component id="btajout" min="-2" pref="88" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
           </Group>
@@ -51,22 +51,24 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btajout" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel11" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="inputheure" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+              <Component id="btmodi" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="59" max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="346" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -75,11 +77,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="jTextField1">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -96,15 +93,15 @@
         <Property name="text" type="java.lang.String" value="Heure:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="inputheure">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputheureActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btajout">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="1"/>
@@ -115,7 +112,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="btmodi">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="1"/>
@@ -169,5 +166,7 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+    </Component>
   </SubComponents>
 </Form>

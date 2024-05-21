@@ -11,7 +11,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author pc
  */
 public class Menu2 extends javax.swing.JInternalFrame {
-
+    private static Menu2 instance;
     /**
      * Creates new form Menu2
      */
@@ -21,6 +21,18 @@ public class Menu2 extends javax.swing.JInternalFrame {
         BasicInternalFrameUI ui= (BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
     }
+     public static Menu2 getInstance() {
+        if (instance == null) {
+            synchronized (Menu2.class) {
+                if (instance == null) {
+                    instance = new Menu2();
+                    //System.out.println("Appel a l'instance de Menu2");
+                }
+            }
+        }
+        return instance;
+            
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,7 +45,7 @@ public class Menu2 extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        btimpri = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(810, 534));
 
@@ -56,8 +68,8 @@ public class Menu2 extends javax.swing.JInternalFrame {
         jTable1.setShowGrid(true);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setText("Imprimer");
+        btimpri.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btimpri.setText("Imprimer");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,14 +81,14 @@ public class Menu2 extends javax.swing.JInternalFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btimpri, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2)
+                .addComponent(btimpri)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -87,7 +99,7 @@ public class Menu2 extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton jButton2;
+    public javax.swing.JButton btimpri;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

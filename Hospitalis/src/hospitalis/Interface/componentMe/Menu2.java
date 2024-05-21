@@ -11,7 +11,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author pc
  */
 public class Menu2 extends javax.swing.JInternalFrame {
-
+    private static Menu2 instance;
     /**
      * Creates new form Menu2
      */
@@ -20,6 +20,17 @@ public class Menu2 extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0,0));
         BasicInternalFrameUI ui= (BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
+    }
+    public static Menu2 getInstance() {
+        if (instance == null) {
+            synchronized (Menu2.class) {
+                if (instance == null) {
+                    instance = new Menu2();
+                    System.out.println("Appel a linstance de Menu2");
+                }
+            }
+        }
+        return instance;
     }
 
     /**
@@ -31,14 +42,14 @@ public class Menu2 extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        inputheure = new javax.swing.JTextField();
+        btajout = new javax.swing.JButton();
+        btmodi = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setPreferredSize(new java.awt.Dimension(810, 534));
 
@@ -48,17 +59,17 @@ public class Menu2 extends javax.swing.JInternalFrame {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setText("Heure:");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        inputheure.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                inputheureActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("Ajouter");
+        btajout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btajout.setText("Ajouter");
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("Modifier");
+        btmodi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btmodi.setText("Modifier");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,15 +101,15 @@ public class Menu2 extends javax.swing.JInternalFrame {
                 .addGap(66, 66, 66)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87)
+                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputheure, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btmodi, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btajout, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(62, 62, 62))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -110,17 +121,18 @@ public class Menu2 extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)))
+                        .addComponent(btajout))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel12)
+                                .addComponent(inputheure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(14, 14, 14)
-                .addComponent(jButton3)
+                .addComponent(btmodi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -129,19 +141,19 @@ public class Menu2 extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void inputheureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputheureActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_inputheureActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton jButton1;
-    public javax.swing.JButton jButton3;
+    public javax.swing.JButton btajout;
+    public javax.swing.JButton btmodi;
+    public javax.swing.JTextField inputheure;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    public javax.swing.JTextField jTextField1;
-    public javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
