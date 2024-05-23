@@ -88,6 +88,11 @@ public class ControleurMenu1S3 implements MouseListener {
     ///
     private void handleLivraison() {
         try {
+            
+            if (menu.ipArtQua_Livre.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs requis.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return; // Sortir de la méthode si les champs sont vides
+            }
             String dateStr = formatDate(menu.jdateLivre.getDate());
             stock = new Stock(connection);
             Service service = new Service(connection);
@@ -96,6 +101,7 @@ public class ControleurMenu1S3 implements MouseListener {
             stock.setNom((String) menu.Article.getSelectedItem());
             stock.setQuantite(Long.parseLong(menu.ipArtQua_Livre.getText()));
             stock.setDate(dateStr);
+            
 
             boolean success = stock.stockLivraison(connection);
             if (success) {

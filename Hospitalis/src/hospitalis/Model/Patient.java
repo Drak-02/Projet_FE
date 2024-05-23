@@ -16,6 +16,19 @@ public class Patient {
     private String etat_civil; // État civil du patient
     private long telephone; // Numéro de téléphone du patient
     private String sexe; // Sexe du patient
+    private String cni;
+
+    public Patient() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public String getCni() {
+        return cni;
+    }
+
+    public void setCni(String cni) {
+        this.cni = cni;
+    }
 
     // Constructeur
     public Patient(int id_patient, String nom, String prenom, String dateNaissance, String etat_civil, long telephone, String sexe) {
@@ -27,7 +40,21 @@ public class Patient {
         this.telephone = telephone;
         this.sexe = sexe;
     }
-
+    // pour la Facturation 
+    public Patient(String nom, String prenom , String date, String cni ){
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateNaissance = date;
+        this.cni = cni;
+    }
+    public String detailsFacturePatient() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nom: ").append(nom).append("\n");
+        sb.append("Prénom: ").append(prenom).append("\n");
+        sb.append("Date de Naissance: ").append(dateNaissance).append("\n");
+        sb.append("CNI: ").append(cni).append("\n");
+        return sb.toString();
+    }
     // Getters et setters
     public int getId_patient() {
         return id_patient;

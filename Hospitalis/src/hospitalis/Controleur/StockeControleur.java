@@ -22,7 +22,7 @@ import java.sql.Connection;
  *
  * @author badra
  */
-public class StockeControleur implements MouseListener {
+public final class StockeControleur implements MouseListener {
     //Attributsp
     private Connection connection;
     private final  ScreenStock screenStock;
@@ -59,7 +59,8 @@ public class StockeControleur implements MouseListener {
         this.menu1S2Controleur = ControleurMenu1S2.getInstance(connection, menu2S);
         this.menu1S3Controleur = ControleurMenu1S3.getInstance(connection, menu3S);
         this.menu1S4Controleur = ControleurMenu1S4.getInstance(connection, menu4S);
-                
+        mouseClicked(new MouseEvent(screenStock.menu1, MouseEvent.MOUSE_CLICKED, System.currentTimeMillis(), 0, 0, 0, 1, false));
+
        //afficherStocke();
     }
 

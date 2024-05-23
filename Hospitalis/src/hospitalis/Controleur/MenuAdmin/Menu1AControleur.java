@@ -124,6 +124,12 @@ public class Menu1AControleur implements MouseListener ,ListSelectionListener {
 
     private void handleAddUser() {
     try {
+        
+        
+        if (menu1A.inputMai.getText().isEmpty() || menu1A.inputNom.getText().isEmpty() || menu1A.inputPrenom.getText().isEmpty() || menu1A.inputPass.getText().isEmpty() ) {
+                JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs requis.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return; // Sortir de la méthode si les champs sont vides
+        }
         String dateNaissanceStr = formatDate(menu1A.inputNaiss.getDate());
         users = new Utilisateurs(connection);
         users.setMatricule(menu1A.inputMatric.getText());

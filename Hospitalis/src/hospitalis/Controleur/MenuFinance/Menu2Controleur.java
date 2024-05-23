@@ -5,10 +5,14 @@
 package hospitalis.Controleur.MenuFinance;
 
 import hospitalis.Interface.componentFi.Menu2;
+import hospitalis.Model.Facture;
 import hospitalis.Model.Rapport;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,22 +24,15 @@ public class Menu2Controleur implements MouseListener {
     private Menu2 menu2;
     private Rapport rapport;
     private static Menu2Controleur instanceM2;
+    private Facture facture;
     
     
     public Menu2Controleur(Connection connection , Menu2 menu2){
         this.connection = connection;
         this.menu2 =menu2;
-        this.menu2.btimpri.addMouseListener(this);
+        this.menu2.chercher.addMouseListener(this);
     }
-    public void setMenu(Menu2 menu2) {
-        this.menu2 = menu2;
-        if (this.menu2 == null) {
-            System.out.println("Le menu est null");
-        } else {
-            System.out.println("Le menu n'est pas null");
-            this.menu2.btimpri.addMouseListener(this);
-        }
-    }
+
      public static Menu2Controleur getInstance(Connection connection,Menu2 menu2){
         if (instanceM2 == null) {
             synchronized (Menu2Controleur.class) {
@@ -53,34 +50,94 @@ public class Menu2Controleur implements MouseListener {
         } else {
             menu2.setVisible(true);
         }
+        updateTable();
     }
     
 
     @Override
     public void mouseClicked(MouseEvent e) { 
-        if (e.getSource() == menu2.btimpri) {
-            handleImprimerFacture();
-      }
+        if (e.getSource() == menu2.chercher) {
+            chercherFacture();
+        }
     }
     
-    public void handleImprimerFacture(){
-        
+    public void chercherFacture(){
+        try {
+            
+            facture = new Facture(connection);
+            facture.setIdFacture(menu2.numerFac.getText());
+            
+            
+            if (menu2.numerFac.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs requis.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return; // Sortir de la méthode si les champs sont vides
+            }
+
+            boolean success = facture.chercherFacturer();
+            if (success) {
+                JOptionPane.showMessageDialog(null, "Facture Trouvé avec ", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                menu2.details.setText(facture.getDetails() + "\n"+ facture.getMontant());
+            } else {
+                JOptionPane.showMessageDialog(null, "Facture Nom Trouvé", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erreur: " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void chargementDeFacturePayer() {
+        List<Facture> factureList = Facture.getAllFacturePayer(connection);
+        DefaultTableModel model = new DefaultTableModel(
+            new Object[]{"Numéro Facture", "Détails", "Montant", "Date", "Status"}, 
+            0
+        );
+        for (Facture facture : factureList) {
+            model.addRow(new Object[]{
+                facture.getIdFacture(),
+                facture.getDetails(),
+                facture.getMontant(),
+                facture.getDateFacture(),
+                facture.getStatus(),
+            });
+        }
+        menu2.jTable1.setModel(model);
+    }
+    private void chargementDeFactureImPayer() {
+        List<Facture> factureList = Facture.getAllFacture(connection);
+        DefaultTableModel model = new DefaultTableModel(
+            new Object[]{"Numéro Facture", "Détails", "Montant", "Date", "Status"}, 
+            0
+        );
+        for (Facture facture : factureList) {
+            model.addRow(new Object[]{
+                facture.getIdFacture(),
+                facture.getDetails(),
+                facture.getMontant(),
+                facture.getDateFacture(),
+                facture.getStatus(),
+            });
+        }
+        menu2.jTable2.setModel(model);
+    }
+    private void updateTable() {
+        chargementDeFacturePayer();
+        chargementDeFactureImPayer();
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-  }
+    }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-   }
+    }
 
     @Override
     public void mouseEntered(MouseEvent e) {
- }
+    }
 
     @Override
     public void mouseExited(MouseEvent e) {
-  }
+   }
     
 }

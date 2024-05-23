@@ -92,6 +92,10 @@ public class Menu1ASControleur implements MouseListener, ListSelectionListener {
     //--------------------------------------------------------------------------
     private void handleAddService() {
     try {
+        if (menu.NomService.getText().isEmpty() || menu.jdes.getText().isEmpty() ) {
+                JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs requis.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return; // Sortir de la méthode si les champs sont vides
+        }
         Service service = new Service(connection);
         
         service.setCodeService(Integer.parseInt(menu.codeService.getText()));// Il faut convertire 

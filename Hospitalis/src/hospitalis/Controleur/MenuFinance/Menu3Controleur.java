@@ -9,6 +9,14 @@ import hospitalis.Model.Facture;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,16 +25,16 @@ import java.sql.Connection;
 public class Menu3Controleur implements MouseListener{
     
     private Facture facture;
-    private Connection connection;
-    private Menu3 menu3;
+    private final Connection connection;
+    private final Menu3 menu3;
     private static Menu3Controleur instanceM3;
     
     public Menu3Controleur(Connection connection, Menu3 menu3) {
         this.connection = connection;
         this.menu3 = menu3;
         this.menu3.btpayer.addMouseListener(this);
-        this.menu3.btsupp.addMouseListener(this);
-        this.menu3.btimpri.addMouseListener(this);
+        this.menu3.chercher.addMouseListener(this);
+       
 
     }
     public static Menu3Controleur getInstance(Connection connection, Menu3 menu3) {
@@ -40,55 +48,120 @@ public class Menu3Controleur implements MouseListener{
         }
         return instanceM3;
     }
-    public void setMenu(Menu3 menu3) {
-        this.menu3 = menu3;
-        if (this.menu3 == null) {
-            System.out.println("Le menu est null");
-        } else {
-            System.out.println("Le menu n'est pas null");
-            this.menu3.btpayer.addMouseListener(this);
-            this.menu3.btsupp.addMouseListener(this);
-            this.menu3.btimpri.addMouseListener(this);
-        }
-    }
+    
     public void afficherMenu(){
         if (menu3.isVisible()) {
             menu3.setVisible(false);
         } else {
             menu3.setVisible(true);
         }
+        updateTable();
     }
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == menu3.btpayer) {
-            handlePayerFacture();
-        } else if (e.getSource() == menu3.btsupp) {
-            handleDeleteFacture();
-        } else if (e.getSource() == menu3.btimpri) {
-            handleImprimerFacture();
+            payerFacture();
+        } else if (e.getSource() == menu3.chercher) {
+            chercherFacture();
         }
    }
-    public void handlePayerFacture(){
-        
-    }
-    public void handleImprimerFacture(){
-        
-    }
-    public void handleDeleteFacture(){
-        
-    }
+  
+    public void payerFacture(){
+       try {
+            String dateStr = formatDate(new Date());
+            
+            facture = new Facture(connection);
+            facture.setIdFacture(menu3.numerFac.getText());
+            facture.setDateFacture(dateStr);
+            
+            
+            if (menu3.numerFac.getText().isEmpty()  ) {
+                JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs requis.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return; // Sortir de la méthode si les champs sont vides
+            }
 
+            boolean success = facture.paiementFacture();
+            if (success) {
+                JOptionPane.showMessageDialog(null, "Paiement Effectué avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                effacerChamps();
+                updateTable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Erreur de Paiement.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erreur: " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    public void chercherFacture(){
+        try {
+            
+            facture = new Facture(connection);
+            facture.setIdFacture(menu3.numerFac.getText());
+            
+            
+            if (menu3.numerFac.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs requis.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return; // Sortir de la méthode si les champs sont vides
+            }
+
+            boolean success = facture.chercherFacturer();
+            if (success) {
+                JOptionPane.showMessageDialog(null, "Facture Trouvé avec ", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                menu3.jdetails.setText(facture.getDetails() + "\n"+ facture.getMontant());
+            } else {
+                JOptionPane.showMessageDialog(null, "Facture Nom Trouvé", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erreur: " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void effacerChamps(){
+        menu3.numerFac.setText("");
+        menu3.jdetails.setText("");
+    }
+    
+    private String formatDate(Date date) throws ParseException {
+        if (date == null) {
+            return null;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(date);
+    }
+    //************************************
+    private void updateTable() {
+        chargementDeFacturePayer();
+    }
+    
+    //-----------------------------------
+    private void chargementDeFacturePayer() {
+        List<Facture> factureList = Facture.getAllFacturePayer(connection);
+        DefaultTableModel model = new DefaultTableModel(
+            new Object[]{"Numéro Facture", "Détails", "Montant", "Date", "Status"}, 
+            0
+        );
+        for (Facture facture : factureList) {
+            model.addRow(new Object[]{
+                facture.getIdFacture(),
+                facture.getDetails(),
+                facture.getMontant(),
+                facture.getDateFacture(),
+                facture.getStatus(),
+            });
+        }
+        menu3.table.setModel(model);
+    }
     @Override
     public void mousePressed(MouseEvent e) {
-  }
+    }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-  }
+    }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-   }
+    }
 
     @Override
     public void mouseExited(MouseEvent e) {

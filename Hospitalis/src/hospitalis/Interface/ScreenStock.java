@@ -3,11 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hospitalis.Interface;
-import hospitalis.Interface.componentSt.Central;
-import hospitalis.Interface.componentSt.Menu1S;
-import hospitalis.Interface.componentSt.Menu1S2;
-import hospitalis.Interface.componentSt.Menu1S3;
-import hospitalis.Interface.componentSt.Menu1S4;
+
 import java.awt.Color;
 import javax.swing.JPanel;
 
@@ -36,14 +32,14 @@ public class ScreenStock extends javax.swing.JFrame {
         menu3.setBackground(DefaultColor);
         menu4.setBackground(DefaultColor);
         // 
-        
+        /*
         CenterPanel.setLayout(new java.awt.CardLayout());
         CenterPanel.add(new Central(), "Menu1");
         CenterPanel.add(new Menu1S(), "Menu1S");
         CenterPanel.add(new  Menu1S2(), "Menu1S2");
         CenterPanel.add(new Menu1S4(), "Menu1S3");
         CenterPanel.add(new Menu1S4(), "Menu1S4");
-        
+        */
     }
     public JPanel getCenterPanel() {
         return CenterPanel;
@@ -59,8 +55,6 @@ public class ScreenStock extends javax.swing.JFrame {
 
         Header = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         Menu = new javax.swing.JPanel();
         menu2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -82,40 +76,12 @@ public class ScreenStock extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Gestion des Stockes");
 
-        jPanel2.setBackground(new java.awt.Color(51, 204, 255));
-        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel2MouseClicked(evt);
-            }
-        });
-
-        jLabel7.setText("Name Appli");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
         Header.setLayout(HeaderLayout);
         HeaderLayout.setHorizontalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(213, 213, 213)
+                .addGap(386, 386, 386)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(357, Short.MAX_VALUE))
         );
@@ -123,9 +89,7 @@ public class ScreenStock extends javax.swing.JFrame {
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel3)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -347,10 +311,6 @@ public class ScreenStock extends javax.swing.JFrame {
         
     }//GEN-LAST:event_menu4MousePressed
 
-    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
-        // TODO add your handling code here
-    }//GEN-LAST:event_jPanel2MouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -396,9 +356,7 @@ public class ScreenStock extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     public javax.swing.JPanel menu1;
     public javax.swing.JPanel menu2;
     public javax.swing.JPanel menu3;

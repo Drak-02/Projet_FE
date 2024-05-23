@@ -19,6 +19,15 @@ public class Traitement {
     private Connection connection;
     private String nomTraitement;
     private double prix;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
     private String desTraitement;
     private int codeTraitement;
 
@@ -59,6 +68,10 @@ public class Traitement {
     public Traitement(Connection connection){
         this.connection = connection;
     }
+    public Traitement(String nom, Double montant){
+        this.prix = montant;
+        this.nomTraitement = nom;
+    }
     //Methodes
     //Ajouter de traitement
     public boolean ajouterTraitement(Connection connection) {
@@ -84,18 +97,15 @@ public class Traitement {
             return false;
         } else {
             // Insérer le nouvel utilisateur si le matricule n'existe pas
-            String insertQuery = "INSERT INTO traitement(codeTraitement, nom, description, prix) VALUES (?, ?, ?,?)";
+            String insertQuery = "INSERT INTO traitement(codeTraitement,type, nom, description, prix) VALUES (?, ?, ?,?)";
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
-                                System.out.println(this.prix);
-                System.out.println(this.nomTraitement);
-                System.out.println(this.desTraitement);
-                System.out.println(this.codeTraitement);
-
+               
                 preparedStatement.setInt(1, this.codeTraitement);
-                preparedStatement.setString(2, this.nomTraitement);
-                preparedStatement.setString(3,this.desTraitement );
-                preparedStatement.setDouble(4, this.prix );
+                preparedStatement.setString(2, this.type);  
+                preparedStatement.setString(3, this.nomTraitement);
+                preparedStatement.setString(4,this.desTraitement );
+                preparedStatement.setDouble(5, this.prix );
                 System.out.println(this.prix);
 
                 preparedStatement.executeUpdate();
@@ -147,7 +157,7 @@ public class Traitement {
     //Récuperation des données de la base de
     public static List<Traitement> getAllTraitement (Connection connection) {
         List<Traitement> traitementList = new ArrayList<>();
-        String query = "SELECT codeTraitement, nom, description, prix FROM traitement";
+        String query = "SELECT codeTraitement,type, nom, description, prix FROM traitement";
 
         try (PreparedStatement statement = connection.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()) {
@@ -156,6 +166,7 @@ public class Traitement {
                 Traitement traitement = new Traitement(connection);
                 
                 traitement.setCodeTraitement(resultSet.getInt("codeTraitement"));
+                traitement.setType(resultSet.getString("type"));
                 traitement.setNomTraitement(resultSet.getString("nom"));
                 traitement.setDesTraitement(resultSet.getString("description"));
                 traitement.setPrix(resultSet.getDouble("prix"));
@@ -169,4 +180,22 @@ public class Traitement {
 
         return traitementList;
     }
+    ///
+    public static List<String> getAllTraitementTypes(Connection connection) {
+        List<String> traitementTypes = new ArrayList<>();
+        String query = "SELECT DISTINCT type FROM traitement";
+
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                traitementTypes.add(resultSet.getString("type"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return traitementTypes;
+    }
+    
 }

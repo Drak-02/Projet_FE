@@ -86,6 +86,11 @@ public class ControleurMenu1S implements MouseListener, ListSelectionListener {
             stock.setType((String) menu1.jtype.getSelectedItem());
             stock.setQuantite(Long.parseLong(menu1.ipQuant.getText()));
             stock.setDate(dateStr);
+            
+            if (menu1.ipArt.getText().isEmpty() || menu1.ipQuant.getText().isEmpty() || menu1.sdate == null ) {
+                JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs requis.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return; // Sortir de la méthode si les champs sont vides
+            }
 
             boolean success = stock.ajouterStocke(connection);
             if (success) {
@@ -95,9 +100,9 @@ public class ControleurMenu1S implements MouseListener, ListSelectionListener {
             } else {
                 JOptionPane.showMessageDialog(null, "Erreur lors de l'ajout de l'utilisateur.", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Erreur: " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erreur: " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
     }
     private String formatDate(Date date) throws ParseException {
         if (date == null) {

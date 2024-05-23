@@ -6,8 +6,6 @@ package hospitalis;
 
 import hospitalis.Controleur.Authentification;
 import hospitalis.Controleur.ControleurBDD;
-import hospitalis.Controleur.MenuAccueil.Menu1Controleur;
-import hospitalis.Interface.componentAc.Menu1;
 import java.sql.Connection;
 
 

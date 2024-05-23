@@ -16,16 +16,16 @@ import java.sql.Connection;
  * @author pc
  */
 public class FinanceControleur implements MouseListener {
-    private ScreenFinance screenFinance;
+    private final ScreenFinance screenFinance;
     private Connection connection;
 
-    private Menu1 menu1;
-    private Menu2 menu2;
-    private Menu3 menu3;
+    private final Menu1 menu1;
+    private final Menu2 menu2;
+    private final Menu3 menu3;
 
-    private Menu1Controleur menu1Controleur;
-    private Menu2Controleur menu2Controleur;
-    private Menu3Controleur menu3Controleur;
+    private final Menu1Controleur menu1Controleur;
+    private final Menu2Controleur menu2Controleur;
+    private final Menu3Controleur menu3Controleur;
     
     public FinanceControleur(Connection connection) {
         this.connection = connection;
@@ -43,7 +43,8 @@ public class FinanceControleur implements MouseListener {
         menu3Controleur = new Menu3Controleur(connection, menu3);
         
         // Simuler un événement de clic sur le menu1
-        mouseClicked(new MouseEvent(screenFinance.menu1, MouseEvent.MOUSE_CLICKED, System.currentTimeMillis(), 0, 0, 0, 1, false));
+       mouseClicked(new MouseEvent(screenFinance.menu1, MouseEvent.MOUSE_CLICKED, System.currentTimeMillis(), 0, 0, 0, 1, false));
+    
     }
 
     public void afficherScreenFinance() {
@@ -51,32 +52,25 @@ public class FinanceControleur implements MouseListener {
     }
 
     private void showMenu1() {
-        screenFinance.getCenterPanel().removeAll();
         screenFinance.getCenterPanel().add(menu1);
-        screenFinance.getCenterPanel().revalidate();
-        screenFinance.getCenterPanel().repaint();
-        menu1Controleur.afficherMenu();
-        
+       
+        menu1Controleur.afficherMenu();    
     }
 
     private void showMenu2() {
-        screenFinance.getCenterPanel().removeAll();
         screenFinance.getCenterPanel().add(menu2);
-        screenFinance.getCenterPanel().revalidate();
-        screenFinance.getCenterPanel().repaint();
         menu2Controleur.afficherMenu();
     }
 
     private void showMenu3() {
-        screenFinance.getCenterPanel().removeAll();
-        screenFinance.getCenterPanel().add(menu3);
-        screenFinance.getCenterPanel().revalidate();
-        screenFinance.getCenterPanel().repaint();
+        screenFinance.getCenterPanel().add(menu3);      
         menu3Controleur.afficherMenu();
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        screenFinance.getCenterPanel().removeAll();
+
         if (e.getSource() == screenFinance.menu1) {
             showMenu1();
         } else if (e.getSource() == screenFinance.menu2) {
@@ -84,6 +78,8 @@ public class FinanceControleur implements MouseListener {
         } else if (e.getSource() == screenFinance.menu3) {
             showMenu3();
         }
+        screenFinance.getCenterPanel().revalidate();
+        screenFinance.getCenterPanel().repaint();
     }
 
     @Override

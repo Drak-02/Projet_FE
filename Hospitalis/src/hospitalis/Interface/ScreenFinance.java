@@ -61,7 +61,7 @@ public class ScreenFinance extends javax.swing.JFrame {
     private void initComponents() {
 
         Header = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         Menu = new javax.swing.JPanel();
         menu2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -77,23 +77,26 @@ public class ScreenFinance extends javax.swing.JFrame {
         Header.setBackground(new java.awt.Color(0, 204, 255));
         Header.setPreferredSize(new java.awt.Dimension(1000, 70));
 
-        jLabel1.setText("Name Application");
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Gestion FINANCE");
 
         javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
         Header.setLayout(HeaderLayout);
         HeaderLayout.setHorizontalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderLayout.createSequentialGroup()
-                .addContainerGap(462, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(396, 396, 396))
+            .addGroup(HeaderLayout.createSequentialGroup()
+                .addGap(187, 187, 187)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 809, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         HeaderLayout.setVerticalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                .addGap(21, 21, 21))
         );
 
         getContentPane().add(Header, java.awt.BorderLayout.PAGE_START);
@@ -104,9 +107,6 @@ public class ScreenFinance extends javax.swing.JFrame {
         menu2.setBackground(new java.awt.Color(204, 204, 204));
         menu2.setPreferredSize(new java.awt.Dimension(178, 50));
         menu2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu2MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu2MousePressed(evt);
             }
@@ -114,7 +114,7 @@ public class ScreenFinance extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/8.png"))); // NOI18N
-        jLabel2.setText("Archive");
+        jLabel2.setText("Suivie Facture");
 
         javax.swing.GroupLayout menu2Layout = new javax.swing.GroupLayout(menu2);
         menu2.setLayout(menu2Layout);
@@ -135,9 +135,6 @@ public class ScreenFinance extends javax.swing.JFrame {
 
         menu1.setBackground(new java.awt.Color(204, 204, 204));
         menu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu1MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu1MousePressed(evt);
             }
@@ -148,7 +145,7 @@ public class ScreenFinance extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/8.png"))); // NOI18N
-        jLabel4.setText("Factures");
+        jLabel4.setText("Facturation");
 
         javax.swing.GroupLayout menu1Layout = new javax.swing.GroupLayout(menu1);
         menu1.setLayout(menu1Layout);
@@ -156,7 +153,7 @@ public class ScreenFinance extends javax.swing.JFrame {
             menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menu1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                 .addGap(34, 34, 34))
         );
         menu1Layout.setVerticalGroup(
@@ -170,9 +167,6 @@ public class ScreenFinance extends javax.swing.JFrame {
         menu3.setBackground(new java.awt.Color(204, 204, 204));
         menu3.setPreferredSize(new java.awt.Dimension(178, 50));
         menu3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu3MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu3MousePressed(evt);
             }
@@ -186,17 +180,14 @@ public class ScreenFinance extends javax.swing.JFrame {
         menu3.setLayout(menu3Layout);
         menu3Layout.setHorizontalGroup(
             menu3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(menu3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         menu3Layout.setVerticalGroup(
             menu3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
@@ -206,8 +197,8 @@ public class ScreenFinance extends javax.swing.JFrame {
             .addGroup(MenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(menu2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                    .addComponent(menu3, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                    .addComponent(menu2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menu3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(MenuLayout.createSequentialGroup()
@@ -249,6 +240,7 @@ public class ScreenFinance extends javax.swing.JFrame {
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MousePressed
@@ -277,29 +269,6 @@ public class ScreenFinance extends javax.swing.JFrame {
         // TODO add your handling code here:
        
     }//GEN-LAST:event_menu1MouseReleased
-
-    private void menu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MouseClicked
-        // TODO add your handling code here:
-        Menu1 menuA = new Menu1();
-        CenterPanel.removeAll();
-        CenterPanel.add(menuA).setVisible(true);
-        
-    }//GEN-LAST:event_menu1MouseClicked
-
-    private void menu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu2MouseClicked
-        // TODO add your handling code here:
-        Menu2 menua = new Menu2();
-        CenterPanel.removeAll();
-        CenterPanel.add(menua).setVisible(true);
-        
-    }//GEN-LAST:event_menu2MouseClicked
-
-    private void menu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu3MouseClicked
-        // TODO add your handling code here:
-        Menu3 menu3a = new Menu3 ();
-        CenterPanel.removeAll();
-        CenterPanel.add(menu3a).setVisible(true);
-    }//GEN-LAST:event_menu3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -341,8 +310,8 @@ public class ScreenFinance extends javax.swing.JFrame {
     private javax.swing.JPanel CenterPanel;
     private javax.swing.JPanel Header;
     private javax.swing.JPanel Menu;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     public javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;

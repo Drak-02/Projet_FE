@@ -70,12 +70,17 @@ public class Menu1ATControleur implements MouseListener, ListSelectionListener {
     ///-------------------------------------------------------------------------
     private void handleAddTraitement() {
     try {
+        if (menu.ipcodeT.getText().isEmpty() || menu.jdes.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs requis.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return; // Sortir de la méthode si les champs sont vides
+        }
         Traitement traitement = new Traitement(connection);
         
         traitement.setCodeTraitement(Integer.parseInt(menu.ipcodeT.getText()));// Il faut convertire 
         traitement.setNomTraitement(menu.ipNom.getText());
         traitement.setDesTraitement(menu.jdes.getText());
-        traitement.setPrix(Double.parseDouble(menu.ipPrix.getText()));
+        traitement.setType(menu.type.getText());
+        traitement.setPrix(Double.parseDouble(menu.type.getText()));
         System.out.println();
         
         boolean success = traitement.ajouterTraitement(connection);
@@ -102,7 +107,7 @@ public class Menu1ATControleur implements MouseListener, ListSelectionListener {
             traitement.setCodeTraitement(codeTraitement);
             traitement.setNomTraitement(menu.ipNom.getText());
             traitement.setDesTraitement(menu.jdes.getText());
-            traitement.setPrix(Double.parseDouble(menu.ipPrix.getText()));
+            traitement.setPrix(Double.parseDouble(menu.type.getText()));
 
             try {
                 // Récupération des données actuelles du tableau
@@ -122,8 +127,8 @@ public class Menu1ATControleur implements MouseListener, ListSelectionListener {
                 if (!menu.jdes.getText().equals(currentDes)) {
                     traitement.setDesTraitement(menu.jdes.getText());
                 }
-                if (Double.parseDouble(menu.ipPrix.getText()) != currentPrix) {
-                    traitement.setPrix(Double.parseDouble(menu.ipPrix.getText()));
+                if (Double.parseDouble(menu.type.getText()) != currentPrix) {
+                    traitement.setPrix(Double.parseDouble(menu.type.getText()));
                 }
                 // Répétez le processus pour les autres champs
 
@@ -164,12 +169,13 @@ public class Menu1ATControleur implements MouseListener, ListSelectionListener {
      private void chargementDeTraitement() {
         List<Traitement> traitementList = Traitement.getAllTraitement(connection);
         DefaultTableModel model = new DefaultTableModel(
-            new Object[]{"Code Service", "Nom", "Description","Prix"}, 
+            new Object[]{"Code Service","Type", "Nom", "Description","Prix"}, 
             0
         );
         for (Traitement traitement: traitementList) {
             model.addRow(new Object[]{
                 traitement.getCodeTraitement(),
+                traitement.getType(),
                 traitement.getNomTraitement(),
                 traitement.getDesTraitement(),
                 traitement.getPrix(),
@@ -184,7 +190,7 @@ public class Menu1ATControleur implements MouseListener, ListSelectionListener {
         menu.ipcodeT.setText("");
         menu.ipNom.setText("");
         menu.jdes.setText("");
-        menu.ipPrix.setText("");
+        menu.type.setText("");
 
     }
     //***************************************************************************************
@@ -232,9 +238,10 @@ public class Menu1ATControleur implements MouseListener, ListSelectionListener {
             if (selectedRow >= 0) {
                 TableModel model = menu.jtables.getModel();
                 menu.ipcodeT.setText(model.getValueAt(selectedRow, 0).toString());
-                menu.ipNom.setText(model.getValueAt(selectedRow, 1).toString());
-                menu.jdes.setText(model.getValueAt(selectedRow, 2).toString()); 
-                menu.ipPrix.setText(model.getValueAt(selectedRow, 3).toString());               
+                menu.ipNom.setText(model.getValueAt(selectedRow, 2).toString());
+                menu.ipPrix1.setText(model.getValueAt(selectedRow, 4).toString());
+                menu.jdes.setText(model.getValueAt(selectedRow, 3).toString()); 
+                menu.type.setText(model.getValueAt(selectedRow, 1).toString());               
             }
         }
     }

@@ -55,12 +55,14 @@ public class Authentification implements ActionListener {
             System.out.println("Admin authentification réussi");
             screenAuthentification.dispose();
             break;
-        case "medecin":
+        case "Médecin":
             // Redirection pour le médecin
             screenAuthentification.dispose();
             break;
-        case "finance":
+        case "Finance":
             // Redirection pour le service finance
+            FinanceControleur finance = new  FinanceControleur(connection);
+            finance.afficherScreenFinance();
             screenAuthentification.dispose();            
             break;
         case "Stocke":
@@ -69,9 +71,11 @@ public class Authentification implements ActionListener {
             stockeControleur.afficherStockeScreen();
             screenAuthentification.dispose();            
             break;
-        case "accueil":
+        case "Accueil":
             // Redirection pour le service accueil
-             screenAuthentification.dispose();           
+            AccueilControleur accueil = new AccueilControleur(connection);
+            accueil.afficherScreenAccueil();
+            screenAuthentification.dispose();           
             break;
         default:
             // Gérer le cas où le rôle n'est pas reconnu

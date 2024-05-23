@@ -44,6 +44,7 @@ public class AdminControleur implements MouseListener {
         this.menu1AControleur = Menu1AControleur.getInstance(connection, menu1A);
         this.menu1ASControleur = Menu1ASControleur.getInstance(connection, menu1AS);
         this.menu1ATControleur = Menu1ATControleur.getInstance(connection, menu1AT);
+        mouseClicked(new MouseEvent(screenAdmin.menu1, MouseEvent.MOUSE_CLICKED, System.currentTimeMillis(), 0, 0, 0, 1, false));
 
     }
 

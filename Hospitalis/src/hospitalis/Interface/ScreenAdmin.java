@@ -3,10 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hospitalis.Interface;
-import hospitalis.Interface.componentAD.Central;
-import hospitalis.Interface.componentAD.Menu1A;
-import hospitalis.Interface.componentAD.Menu1AS;
-import hospitalis.Interface.componentAD.Menu1AT;
+
 import java.awt.Color;
 
 import javax.swing.JPanel;
@@ -35,13 +32,13 @@ public class ScreenAdmin extends javax.swing.JFrame {
         menu2.setBackground(DefaultColor);
         menu3.setBackground(DefaultColor);
         // 
-        
+        /*
         CenterPanel.setLayout(new java.awt.CardLayout());
         CenterPanel.add(new Central(), "Menu1");
         CenterPanel.add(new Menu1A(), "Menu1A");
         CenterPanel.add(new  Menu1AS(), "Menu1AS");
         CenterPanel.add(new Menu1AT(), "Menu1AT");
-        
+        */
     }
     // Initialize components here as in your original code
     
@@ -72,8 +69,6 @@ public class ScreenAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         Header = new javax.swing.JPanel();
-        menu4 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         Menu = new javax.swing.JPanel();
         menu2 = new javax.swing.JPanel();
@@ -90,33 +85,6 @@ public class ScreenAdmin extends javax.swing.JFrame {
         Header.setBackground(new java.awt.Color(0, 204, 255));
         Header.setPreferredSize(new java.awt.Dimension(1000, 70));
 
-        menu4.setBackground(new java.awt.Color(0, 204, 255));
-        menu4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                menu4MousePressed(evt);
-            }
-        });
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setText("Appli Name");
-
-        javax.swing.GroupLayout menu4Layout = new javax.swing.GroupLayout(menu4);
-        menu4.setLayout(menu4Layout);
-        menu4Layout.setHorizontalGroup(
-            menu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menu4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-        menu4Layout.setVerticalGroup(
-            menu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -127,9 +95,7 @@ public class ScreenAdmin extends javax.swing.JFrame {
         HeaderLayout.setHorizontalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(menu4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(46, 46, 46)
+                .addGap(185, 185, 185)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 809, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -137,11 +103,7 @@ public class ScreenAdmin extends javax.swing.JFrame {
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(HeaderLayout.createSequentialGroup()
-                        .addComponent(menu4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -311,11 +273,6 @@ public class ScreenAdmin extends javax.swing.JFrame {
         menu3.setBackground(ClickedColor);
     }//GEN-LAST:event_menu3MousePressed
 
-    private void menu4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu4MousePressed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_menu4MousePressed
-
     /**
      * @param args the command line arguments
      */
@@ -359,11 +316,9 @@ public class ScreenAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JPanel menu1;
     public javax.swing.JPanel menu2;
     public javax.swing.JPanel menu3;
-    public javax.swing.JPanel menu4;
     // End of variables declaration//GEN-END:variables
 }
