@@ -105,11 +105,11 @@ public class ControleurMenu1S3 implements MouseListener {
 
             boolean success = stock.stockLivraison(connection);
             if (success) {
-                JOptionPane.showMessageDialog(null, "Utilisateur ajouté avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
                 EffacerChamps();
                 updateTable(); // Mise à jour de la table après ajout
             } else {
-                JOptionPane.showMessageDialog(null, "Erreur lors de l'ajout de l'utilisateur.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Erreur lors de livraison.", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Erreur: " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);

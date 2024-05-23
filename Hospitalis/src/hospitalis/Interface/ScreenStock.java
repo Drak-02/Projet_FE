@@ -30,7 +30,7 @@ public class ScreenStock extends javax.swing.JFrame {
         menu1.setBackground(DefaultColor);
         menu2.setBackground(DefaultColor);
         menu3.setBackground(DefaultColor);
-        menu4.setBackground(DefaultColor);
+        //menu4.setBackground(DefaultColor);
         // 
         /*
         CenterPanel.setLayout(new java.awt.CardLayout());
@@ -62,8 +62,6 @@ public class ScreenStock extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         menu3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        menu4 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         CenterPanel = new javax.swing.JPanel();
 
@@ -184,35 +182,6 @@ public class ScreenStock extends javax.swing.JFrame {
             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        menu4.setBackground(new java.awt.Color(204, 204, 204));
-        menu4.setPreferredSize(new java.awt.Dimension(178, 50));
-        menu4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                menu4MousePressed(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/archi.png"))); // NOI18N
-        jLabel6.setText("Archive");
-
-        javax.swing.GroupLayout menu4Layout = new javax.swing.GroupLayout(menu4);
-        menu4.setLayout(menu4Layout);
-        menu4Layout.setHorizontalGroup(
-            menu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menu4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        menu4Layout.setVerticalGroup(
-            menu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
@@ -221,8 +190,7 @@ public class ScreenStock extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(menu2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(menu3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(menu4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(menu3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(MenuLayout.createSequentialGroup()
@@ -237,9 +205,7 @@ public class ScreenStock extends javax.swing.JFrame {
                 .addComponent(menu2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(menu3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(menu4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(192, Short.MAX_VALUE))
+                .addContainerGap(282, Short.MAX_VALUE))
             .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(MenuLayout.createSequentialGroup()
                     .addGap(22, 22, 22)
@@ -274,7 +240,7 @@ public class ScreenStock extends javax.swing.JFrame {
         menu1.setBackground(ClickedColor);
         menu2.setBackground(DefaultColor);
         menu3.setBackground(DefaultColor);
-        menu4.setBackground(DefaultColor);
+        //menu4.setBackground(DefaultColor);
 
         
     }//GEN-LAST:event_menu1MousePressed
@@ -284,7 +250,7 @@ public class ScreenStock extends javax.swing.JFrame {
         menu1.setBackground(DefaultColor);
         menu2.setBackground(ClickedColor);
         menu3.setBackground(DefaultColor);
-        menu4.setBackground(DefaultColor);
+        //menu4.setBackground(DefaultColor);
 
     }//GEN-LAST:event_menu2MousePressed
 
@@ -293,7 +259,7 @@ public class ScreenStock extends javax.swing.JFrame {
         menu1.setBackground(DefaultColor);
         menu2.setBackground(DefaultColor);
         menu3.setBackground(ClickedColor);
-        menu4.setBackground(DefaultColor);
+        //menu4.setBackground(DefaultColor);
 
     }//GEN-LAST:event_menu3MousePressed
 
@@ -301,15 +267,6 @@ public class ScreenStock extends javax.swing.JFrame {
         // TODO add your handling code here:
        
     }//GEN-LAST:event_menu1MouseReleased
-
-    private void menu4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu4MousePressed
-        // TODO add your handling code here:
-        menu1.setBackground(DefaultColor);
-        menu2.setBackground(DefaultColor);
-        menu3.setBackground(DefaultColor);
-        menu4.setBackground(ClickedColor);
-        
-    }//GEN-LAST:event_menu4MousePressed
 
     /**
      * @param args the command line arguments
@@ -355,11 +312,9 @@ public class ScreenStock extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JPanel menu1;
     public javax.swing.JPanel menu2;
     public javax.swing.JPanel menu3;
-    public javax.swing.JPanel menu4;
     // End of variables declaration//GEN-END:variables
 }

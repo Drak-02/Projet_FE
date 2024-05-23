@@ -197,12 +197,15 @@ public class Stock  extends StockObserable {
         return articleList;
     }
     //
-     public boolean stockLivraison(Connection connection) {
+    public boolean stockLivraison(Connection connection) {
         String queryLivraison = "INSERT INTO Stock_Livre (code_service, id_article, quantite, date) VALUES (?, ?, ?, ?)";
         String queryMisJourtock = "UPDATE Stock SET quantite = quantite - ? WHERE id_article = ?";
         String queryIDArticle = "SELECT DISTINCT id_article FROM Stock WHERE article = ?";
+        String queryQuantiteStock = "SELECT quantite FROM Stock WHERE id_article = ?";
 
         int idArticle = -1;
+        long quantiteStock = 0;
+
         try (PreparedStatement preS = connection.prepareStatement(queryIDArticle)) {
             preS.setString(1, this.nom);
             try (ResultSet resultSet = preS.executeQuery()) {
@@ -218,6 +221,27 @@ public class Stock  extends StockObserable {
             return false;
         }
 
+        // Obtenir la quantité actuelle du stock
+        try (PreparedStatement preSQuantite = connection.prepareStatement(queryQuantiteStock)) {
+            preSQuantite.setInt(1, idArticle);
+            try (ResultSet resultSet = preSQuantite.executeQuery()) {
+                if (resultSet.next()) {
+                    quantiteStock = resultSet.getLong("quantite");
+                    if (quantiteStock < this.quantite) {
+                        System.out.println("Quantité insuffisante pour l'article : " + this.nom);
+                        return false;
+                    }
+                } else {
+                    System.out.println("Article non trouvé pour vérifier la quantité : " + this.nom);
+                    return false;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        // Mettre à jour la quantité du stock
         try (PreparedStatement updateStatement = connection.prepareStatement(queryMisJourtock)) {
             updateStatement.setLong(1, this.quantite);
             updateStatement.setInt(2, idArticle);
@@ -231,6 +255,7 @@ public class Stock  extends StockObserable {
             return false;
         }
 
+        // Insérer dans Stock_Livre
         try (PreparedStatement preparedStatement = connection.prepareStatement(queryLivraison)) {
             preparedStatement.setInt(1, this.codeService);
             preparedStatement.setInt(2, idArticle);
@@ -247,7 +272,7 @@ public class Stock  extends StockObserable {
 
         return true;
     }
-   
+  
 }
 
  

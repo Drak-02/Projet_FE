@@ -87,18 +87,18 @@ public class ControleurMenu1S implements MouseListener, ListSelectionListener {
             stock.setQuantite(Long.parseLong(menu1.ipQuant.getText()));
             stock.setDate(dateStr);
             
-            if (menu1.ipArt.getText().isEmpty() || menu1.ipQuant.getText().isEmpty() || menu1.sdate == null ) {
+            if (menu1.ipArt.getText().isEmpty() || Long.parseLong(menu1.ipQuant.getText())< 0 || menu1.sdate == null ) {
                 JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs requis.", "Erreur", JOptionPane.ERROR_MESSAGE);
                 return; // Sortir de la méthode si les champs sont vides
             }
 
             boolean success = stock.ajouterStocke(connection);
             if (success) {
-                JOptionPane.showMessageDialog(null, "Utilisateur ajouté avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Stock ajouté avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
                 EffacerChamps();
                 updateTable(); // Mise à jour de la table après ajout
             } else {
-                JOptionPane.showMessageDialog(null, "Erreur lors de l'ajout de l'utilisateur.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Erreur lors de l'ajout de Stock.", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erreur: " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
