@@ -187,16 +187,25 @@ public class Menu1AControleur implements MouseListener ,ListSelectionListener {
         int selectedRow = menu1A.jtables.getSelectedRow();
         if (selectedRow >= 0) {
             String matricule = (String) menu1A.jtables.getValueAt(selectedRow, 0);
-            users = new Utilisateurs(connection);
-            users.setMatricule(matricule);
+            int response = JOptionPane.showConfirmDialog(null, 
+                "Êtes-vous sûr de vouloir supprimer l'utilisateur avec le matricule : " + matricule + " ?", 
+                "Confirmation de suppression", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.WARNING_MESSAGE);
 
-            boolean success = users.supprimerCompte(connection);
-            if (success) {
-                JOptionPane.showMessageDialog(null, "Utilisateur supprimé avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
-                updateTable(); // Mise à jour de la table après suppression
-            } else {
-                JOptionPane.showMessageDialog(null, "Erreur lors de la suppression de l'utilisateur.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            }
+            if (response == JOptionPane.YES_OPTION) {
+                users = new Utilisateurs(connection);
+                users.setMatricule(matricule);
+
+                boolean success = users.supprimerCompte(connection);
+                if (success) {
+                    JOptionPane.showMessageDialog(null, "Utilisateur supprimé avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                    EffacerChamps();
+                    updateTable(); // Mise à jour de la table après suppression
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erreur lors de la suppression de l'utilisateur.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            } // Si la réponse est NO, ne faites rien
         } else {
             JOptionPane.showMessageDialog(null, "Veuillez sélectionner un utilisateur à supprimer.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
@@ -263,6 +272,7 @@ public class Menu1AControleur implements MouseListener ,ListSelectionListener {
                 boolean success = users.modifierCompte(connection);
                 if (success) {
                     JOptionPane.showMessageDialog(null, "Utilisateur modifié avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                    EffacerChamps();
                     updateTable(); // Mise à jour de la table après modification
                 } else {
                     JOptionPane.showMessageDialog(null, "Erreur lors de la modification de l'utilisateur.", "Erreur", JOptionPane.ERROR_MESSAGE);

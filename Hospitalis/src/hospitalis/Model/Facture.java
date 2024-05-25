@@ -260,6 +260,32 @@ public class Facture {
         }
         return true; // Si la facture est trouvée avec succès
     }
+    public boolean chercherFacturerAll(){
+        String queryCherche = "SELECT * FROM facture WHERE num_facture=?";
+
+        try (PreparedStatement statement = connection.prepareStatement(queryCherche)) {
+            statement.setString(1, this.idFacture);
+            //statement.setString(2, attentStatus);
+            
+            
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if(resultSet.next()){   
+                    setDetails(resultSet.getString("details"));
+                    setMontant(Double.parseDouble(resultSet.getString("montant")));
+                       
+                }else{
+                    return false;
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true; // Si la facture est trouvée avec succès
+    }
     /*
     public List<String> getAllTraitement(String type) {
         List<String> listTraitement = new ArrayList<>();

@@ -135,8 +135,8 @@ public class Menu2 extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(numerFac, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
-                        .addComponent(chercher, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(112, 112, 112)
+                        .addComponent(chercher, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(93, 93, 93)
                         .addComponent(details, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)))
                 .addContainerGap())
         );

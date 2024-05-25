@@ -91,29 +91,29 @@ public class Menu1ASControleur implements MouseListener, ListSelectionListener {
     }
     //--------------------------------------------------------------------------
     private void handleAddService() {
-    try {
-        if (menu.NomService.getText().isEmpty() || menu.jdes.getText().isEmpty() ) {
-                JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs requis.", "Erreur", JOptionPane.ERROR_MESSAGE);
-                return; // Sortir de la méthode si les champs sont vides
-        }
-        Service service = new Service(connection);
-        
-        service.setCodeService(Integer.parseInt(menu.codeService.getText()));// Il faut convertire 
-        service.setNomService(menu.NomService.getText());
-        service.setDesService(menu.jdes.getText());
-        
-        boolean success = service.ajouterService(connection);
-        if (success) {
-            JOptionPane.showMessageDialog(null, "Service ajouté avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
-            EffacerChamps();
-            updateTable();
-            // Mise à jour de la table après ajout
-        } else {
-            JOptionPane.showMessageDialog(null, "Erreur lors de l'ajout de Service.", "Erreur", JOptionPane.ERROR_MESSAGE);
-        }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erreur: " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-        }
+        try {
+            if (menu.NomService.getText().isEmpty() || menu.jdes.getText().isEmpty() ) {
+                    JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs requis.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    return; // Sortir de la méthode si les champs sont vides
+            }
+            Service service = new Service(connection);
+
+            service.setCodeService(Integer.parseInt(menu.codeService.getText()));// Il faut convertire 
+            service.setNomService(menu.NomService.getText());
+            service.setDesService(menu.jdes.getText());
+
+            boolean success = service.ajouterService(connection);
+            if (success) {
+                JOptionPane.showMessageDialog(null, "Service ajouté avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                EffacerChamps();
+                updateTable();
+                // Mise à jour de la table après ajout
+            } else {
+                JOptionPane.showMessageDialog(null, "Erreur lors de l'ajout de Service.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erreur: " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
     }
     //***************************************************************************************
     private void handleModifyService() throws ParseException {
@@ -164,18 +164,28 @@ public class Menu1ASControleur implements MouseListener, ListSelectionListener {
         int selectedRow = menu.jtables.getSelectedRow();
         if (selectedRow >= 0) {
             int codeService = (int) menu.jtables.getValueAt(selectedRow, 0);
-            service = new Service(connection);
-            service.setCodeService(codeService);
 
-            boolean success = service.supprimerService(connection);
-            if (success) {
-                JOptionPane.showMessageDialog(null, "Utilisateur supprimé avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
-                updateTable(); // Mise à jour de la table après suppression
-            } else {
-                JOptionPane.showMessageDialog(null, "Erreur lors de la suppression de l'utilisateur.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            // Afficher la boîte de dialogue de confirmation
+            int response = JOptionPane.showConfirmDialog(null, 
+                "Êtes-vous sûr de vouloir supprimer le service avec le code : " + codeService + " ?", 
+                "Confirmation de suppression", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.WARNING_MESSAGE);
+
+            if (response == JOptionPane.YES_OPTION) {
+                service = new Service(connection);
+                service.setCodeService(codeService);
+
+                boolean success = service.supprimerService(connection);
+                if (success) {
+                    JOptionPane.showMessageDialog(null, "Service supprimé avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                    updateTable(); // Mise à jour de la table après suppression
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erreur lors de la suppression du service.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Veuillez sélectionner un utilisateur à supprimer.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Veuillez sélectionner un service à supprimer.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
     //***************************************************************************************

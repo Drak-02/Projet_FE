@@ -42,7 +42,7 @@ public class ControleurMenu1S implements MouseListener, ListSelectionListener {
         // this.menu.btsupprimer.addMouseListener(this);
         //this.menu.btmodifier.addMouseListener(this);
         this.menu1.jtables.getSelectionModel().addListSelectionListener(this);
-        chargementDeStocke();
+        
     }
     //
     //Contrôle la creation des instances lors de l'arriver pour ne pas créer a chaque fois une autre instance ( surcharge).
@@ -65,6 +65,7 @@ public class ControleurMenu1S implements MouseListener, ListSelectionListener {
         } else {
             menu1.setVisible(true);
         }
+        updateTable();
     }
     //**************************************************************************
 
@@ -142,7 +143,7 @@ public class ControleurMenu1S implements MouseListener, ListSelectionListener {
     }
     //
     @Override
-        public void valueChanged(ListSelectionEvent e) {
+    public void valueChanged(ListSelectionEvent e) {
             if (!e.getValueIsAdjusting()) {
                 int selectedRow = menu1.jtables.getSelectedRow();
                 if (selectedRow >= 0) {
@@ -159,7 +160,7 @@ public class ControleurMenu1S implements MouseListener, ListSelectionListener {
                     }
                 }
             }
-        }
+    }
     ///-------------------------------------------------------------------------
        /*
         private void handleModifyStock() throws ParseException {

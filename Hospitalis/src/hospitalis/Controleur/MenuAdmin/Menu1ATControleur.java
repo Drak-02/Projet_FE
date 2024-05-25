@@ -151,18 +151,28 @@ public class Menu1ATControleur implements MouseListener, ListSelectionListener {
         int selectedRow = menu.jtables.getSelectedRow();
         if (selectedRow >= 0) {
             int codeTraitement = (int) menu.jtables.getValueAt(selectedRow, 0);
-            traitement = new Traitement(connection);
-            traitement.setCodeTraitement(codeTraitement);
 
-            boolean success = traitement.supprimerTraitement(connection);
-            if (success) {
-                JOptionPane.showMessageDialog(null, "Traitement supprimé avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
-                updateTable(); // Mise à jour de la table après suppression
-            } else {
-                JOptionPane.showMessageDialog(null, "Erreur lors de la suppression de l'utilisateur.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            // Afficher la boîte de dialogue de confirmation
+            int response = JOptionPane.showConfirmDialog(null, 
+                "Êtes-vous sûr de vouloir supprimer le traitement avec le code : " + codeTraitement + " ?", 
+                "Confirmation de suppression", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.WARNING_MESSAGE);
+
+            if (response == JOptionPane.YES_OPTION) {
+                traitement = new Traitement(connection);
+                traitement.setCodeTraitement(codeTraitement);
+
+                boolean success = traitement.supprimerTraitement(connection);
+                if (success) {
+                    JOptionPane.showMessageDialog(null, "Traitement supprimé avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                    updateTable(); // Mise à jour de la table après suppression
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erreur lors de la suppression du traitement.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Veuillez sélectionner un utilisateur à supprimer.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Veuillez sélectionner un traitement à supprimer.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
     //***************************************************************************************

@@ -41,8 +41,8 @@
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="numerFac" min="-2" pref="134" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                      <Component id="chercher" min="-2" pref="83" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+                      <Component id="chercher" min="-2" pref="102" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
                       <Component id="details" pref="318" max="32767" attributes="0"/>
                   </Group>
               </Group>

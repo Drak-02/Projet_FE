@@ -73,16 +73,18 @@ public class Menu2Controleur implements MouseListener {
                 return; // Sortir de la méthode si les champs sont vides
             }
 
-            boolean success = facture.chercherFacturer();
+            boolean success = facture.chercherFacturerAll();
             if (success) {
                 JOptionPane.showMessageDialog(null, "Facture Trouvé avec ", "Succès", JOptionPane.INFORMATION_MESSAGE);
                 menu2.details.setText(facture.getDetails() + "\n"+ facture.getMontant());
+            
             } else {
                 JOptionPane.showMessageDialog(null, "Facture Nom Trouvé", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erreur: " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
+        EffacerChamps();
     }
     
     private void chargementDeFacturePayer() {
@@ -123,7 +125,10 @@ public class Menu2Controleur implements MouseListener {
         chargementDeFacturePayer();
         chargementDeFactureImPayer();
     }
-
+    
+    private void EffacerChamps(){
+        menu2.chercher.setText("");
+    }
     @Override
     public void mousePressed(MouseEvent e) {
     }
