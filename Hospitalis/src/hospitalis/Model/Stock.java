@@ -272,6 +272,34 @@ public class Stock  extends StockObserable {
 
         return true;
     }
+    // -------------------------------------------------------------------------
+    public static List<Stock> chercheArticle(Connection connection, String motChercher) {
+        List<Stock> listeArticle = new ArrayList<>();
+        String query = "SELECT article, type, quantite, date_entre FROM Stock WHERE article LIKE ? OR type LIKE ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            String recherche = "%" + motChercher + "%";
+            statement.setString(1, recherche);
+            statement.setString(2, recherche);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Stock stock = new Stock(connection);
+
+                    stock.setNom(resultSet.getString("article"));
+                    stock.setType(resultSet.getString("type"));
+                    stock.setQuantite(resultSet.getLong("quantite"));
+                    stock.setDate(resultSet.getString("date_entre")); // Corrigez le nom de la colonne ici
+
+                    listeArticle.add(stock);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listeArticle;
+    }
   
 }
 

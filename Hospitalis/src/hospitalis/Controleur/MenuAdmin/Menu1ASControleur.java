@@ -200,7 +200,7 @@ public class Menu1ASControleur implements MouseListener, ListSelectionListener {
         chargementDeService();
     }
    //***************************************************************************************
-     private void chargementDeService() {
+    private void chargementDeService() {
         List<Service> serviceList = Service.getAllService(connection);
         DefaultTableModel model = new DefaultTableModel(
             new Object[]{"Code Service", "Nom", "Description"}, 

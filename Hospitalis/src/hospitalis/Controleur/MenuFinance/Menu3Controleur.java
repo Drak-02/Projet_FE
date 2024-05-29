@@ -55,8 +55,10 @@ public class Menu3Controleur implements MouseListener{
         } else {
             menu3.setVisible(true);
         }
+        menu3.jdetails.setText("");
         updateTable();
     }
+    
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == menu3.btpayer) {
@@ -64,61 +66,61 @@ public class Menu3Controleur implements MouseListener{
         } else if (e.getSource() == menu3.chercher) {
             chercherFacture();
         }
-   }
-  
-    public void payerFacture(){
-       try {
-            String dateStr = formatDate(new Date());
-            
-            facture = new Facture(connection);
-            facture.setIdFacture(menu3.numerFac.getText());
-            facture.setDateFacture(dateStr);
-            
-            
-            if (menu3.numerFac.getText().isEmpty()  ) {
-                JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs requis.", "Erreur", JOptionPane.ERROR_MESSAGE);
-                return; // Sortir de la méthode si les champs sont vides
-            }
-
-            boolean success = facture.paiementFacture();
-            if (success) {
-                JOptionPane.showMessageDialog(null, "Paiement Effectué avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
-                effacerChamps();
-                updateTable();
-            } else {
-                JOptionPane.showMessageDialog(null, "Erreur de Paiement.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erreur: " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-        }
     }
-    public void chercherFacture(){
+  
+    public void payerFacture() {
         try {
-            
-            facture = new Facture(connection);
-            facture.setIdFacture(menu3.numerFac.getText());
-            
-            
             if (menu3.numerFac.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs requis.", "Erreur", JOptionPane.ERROR_MESSAGE);
                 return; // Sortir de la méthode si les champs sont vides
             }
 
-            boolean success = facture.chercherFacturer();
+            String dateStr = formatDate(new Date());
+
+            facture = new Facture(connection);
+            facture.setIdFacture(menu3.numerFac.getText());
+            facture.setDateFacture(dateStr);
+
+            boolean success = facture.paiementFacture();
+            System.out.println("ture+++"+ success);
             if (success) {
-                JOptionPane.showMessageDialog(null, "Facture Trouvé avec ", "Succès", JOptionPane.INFORMATION_MESSAGE);
-                menu3.jdetails.setText(facture.getDetails() + "\n"+ facture.getMontant());
+                JOptionPane.showMessageDialog(null, "Paiement effectué avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                effacerChamps();
+                updateTable();
             } else {
-                JOptionPane.showMessageDialog(null, "Facture Nom Trouvé", "Erreur", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Erreur de paiement.", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erreur: " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
+    public void chercherFacture(){        
+            
+            if (menu3.numerFac.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs requis.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return; // Sortir de la méthode si les champs sont vides
+            }
+            facture = new Facture(connection);
+            facture.setIdFacture(menu3.numerFac.getText());
+
+            boolean success = facture.chercherFacturer();
+            if (success) {
+                JOptionPane.showMessageDialog(null, "Facture Trouvé avec ", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                StringBuilder detailsBuilder = new StringBuilder();
+                detailsBuilder.append("Détails de la facture:\n");
+                detailsBuilder.append(facture.getDetails()).append("\n");
+                detailsBuilder.append("Montant: ").append(facture.getMontant()).append(" DHS\n");
+
+                menu3.jdetails.setText(detailsBuilder.toString());
+                effacerChamps();
+            } else {
+                JOptionPane.showMessageDialog(null, "Facture Nom Trouvé", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+    }
     
     public void effacerChamps(){
         menu3.numerFac.setText("");
-        menu3.jdetails.setText("");
+       //
     }
     
     private String formatDate(Date date) throws ParseException {

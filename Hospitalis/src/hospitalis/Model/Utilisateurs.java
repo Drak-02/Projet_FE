@@ -262,6 +262,41 @@ public class Utilisateurs {
             return false;
         }
     }
+    //******************************************************
+    public static List<Utilisateurs> rechercherUtilisateurs(Connection connection, String termeRecherche) {
+        List<Utilisateurs> userList = new ArrayList<>();
+        String query = "SELECT matricule, nom, prenom, dateNaissance, password, telephone, email, specialite, role, sexe " +
+                       "FROM utilisateurs " +
+                       "WHERE matricule LIKE ? OR nom LIKE ? OR prenom LIKE ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            String recherche = "%" + termeRecherche + "%";
+            statement.setString(1, recherche);
+            statement.setString(2, recherche);
+            statement.setString(3, recherche);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Utilisateurs user = new Utilisateurs(connection);
+                    user.setMatricule(resultSet.getString("matricule"));
+                    user.setNom(resultSet.getString("nom"));
+                    user.setPrenom(resultSet.getString("prenom"));
+                    user.setDateNaissance(resultSet.getString("dateNaissance"));
+                    user.setPassword(resultSet.getString("password"));
+                    user.setTelephone(resultSet.getLong("telephone"));
+                    user.setEmail(resultSet.getString("email"));
+                    user.setSpecialite(resultSet.getString("specialite"));
+                    user.setRole(resultSet.getString("role"));
+                    user.setSexe(resultSet.getString("sexe"));
+                    userList.add(user);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userList;
+    }
 }
     
     //****************************************************** */

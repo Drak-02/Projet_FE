@@ -24,6 +24,7 @@ public class Authentification implements ActionListener {
     private ScreenAuthentification screenAuthentification;
     private Utilisateurs users;
     protected Connection connection;
+    public static String matMed;
     
     //Constructeur
     //Lors de la création de l'instance on obtient la connexion avec la base de données 
@@ -57,6 +58,10 @@ public class Authentification implements ActionListener {
             break;
         case "Médecin":
             // Redirection pour le médecin
+            // Redirection pour le médecin
+            matMed = screenAuthentification.jmatricule.getText();
+            MedecinControleur medecinControleur = new MedecinControleur(connection);
+            medecinControleur.afficherScreenMedecin();
             screenAuthentification.dispose();
             break;
         case "Finance":
@@ -73,8 +78,8 @@ public class Authentification implements ActionListener {
             break;
         case "Accueil":
             // Redirection pour le service accueil
-            AccueilControleur accueil = new AccueilControleur(connection);
-            accueil.afficherScreenAccueil();
+            AccueilControleur ac = new AccueilControleur(connection);
+            ac.afficherScreenAccueil();
             screenAuthentification.dispose();           
             break;
         default:

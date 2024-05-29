@@ -4,7 +4,9 @@
  */
 package hospitalis.Interface.componentMe;
 
+import javax.swing.JTable;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,6 +14,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  */
 public class Menu2 extends javax.swing.JInternalFrame {
     private static Menu2 instance;
+    private DefaultTableModel tableModel;
     /**
      * Creates new form Menu2
      */
@@ -32,6 +35,12 @@ public class Menu2 extends javax.swing.JInternalFrame {
         }
         return instance;
     }
+    public JTable getTable(){
+        return tablecalender;
+    }
+    public DefaultTableModel getTableModel(){
+        return tableModel;
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,8 +57,8 @@ public class Menu2 extends javax.swing.JInternalFrame {
         btajout = new javax.swing.JButton();
         btmodi = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        tablecalender = new javax.swing.JTable();
+        inputjour = new com.toedter.calendar.JDateChooser();
 
         setPreferredSize(new java.awt.Dimension(810, 534));
 
@@ -57,7 +66,7 @@ public class Menu2 extends javax.swing.JInternalFrame {
         jLabel11.setText("Jour:");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel12.setText("Heure:");
+        jLabel12.setText("Horaire:");
 
         inputheure.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,7 +80,7 @@ public class Menu2 extends javax.swing.JInternalFrame {
         btmodi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btmodi.setText("Modifier");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablecalender.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -79,7 +88,7 @@ public class Menu2 extends javax.swing.JInternalFrame {
                 {null, null, null}
             },
             new String [] {
-                "Jour", "heure", "Matricule medecin"
+                "Jour", "Horaire", "Matricule medecin"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -90,8 +99,8 @@ public class Menu2 extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setShowGrid(true);
-        jScrollPane1.setViewportView(jTable1);
+        tablecalender.setShowGrid(true);
+        jScrollPane1.setViewportView(tablecalender);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,7 +110,7 @@ public class Menu2 extends javax.swing.JInternalFrame {
                 .addGap(66, 66, 66)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputjour, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -126,7 +135,7 @@ public class Menu2 extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputjour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel12)
@@ -150,10 +159,10 @@ public class Menu2 extends javax.swing.JInternalFrame {
     public javax.swing.JButton btajout;
     public javax.swing.JButton btmodi;
     public javax.swing.JTextField inputheure;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    public com.toedter.calendar.JDateChooser inputjour;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JTable tablecalender;
     // End of variables declaration//GEN-END:variables
 }

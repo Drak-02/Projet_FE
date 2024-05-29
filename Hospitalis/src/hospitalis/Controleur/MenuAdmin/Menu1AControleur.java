@@ -26,16 +26,27 @@ public class Menu1AControleur implements MouseListener ,ListSelectionListener {
     private Connection connection;
     private Menu1A menu1A;
     private Utilisateurs users;
+    private ResultRecherche resultat;
     private static Menu1AControleur instanceM1;
     
     public Menu1AControleur(Connection connection, Menu1A menu1A) {
         this.connection = connection;
         this.menu1A = menu1A;
+        this.resultat = ResultRecherche.getInstance();
+        
+        
         System.out.println("Appe creation menuCont1");
         this.menu1A.btajouter.addMouseListener(this);
         this.menu1A.btsupprimer.addMouseListener(this);
         this.menu1A.btmodifier.addMouseListener(this);
-        this.menu1A.jtables.getSelectionModel().addListSelectionListener(this);
+        this.menu1A.btChercher.addMouseListener(this);
+        resultat.ferme.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                resultat.setVisible(false);
+                 EffacerChamps();
+            }
+        });
+        //this.menu1A.jtables.getSelectionModel().addListSelectionListener(this);
         chargementDeUsers();
     }
     
@@ -77,7 +88,10 @@ public class Menu1AControleur implements MouseListener ,ListSelectionListener {
             } catch (ParseException ex) {
                 Logger.getLogger(Menu1AControleur.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }else if (e.getSource() == menu1A.btChercher){
+            chercherUser();
         }
+         EffacerChamps();
     }
     //*******************************
 
@@ -165,6 +179,7 @@ public class Menu1AControleur implements MouseListener ,ListSelectionListener {
     }
 
     private void EffacerChamps() {
+        menu1A.cherche.setText("");
         menu1A.inputMatric.setText("");
         menu1A.inputNom.setText("");
         menu1A.inputPrenom.setText("");
@@ -182,6 +197,7 @@ public class Menu1AControleur implements MouseListener ,ListSelectionListener {
         } else {
             menu1A.setVisible(true);
         }
+         EffacerChamps();
     }
     private void handleDeleteUser() {
         int selectedRow = menu1A.jtables.getSelectedRow();
@@ -209,82 +225,62 @@ public class Menu1AControleur implements MouseListener ,ListSelectionListener {
         } else {
             JOptionPane.showMessageDialog(null, "Veuillez sélectionner un utilisateur à supprimer.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
+        EffacerChamps();
     }
 
     private void handleModifyUser() throws ParseException {
-        int selectedRow = menu1A.jtables.getSelectedRow();
-        if (selectedRow >= 0) {
-            String matricule = (String) menu1A.jtables.getValueAt(selectedRow, 0);
-            String dateNaissanceStr = formatDate(menu1A.inputNaiss.getDate()); 
-            
-            users = new Utilisateurs(connection);
-            users.setMatricule(matricule);
-            users.setNom(menu1A.inputNom.getText());
-            users.setPrenom(menu1A.inputPrenom.getText());
-            users.setDateNaissance(dateNaissanceStr);
-            users.setPassword(new String(menu1A.inputPass.getPassword()));
-            users.setSpecialite(menu1A.inputSpe.getText());
-            users.setEmail(menu1A.inputMai.getText());
-            users.setRole((String) menu1A.inputRole.getSelectedItem());
-            users.setSexe(menu1A.boutonHomme.isSelected() ? "Homme" : "Femme");
+        // Créer une nouvelle instance de Utilisateurs avec les informations saisies
+        users = new Utilisateurs(connection);
 
+        // Récupération des données saisies dans les champs de saisie
+        String matricule = menu1A.inputMatric.getText();
+        String nom = menu1A.inputNom.getText();
+        String prenom = menu1A.inputPrenom.getText();
+        String dateNaissanceStr = formatDate(menu1A.inputNaiss.getDate());
+        String password = new String(menu1A.inputPass.getPassword());
+        String specialite = menu1A.inputSpe.getText();
+        String email = menu1A.inputMai.getText();
+        String role = (String) menu1A.inputRole.getSelectedItem();
+        String sexe = menu1A.boutonHomme.isSelected() ? "Homme" : "Femme";
+
+        // Vérifie si le champ de téléphone n'est pas vide avant de le convertir en Long
+        String telephoneStr = menu1A.inputTel.getText();
+        long telephone = 0;
+        if (!telephoneStr.isEmpty()) {
             try {
-                // Vérifie si le champ de téléphone n'est pas vide avant de le convertir en Long
-                String telephoneStr = menu1A.inputTel.getText();
-                if (!telephoneStr.isEmpty()) {
-                    long telephone = Long.parseLong(telephoneStr);
-                    users.setTelephone(telephone);
-                } else {
-                    // Si le champ est vide, affecte 0 au téléphone ou une autre valeur par défaut selon votre logique
-                    users.setTelephone(0); // ou une autre valeur par défaut
-                }
-
-                // Récupération des données actuelles du tableau
-
-                String currentMatricule = (String) menu1A.jtables.getValueAt(selectedRow, 0);
-                String currentNom = (String) menu1A.jtables.getValueAt(selectedRow, 1);
-                String currentPrenom = (String) menu1A.jtables.getValueAt(selectedRow, 2);
-                String currentDateNaissanceStr = (String) menu1A.jtables.getValueAt(selectedRow, 3);
-                String currentPassword = (String) menu1A.jtables.getValueAt(selectedRow, 4);
-                String currentSpecialite = (String) menu1A.jtables.getValueAt(selectedRow, 6);
-                String currentEmail = (String) menu1A.jtables.getValueAt(selectedRow, 7);
-                String currentRole = (String) menu1A.jtables.getValueAt(selectedRow, 8);
-                String currentSexe = (String) menu1A.jtables.getValueAt(selectedRow, 9);
-
-                // Comparaison avec les valeurs actuelles et mise à jour si nécessaire
-                if (!matricule.equals(currentMatricule)) {
-                    users.setMatricule(matricule);
-                }
-                if (!menu1A.inputNom.getText().equals(currentNom)) {
-                    users.setNom(menu1A.inputNom.getText());
-                }
-                if (!menu1A.inputPrenom.getText().equals(currentPrenom)) {
-                    users.setPrenom(menu1A.inputPrenom.getText());
-                }
-                if (dateNaissanceStr != null && !dateNaissanceStr.equals(currentDateNaissanceStr)) {
-                    users.setDateNaissance(dateNaissanceStr);
-                }
-                if (!new String(menu1A.inputPass.getPassword()).equals(currentPassword)) {
-                    users.setPassword(new String(menu1A.inputPass.getPassword()));
-                }
-                // Répétez le processus pour les autres champs
-
-                boolean success = users.modifierCompte(connection);
-                if (success) {
-                    JOptionPane.showMessageDialog(null, "Utilisateur modifié avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
-                    EffacerChamps();
-                    updateTable(); // Mise à jour de la table après modification
-                } else {
-                    JOptionPane.showMessageDialog(null, "Erreur lors de la modification de l'utilisateur.", "Erreur", JOptionPane.ERROR_MESSAGE);
-                }
+                telephone = Long.parseLong(telephoneStr);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Erreur: Le numéro de téléphone doit être un nombre.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Erreur lors de la modification de l'utilisateur : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Veuillez sélectionner un utilisateur à modifier.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
+
+        // Définir les informations dans l'objet Utilisateurs
+        users.setMatricule(matricule);
+        users.setNom(nom);
+        users.setPrenom(prenom);
+        users.setDateNaissance(dateNaissanceStr);
+        users.setPassword(password);
+        users.setSpecialite(specialite);
+        users.setEmail(email);
+        users.setRole(role);
+        users.setSexe(sexe);
+        users.setTelephone(telephone);
+
+        try {
+            // Modifier l'utilisateur dans la base de données
+            boolean success = users.modifierCompte(connection);
+            if (success) {
+                JOptionPane.showMessageDialog(null, "Utilisateur modifié avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                EffacerChamps();
+                updateTable(); // Mise à jour de la table après modification
+            } else {
+                JOptionPane.showMessageDialog(null, "Erreur lors de la modification de l'utilisateur.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erreur lors de la modification de l'utilisateur : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+        //EffacerChamps();
     }
         
     //Cette methodes mes permet de chercher les données et afficher
@@ -314,8 +310,46 @@ public class Menu1AControleur implements MouseListener ,ListSelectionListener {
     private void updateTable() {
         chargementDeUsers();
     }
+    //-----------------------------------------------------
+    private void chercherUser() {
+        if (menu1A.cherche.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Veuillez remplir tous le champs cherche.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return; // Sortir de la méthode si les champs sont vides
+        }        
+        //users = new Utilisateurs(connection);
+        
+        List<Utilisateurs> utilisateursTrouves = Utilisateurs.rechercherUtilisateurs(connection, menu1A.cherche.getText());
 
-    //----------------------------------
+        if (!utilisateursTrouves.isEmpty()) {
+            // Effacer le modèle actuel de la table de recherche
+            DefaultTableModel model = (DefaultTableModel) resultat.jtblRecherche.getModel();
+            model.setRowCount(0);
+
+            // Remplir le modèle avec les résultats de la recherche
+            for (Utilisateurs utilisateur : utilisateursTrouves) {
+                model.addRow(new Object[]{
+                    utilisateur.getMatricule(),
+                    utilisateur.getNom(),
+                    utilisateur.getPrenom(),
+                    utilisateur.getDateNaissance(),
+                    utilisateur.getPassword(),
+                    utilisateur.getTelephone(),
+                    utilisateur.getSpecialite(),
+                    utilisateur.getEmail(),
+                    utilisateur.getRole(),
+                    utilisateur.getSexe()
+                });
+            }
+            
+            resultat.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Aucun utilisateur trouvé.", "Information", JOptionPane.INFORMATION_MESSAGE);
+        }
+        //EffacerChamps();
+    }
+    
+    
+    //-----------------------------------------------------
     @Override
     public void mousePressed(MouseEvent e) {}
 

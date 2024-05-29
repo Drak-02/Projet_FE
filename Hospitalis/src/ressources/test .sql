@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 23 mai 2024 à 21:30
+-- Généré le : mer. 29 mai 2024 à 13:01
 -- Version du serveur : 8.2.0
 -- Version de PHP : 8.3.0
 
@@ -24,6 +24,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `chambre`
+--
+
+DROP TABLE IF EXISTS `chambre`;
+CREATE TABLE IF NOT EXISTS `chambre` (
+  `num_chambre` int NOT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `disponibilite` varchar(20) DEFAULT NULL,
+  `categorie` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`num_chambre`)
+) ;
+
+--
+-- Déchargement des données de la table `chambre`
+--
+
+INSERT INTO `chambre` (`num_chambre`, `type`, `disponibilite`, `categorie`) VALUES
+(12, 'Double', 'Disponible', 'Hospitalisation'),
+(145, 'Simple', 'Disponible', 'Hospitalisation');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `facture`
 --
 
@@ -33,6 +56,7 @@ CREATE TABLE IF NOT EXISTS `facture` (
   `details` varchar(255) DEFAULT NULL,
   `montant` decimal(10,2) DEFAULT NULL,
   `date` date DEFAULT NULL,
+  `listeTraitement` text,
   `status` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`num_facture`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -41,9 +65,15 @@ CREATE TABLE IF NOT EXISTS `facture` (
 -- Déchargement des données de la table `facture`
 --
 
-INSERT INTO `facture` (`num_facture`, `details`, `montant`, `date`, `status`) VALUES
-('FACT240523203236', 'Matricule Médecin Infos\nMAlI\nPatient infos \nNom:Keita\nPrénom:Badra\nCNI:YDKO5', 350.00, '2024-05-23', 'Attent'),
-('FACT240523193156', 'Matricule Médecin Infos\nALQ2\nPatient infos \nNom:Modi\nPrénom:sd\nCNI:654', 280.00, '2024-05-23', 'payé');
+INSERT INTO `facture` (`num_facture`, `details`, `montant`, `date`, `listeTraitement`, `status`) VALUES
+('FACT240528160857', 'Nom: Younoussa\nPrénom: ABDOUL WAHAB\nDate de Naissance: 2002-11-11\nCNI: U001136K\n\nNom: BADRA\n', 10200.00, '2024-05-28', 'Appendicectomie Montant : 10000.0\nRadiographie Thoracique Montant : 200.0', 'Attent'),
+('FACT240528152357', 'Nom: ABDOUL\nPrénom: WAHAB\nDate de Naissance: 2024-05-01\nCNI: U001136K\n\nNom: STOPEUR\n', 95.00, '2024-05-28', 'Consultation en gastro-entérologie Montant : 95.0', 'payé'),
+('FACT240528152608', 'Nom: SOUNA\nPrénom: ABDOUL\nDate de Naissance: 2024-05-22\nCNI: 111\n\nNom: BOUBA\n', 275.00, '2024-05-28', 'Consultation en gastro-entérologie Montant : 95.0\nConsultation en cardiologie Montant : 90.0\nConsultation en urologie Montant : 90.0', 'payé'),
+('FACT240528152754', 'Nom: ABS\nPrénom: KALI\nDate de Naissance: 2024-05-02\nCNI: U7856\n\nNom: KJ\n', 275.00, '2024-05-28', 'Consultation en gastro-entérologie Montant : 95.0\nConsultation en cardiologie Montant : 90.0\nConsultation en urologie Montant : 90.0', 'payé'),
+('FACT240528153520', 'Nom: AL\nPrénom: s\nDate de Naissance: 2024-05-08\nCNI: ud\n\nNom: edd\n', 75.00, '2024-05-28', 'Consultation en dermatologie Montant : 75.0', 'payé'),
+('FACT240528155000', 'Nom: BADRA\nPrénom: AZERTY\nDate de Naissance: 2024-05-01\nCNI: U001141D\n\nNom: ALIOU\n', 325.00, '2024-05-28', 'Consultation en dermatologie Montant : 75.0\nConsultation en orthopédie Montant : 85.0\nConsultation en neurologie Montant : 80.0\nConsultation en endocrinologie Montant : 85.0', 'payé'),
+('FACT240528155811', 'Nom: Keita\nPrénom: Badra\nDate de Naissance: 2024-05-01\nCNI: 1455i\n\nNom: lkdq\n', 270.00, '2024-05-28', 'Consultation en endocrinologie Montant : 85.0\nConsultation en gastro-entérologie Montant : 95.0\nConsultation en urologie Montant : 90.0', 'Attent'),
+('FACT240528160103', 'Nom: Younoussa\nPrénom: Abdoul Wahab\nDate de Naissance: 2002-11-11\nCNI: U001136K\n\nNom: Badra Aliou\n', 860.00, '2024-05-28', 'Consultation en urologie Montant : 90.0\nConsultation en cardiologie Montant : 90.0\nConsultation en soins primaires Montant : 50.0\nConsultation en gynécologie Montant : 70.0\nConsultation en médecine interne Montant : 65.0\nConsultation médicale générale Montant : 50.0\nConsultation en gastro-entérologie Montant : 95.0\nConsultation en endocrinologie Montant : 85.0\nConsultation en endocrinologie Montant : 85.0\nConsultation en cardiologie Montant : 90.0\nConsultation en cardiologie Montant : 90.0', 'Attent');
 
 -- --------------------------------------------------------
 
@@ -53,10 +83,10 @@ INSERT INTO `facture` (`num_facture`, `details`, `montant`, `date`, `status`) VA
 --
 DROP VIEW IF EXISTS `facturespayees`;
 CREATE TABLE IF NOT EXISTS `facturespayees` (
-`num_facture` varchar(50)
+`date` date
 ,`details` varchar(255)
 ,`montant` decimal(10,2)
-,`date` date
+,`num_facture` varchar(50)
 ,`status` varchar(15)
 );
 
@@ -80,7 +110,8 @@ CREATE TABLE IF NOT EXISTS `service` (
 
 INSERT INTO `service` (`code_service`, `type_service`, `description`) VALUES
 (123, 'Urgance', 'je vais change'),
-(124, 'Administratifs', 'pour le accueil et autre ');
+(124, 'Administratifs', 'pour le accueil et autre '),
+(125, 'Traumatologie', 'L\'automatique');
 
 -- --------------------------------------------------------
 
@@ -96,7 +127,19 @@ CREATE TABLE IF NOT EXISTS `stock` (
   `quantite` mediumtext,
   `date_entre` date DEFAULT NULL,
   PRIMARY KEY (`id_article`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `stock`
+--
+
+INSERT INTO `stock` (`id_article`, `article`, `type`, `quantite`, `date_entre`) VALUES
+(1, 'A1', 'Médicament', '25', '2024-05-16'),
+(2, 'AD4', 'Médicament', '2', '2024-05-16'),
+(3, 'A7', 'Matriel', '10', '2024-05-16'),
+(4, 'A', 'Médicament', '230', '2024-05-31'),
+(5, 'A7', 'Matriel', '14', '2024-05-24'),
+(6, 'Q4', 'Médicament', '145', '2024-05-08');
 
 -- --------------------------------------------------------
 
@@ -114,6 +157,17 @@ CREATE TABLE IF NOT EXISTS `stock_livre` (
   KEY `id_article` (`id_article`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Déchargement des données de la table `stock_livre`
+--
+
+INSERT INTO `stock_livre` (`code_service`, `id_article`, `quantite`, `date`) VALUES
+(123, 3, '14', '2024-05-23'),
+(124, 3, '200', '2024-05-14'),
+(124, 3, '30', '2024-05-31'),
+(123, 4, '24', '2024-05-06'),
+(125, 2, '23', '2024-05-28');
+
 -- --------------------------------------------------------
 
 --
@@ -128,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `traitement` (
   `description` text,
   `prix` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`codeTraitement`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `traitement`
@@ -150,7 +204,14 @@ INSERT INTO `traitement` (`codeTraitement`, `type`, `nom`, `description`, `prix`
 (13, 'Consultation générale', 'Consultation en santé mentale', 'Examen médical pour les problèmes de santé mentale', 60.00),
 (14, 'Consultation spécialisée', 'Consultation en endocrinologie', 'Examen médical avec un spécialiste des troubles hormonaux', 85.00),
 (15, 'Consultation générale', 'Consultation en soins primaires', 'Examen médical de routine pour les soins de santé de base', 50.00),
-(16, 'Consultation spécialisée', 'Consultation en urologie', 'Examen médical avec un spécialiste des troubles urinaires et reproductifs', 90.00);
+(16, 'Consultation spécialisée', 'Consultation en urologie', 'Examen médical avec un spécialiste des troubles urinaires et reproductifs', 90.00),
+(17, 'Consultation', 'Consultation Générale', 'Consultation médicale générale', 40.00),
+(18, 'Consultation Spécialisée', 'Consultation Cardiologique', 'Consultation avec un cardiologue', 500.00),
+(19, 'Radiologie', 'Radiographie Thoracique', 'Imagerie radiographique de la région thoracique', 200.00),
+(20, 'Chirurgie', 'Appendicectomie', 'Chirurgie de retrait de l\'appendice', 10000.00),
+(21, 'Médecine Interne', 'Consultation Diabétologie', 'Consultation pour gestion du diabète', 450.00),
+(22, 'Laboratoire', 'Analyse de Sang', 'Tests sanguins complets', 150.00),
+(23, 'Physiothérapie', 'Séance de Kinésithérapie', 'Traitement par kinésithérapie', 250.00);
 
 -- --------------------------------------------------------
 
@@ -182,7 +243,8 @@ INSERT INTO `utilisateurs` (`Matricule`, `Nom`, `Prenom`, `DateNaissance`, `Pass
 ('12564', 'Ali', 'efz', '2024-05-11', '124', '451361894', '78efkfe', ',l,ke', 'Stocke', 'Homme'),
 ('56884', 'bas', 'zez', '2004-05-14', '123', '118853547', 'medecin', 'ba@gmail.com', 'Finance', 'Homme'),
 ('75788', 'efz', 'fezf', '2024-05-17', '123', '48965', 'zfef', 'feef', 'Accueil', 'Homme'),
-('12454', 'wahab', 'jk', '2009-05-15', '123', '789545415', 'doctor', 'g@gmail.com', 'Médecin', 'Homme');
+('12452', 'S', 'Moussa', '2024-05-02', '123', '784595269', 'Medecin', 'moussa@gmail.com', 'Médecin', 'Homme'),
+('234', 'SOUNA', 'ABDOUL', '1764-05-01', '123', '9', 'MONOPOLE', 'abdoul@gmail.com', 'Stocke', 'Homme');
 
 -- --------------------------------------------------------
 

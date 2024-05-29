@@ -4,6 +4,7 @@
  */
 package hospitalis.Controleur.MenuStocke;
 
+import hospitalis.Controleur.ImprimerDriver;
 import hospitalis.Interface.componentSt.Menu1S2;
 import hospitalis.Model.Stock;
 import java.awt.event.MouseEvent;
@@ -30,6 +31,7 @@ public class ControleurMenu1S2 implements MouseListener {
         this.menu = menu;
         chargementNiveau();
         System.out.println("Appe creation menuStocke1 ");  
+        menu.Imprimer.addMouseListener(this);
         // Ajouter un écouteur pour détecter quand le panneau devient visible
         this.menu.addAncestorListener(new AncestorListener() {
             @Override
@@ -83,9 +85,16 @@ public class ControleurMenu1S2 implements MouseListener {
             menu.jtniveau.setModel(model);
         }
     //**************************************************************************
-
+        
+     private void imprimerTable(){
+         String titre = "Niveau Des Stockes";
+        ImprimerDriver.imprimerJtable(menu.jtniveau, titre);
+     }   
     @Override
-    public void mouseClicked(MouseEvent e) {   
+    public void mouseClicked(MouseEvent e) { 
+        if(e.getSource() == menu.Imprimer){
+            imprimerTable();
+        }
     }
 
     @Override

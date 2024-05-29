@@ -29,19 +29,26 @@ public class ControleurMenu1S implements MouseListener, ListSelectionListener {
     private Connection connection;
     private Menu1S menu1;
     private Stock stock;
+    private ResultatRecherche resultat;
     private static ControleurMenu1S instance;
     //
     public ControleurMenu1S(Connection connection, Menu1S menu) {
         this.connection = connection;
         this.menu1 = menu;
+        this.resultat = ResultatRecherche.getInstance();
         
         System.out.println("Appe creation menuCont1");
         
         this.menu1.btadd.addMouseListener(this);
         
-        // this.menu.btsupprimer.addMouseListener(this);
-        //this.menu.btmodifier.addMouseListener(this);
-        this.menu1.jtables.getSelectionModel().addListSelectionListener(this);
+        this.menu1.btChercher.addMouseListener(this);
+        
+        resultat.ferme.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                resultat.setVisible(false);
+                 EffacerChamps();
+            }
+        });
         
     }
     //
@@ -71,10 +78,10 @@ public class ControleurMenu1S implements MouseListener, ListSelectionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("CLicked stock1");
         if(e.getSource() == menu1.btadd){        
             handleAddStock();
-            System.out.println("CLicked stock2");
+        }else if (e.getSource() == menu1.btChercher){
+            ChercheArticle();
         }
     }
     
@@ -116,6 +123,7 @@ public class ControleurMenu1S implements MouseListener, ListSelectionListener {
         menu1.ipArt.setText("");
         menu1.ipQuant.setText("");
         menu1.sdate.setDate(null);
+        menu1.chercher.setText("");
         //menu1A.buttonGroup1.clearSelection();
         menu1.jtype.setSelectedIndex(0);
     }
@@ -161,52 +169,37 @@ public class ControleurMenu1S implements MouseListener, ListSelectionListener {
                 }
             }
     }
-    ///-------------------------------------------------------------------------
-       /*
-        private void handleModifyStock() throws ParseException {
-        int selectedRow = menu1.jtables.getSelectedRow();
-        if (selectedRow >= 0) {
-            int codeService = (int) menu1.jtables.getValueAt(selectedRow, 0);
-            
-            stock = new Stock(connection);
-            stock.setNom();
-            stock.setNomService(menu.NomService.getText());
-            stock.setDesService(menu.jdes.getText());
+    private void ChercheArticle() {
+        if (menu1.chercher.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Veuillez remplir le champ de recherche.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return; // Sortir de la méthode si le champ est vide
+        }
 
-            try {
-                // Récupération des données actuelles du tableau
+        System.out.println("Recherche en cours...");
+        List<Stock> listeArticleTrouves = Stock.chercheArticle(connection, menu1.chercher.getText());
 
-                int currentCodeService = (int) menu.jtables.getValueAt(selectedRow, 0);
-                String currentNom = (String) menu.jtables.getValueAt(selectedRow, 1);
-                String currentDes = (String) menu.jtables.getValueAt(selectedRow, 2);
+        if (!listeArticleTrouves.isEmpty()) {
+            DefaultTableModel model = (DefaultTableModel) resultat.jtables.getModel();
 
-                // Comparaison avec les valeurs actuelles et mise à jour si nécessaire
-                if (codeService != currentCodeService) {
-                    service.setCodeService(codeService);
-                }
-                if (!menu.NomService.getText().equals(currentNom)) {
-                    service.setNomService(menu.NomService.getText());
-                }
-                if (!menu.jdes.getText().equals(currentDes)) {
-                    service.setDesService(menu.jdes.getText());
-                }
-                // Répétez le processus pour les autres champs
+            // Effacer les anciennes lignes
+            model.setRowCount(0);
 
-                boolean success = service.modifierService(connection);
-                if (success) {
-                    JOptionPane.showMessageDialog(null, "Service modifié avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
-                    updateTable(); // Mise à jour de la table après modification
-                } else {
-                    JOptionPane.showMessageDialog(null, "Erreur lors de la modification de Service", "Erreur", JOptionPane.ERROR_MESSAGE);
-                }
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Erreur lors de la modification de l'utilisateur : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+            // Ajouter les nouvelles lignes
+            for (Stock stock : listeArticleTrouves) {
+                model.addRow(new Object[]{
+                    stock.getNom(),
+                    stock.getType(),
+                    stock.getQuantite(),
+                    stock.getDate()
+                });
             }
+            resultat.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null, "Veuillez sélectionner un Service à modifier.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Aucun article trouvé.", "Information", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    */
+    ///-------------------------------------------------------------------------
+    
     @Override
     public void mousePressed(MouseEvent e) {
     }

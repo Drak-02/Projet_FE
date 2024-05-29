@@ -3,10 +3,12 @@ package hospitalis.Controleur;
 import hospitalis.Controleur.MenuAccueil.Menu1Controleur;
 import hospitalis.Controleur.MenuAccueil.Menu2Controleur;
 import hospitalis.Controleur.MenuAccueil.Menu3Controleur;
+
 import hospitalis.Interface.ScreenAccueil;
 import hospitalis.Interface.componentAc.Menu1;
 import hospitalis.Interface.componentAc.Menu2;
 import hospitalis.Interface.componentAc.Menu3;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
@@ -18,22 +20,22 @@ public class AccueilControleur implements MouseListener {
     private Menu1 menu1;
     private Menu2 menu2;
     private Menu3 menu3;
-
+    
     private Menu1Controleur menu1Controleur;
     private Menu2Controleur menu2Controleur;
     private Menu3Controleur menu3Controleur;
-
+    
     public AccueilControleur(Connection connection) {
         this.connection = connection;
         screenAccueil = new ScreenAccueil();
         screenAccueil.menu1.addMouseListener(this);
         screenAccueil.menu2.addMouseListener(this);
         screenAccueil.menu3.addMouseListener(this);
-
+        //screenAccueil.menu4.addMouseListener(this);
         menu1 = Menu1.getInstance();
         menu2 = Menu2.getInstance();
         menu3 = Menu3.getInstance();
-
+      
         menu1Controleur = new Menu1Controleur(connection, menu1);
         menu2Controleur = new Menu2Controleur(connection, menu2);
         menu3Controleur = new Menu3Controleur(connection, menu3);
@@ -44,13 +46,11 @@ public class AccueilControleur implements MouseListener {
     public void afficherScreenAccueil() {
         screenAccueil.setVisible(true);
     }
-
     private void showMenu1() {
         screenAccueil.getCenterPanel().add(menu1);
         menu1Controleur.afficherMenu();
-        menu1Controleur.fetchDataToTable();
+        //menu1Controleur.fetchDataToTable();
     }
-
     private void showMenu2() {
         screenAccueil.getCenterPanel().add(menu2);
         menu2Controleur.afficherMenu();
@@ -59,6 +59,7 @@ public class AccueilControleur implements MouseListener {
         screenAccueil.getCenterPanel().add(menu3);
         menu3Controleur.afficherMenu();
     }
+    
     @Override
     public void mouseClicked(MouseEvent e) {
         screenAccueil.getCenterPanel().removeAll();

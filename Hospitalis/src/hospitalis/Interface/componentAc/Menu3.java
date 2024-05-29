@@ -44,13 +44,13 @@ public class Menu3 extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        inputnumchambre = new javax.swing.JTextField();
+        inputNumero = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         inputdispochambre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         inputtypechambre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablechambre = new javax.swing.JTable();
         btsupp = new javax.swing.JButton();
         btmodi = new javax.swing.JButton();
         btajout = new javax.swing.JButton();
@@ -66,7 +66,7 @@ public class Menu3 extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Type chambre:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablechambre.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -74,7 +74,7 @@ public class Menu3 extends javax.swing.JInternalFrame {
                 {null, null, null}
             },
             new String [] {
-                "Numéro de chambre", "Type de chambre", "Disponibilité"
+                "Numéro de chambre", "Disponibilité", "Type de chambre"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -85,7 +85,7 @@ public class Menu3 extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablechambre);
 
         btsupp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btsupp.setText("Supprimer");
@@ -104,7 +104,7 @@ public class Menu3 extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inputnumchambre, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(100, 100, 100)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -130,7 +130,7 @@ public class Menu3 extends javax.swing.JInternalFrame {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(inputnumchambre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(inputdispochambre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
@@ -152,13 +152,13 @@ public class Menu3 extends javax.swing.JInternalFrame {
     public javax.swing.JButton btajout;
     public javax.swing.JButton btmodi;
     public javax.swing.JButton btsupp;
+    public javax.swing.JTextField inputNumero;
     public javax.swing.JTextField inputdispochambre;
-    public javax.swing.JTextField inputnumchambre;
     public javax.swing.JTextField inputtypechambre;
     public javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTable jTable1;
+    public javax.swing.JTable tablechambre;
     // End of variables declaration//GEN-END:variables
 }

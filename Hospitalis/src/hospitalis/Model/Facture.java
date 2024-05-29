@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 /**
@@ -28,6 +29,7 @@ public class Facture {
     private String status;
     private static final String attentStatus = "Attent";
     private static final String payeFacture = "payé";
+    private List<String> listeTraitementsEffectues;
 
     public String getStatus() {
         return status;
@@ -107,7 +109,7 @@ public class Facture {
     }
     // Creation de la facture 
     public boolean creeFacture() {
-        String queryFacture = "INSERT INTO Facture (num_facture, details, montant, date,status) VALUES (?, ?, ?, ?,?)";
+        String queryFacture = "INSERT INTO Facture (num_facture, details, montant, date, listeTraitement, status) VALUES (?, ?, ?, ?, ?, ?)";
         idFacture = genererCodeFacture();
         System.out.println("Facture: " + idFacture);
 
@@ -116,16 +118,25 @@ public class Facture {
             preparedStatement.setString(2, details);
             preparedStatement.setDouble(3, montant);
             preparedStatement.setString(4, dateFacture);
-            preparedStatement.setString(5, attentStatus);
+            preparedStatement.setString(5, String.join("\n", listeTraitementsEffectues));
+            preparedStatement.setString(6, attentStatus);
 
             preparedStatement.executeUpdate();
 
             System.out.println("Facture ajoutée avec succès");
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+           return false;
         }
         return true;
+    }
+    //
+    public List<String> getListeTraitementsEffectues() {
+        return listeTraitementsEffectues;
+    }
+
+    public void setListeTraitementsEffectues(List<String> listeTraitementsEffectues) {
+        this.listeTraitementsEffectues = listeTraitementsEffectues;
     }
     
     //list de traitement effactue
@@ -224,13 +235,9 @@ public class Facture {
                 reinsertStmt.setString(1, this.dateFacture);
                 
                 reinsertStmt.executeUpdate();
-            }else{
-                return false;
             }
-
-            return rowsAffected > 1;
+            return true;
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -260,6 +267,7 @@ public class Facture {
         }
         return true; // Si la facture est trouvée avec succès
     }
+
     public boolean chercherFacturerAll(){
         String queryCherche = "SELECT * FROM facture WHERE num_facture=?";
 
@@ -286,6 +294,8 @@ public class Facture {
         }
         return true; // Si la facture est trouvée avec succès
     }
+    
+    
     /*
     public List<String> getAllTraitement(String type) {
         List<String> listTraitement = new ArrayList<>();
@@ -308,5 +318,26 @@ public class Facture {
 
         return listTraitement;
     }*/
+
+    public List<String> getTraitementsForFacture(String numFacture) {
+        List<String> traitements = new ArrayList<>();
+        String query = "SELECT listeTraitement FROM Facture WHERE num_facture = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, numFacture);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    String details = resultSet.getString("listeTraitement");
+                    // Supposons que les traitements sont stockés dans la colonne "details" sous forme de chaîne séparée par des virgules
+                    String[] traitementsArray = details.split(",");
+                    traitements.addAll(Arrays.asList(traitementsArray));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return traitements;
+    }
     
 }

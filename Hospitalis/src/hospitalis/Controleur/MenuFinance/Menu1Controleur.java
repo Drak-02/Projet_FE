@@ -5,31 +5,35 @@
 package hospitalis.Controleur.MenuFinance;
 
 import hospitalis.Interface.componentFi.Menu1;
+import hospitalis.Interface.componentFi.PrintFacture;
 import hospitalis.Model.Facture;
-import hospitalis.Model.ImprimerFacture;
 import hospitalis.Model.Patient;
 import hospitalis.Model.Traitement;
-import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -40,17 +44,22 @@ public class Menu1Controleur implements MouseListener , ItemListener {
     private final Menu1 menu1;
     private static Menu1Controleur instanceM1;
     private Facture facture;
+    private Patient patient;
     
     public Menu1Controleur(Connection connection, Menu1 menu1) {
         this.connection = connection;
         this.menu1 = menu1;
+        
         
         menu1.liste_Traitement.setModel(new DefaultListModel<>());
         menu1.listeEffectuer1.setModel(new DefaultListModel<>());
 
         
         this.menu1.btajout.addMouseListener(this);
+        this.menu1.imprimer.addMouseListener(this);
+        
         this.menu1.type.addItemListener(this);
+        
         this.menu1.listeEffectuer1.addMouseListener(this);
         this.menu1.liste_Traitement.addMouseListener(this);
         this.facture = new Facture(connection);
@@ -78,27 +87,30 @@ public class Menu1Controleur implements MouseListener , ItemListener {
         } else {
             menu1.setVisible(true);
         }
-       updateTable();
+        
+        //menu1.listeEffectuer1
+        updateTable();
     }
     //------------------------------------------------------------------------------------------------------------------------------------------
 
-   private void EtablirFacture() {
+    private void EtablirFacture() {
         try {
             facture = new Facture(connection);
 
             String type = (String) menu1.type.getSelectedItem();
-            if (!type.equals("Consultation") && !type.equals("Consultation Spécialisé")) {
+            //if (!type.equals("Consultation") && !type.equals("Consultation Spécialisé")) {
                 chargementDeTraitement(type);
-            }
+            //}
 
             DefaultListModel<String> modelEffectuer1 = (DefaultListModel<String>) menu1.listeEffectuer1.getModel();
             double montantTotal = 0;
+            List<String> listeTraitement = new ArrayList<>(); // Nouvelle liste pour stocker les détails des traitements
 
             for (int i = 0; i < modelEffectuer1.size(); i++) {
                 String traitementStr = modelEffectuer1.getElementAt(i);
-                // Parsing the string to extract price
                 double prix = Double.parseDouble(traitementStr.substring(traitementStr.lastIndexOf(":") + 1).trim());
                 montantTotal += prix;
+               listeTraitement.add(modelEffectuer1.getElementAt(i));
             }
 
             // Vérifier si les champs nécessaires sont vides
@@ -107,25 +119,33 @@ public class Menu1Controleur implements MouseListener , ItemListener {
                 return; // Sortir de la méthode si les champs sont vides
             }
 
-            System.out.println("++++++++++");
-            String detailsF = "Matricule Médecin Infos\n" + menu1.matricule.getText()+"\n"+
-                    "Patient infos \nNom:" + menu1.namePatient.getText() + "\nPrénom:"+menu1.prenomPatient.getText()+"\nCNI:"+
-                        menu1.identifiant.getText();
+            String date = formatDate(menu1.naissanceP.getDate());
+
+            patient = new Patient();
+            patient.setNom(menu1.namePatient.getText());
+            patient.setPrenom(menu1.prenomPatient.getText());
+            patient.setCni(menu1.identifiant.getText());
+            patient.setMed(menu1.matricule.getText());
+            patient.setDateNaissance(date);
+
+            String detailsF = patient.detailsFacturePatient();
 
             String dateStr = formatDate(new Date());
+
+            // Set the list of treatments in the facture object
+            facture.setListeTraitementsEffectues(listeTraitement);
 
             facture.setMontant(montantTotal);
             facture.setDetails(detailsF);
             facture.setDateFacture(dateStr);
-            System.out.println("Date:" +dateStr);
+            System.out.println("Date:" + dateStr);
             boolean success = facture.creeFacture();
 
             if (success) {
                 JOptionPane.showMessageDialog(null, "Facture établie avec succès. Montant total: " + montantTotal + " DHS", "Succès", JOptionPane.INFORMATION_MESSAGE);
                 EffacerChamps();
-                //String detailsFacture = detailsFacture();
-                //imprimerFacture(detailsFacture);
-                updateTable(); // Mise à jour de la table après ajout
+                updateTable();
+                modelEffectuer1.clear();
             } else {
                 JOptionPane.showMessageDialog(null, "Erreur lors de l'établissement de la facture.", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
@@ -134,24 +154,14 @@ public class Menu1Controleur implements MouseListener , ItemListener {
         }
     }
    //-----------------------------------------
-    public void imprimerFacture(String fact) {
-        PrinterJob job = PrinterJob.getPrinterJob();
-        job.setPrintable(new ImprimerFacture(fact));
-
-        if (job.printDialog()) {
-            try {
-                job.print();
-            } catch (PrinterException e) {
-                JOptionPane.showMessageDialog(null, "Erreur lors de l'impression de la facture.", "Erreur d'impression", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
         //------------------------------------------------------------------------------------------------------------------------------------------
      private void EffacerChamps() {
         menu1.identifiant.setText("");
         menu1.namePatient.setText("");
         menu1.naissanceP.setDate(null);
         menu1.prenomPatient.setText("");
+        menu1.listeEffectuer1.clearSelection();
+        
         //menu1A.buttonGroup1.clearSelection();
         menu1.type.setSelectedIndex(0);
         menu1.matricule.setText("");
@@ -160,53 +170,8 @@ public class Menu1Controleur implements MouseListener , ItemListener {
         chargementDeFacture();
         loadTraitementTypes();
     }
-    //***************
-    public Patient getPatient() {
-        try {
-            Patient patient = new Patient();
-            
-            String dateStr = formatDate(menu1.naissanceP.getDate());
-            patient.setNom(menu1.namePatient.getText());
-            patient.setPrenom(menu1.prenomPatient.getText());
-            patient.setCni(menu1.identifiant.getText());
-            patient.setDateNaissance(dateStr);
-            
-            return patient;
-        } catch (ParseException ex) {
-            Logger.getLogger(Menu1Controleur.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    } 
-    
         // Exemple de méthode pour obtenir les détails de la facture
-    private String detailsFacture() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Facture\n");
-        sb.append("Date: ").append(new SimpleDateFormat("yyyy-MM-dd").format(new Date())).append("\n");
-        sb.append("Médecin:");
-        //sb.append(m)
-        sb.append("Informations du Patient:\n");
-        sb.append(getPatient().detailsFacturePatient()); // Assuming getPatient() returns a Patient object
-        sb.append("Traitements:\n");
-
-        ListModel<String> listModel = menu1.listeEffectuer1.getModel();
-        if (listModel instanceof DefaultListModel) {
-            DefaultListModel<String> model = (DefaultListModel<String>) listModel;
-            for (int i = 0; i < model.size(); i++) {
-                String traitementStr = model.getElementAt(i);
-
-                String nomTraitement = traitementStr.substring(0, traitementStr.lastIndexOf(" Montant")).trim();
-                String prixStr = traitementStr.substring(traitementStr.lastIndexOf(":") + 1).trim();
-                double prix = Double.parseDouble(prixStr);
-                sb.append(nomTraitement).append(" : ").append(prix).append(" DHS").append("\n");
-            }
-        } else {
-            sb.append("Erreur: Le modèle de la liste n'est pas un DefaultListModel<String>.");
-        }
-
-        return sb.toString();
-    }
-    
+   
     //------------------------------------------------------------------------------------------------------------------------------------------
     //FORMAT DE LA DATE
     private String formatDate(Date date) throws ParseException {
@@ -216,16 +181,18 @@ public class Menu1Controleur implements MouseListener , ItemListener {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(date);
     }
+    
     private void chargementDeTraitement(String type) {
         List<Traitement> traitementList = facture.getAllTraitement(type);
             DefaultListModel<String> model = new DefaultListModel<>();
 
         for (Traitement traitement : traitementList) {
-            String str = traitement.getNomTraitement() + " Montant : "+ traitement.getPrix();
+            String str = traitement.getNomTraitement() + " Montant : "+ traitement.getPrix() ;
             model.addElement(str);
         }
         menu1.liste_Traitement.setModel(model);
     }
+    
     @Override
     public void mousePressed(MouseEvent e) {
     }
@@ -271,7 +238,10 @@ public class Menu1Controleur implements MouseListener , ItemListener {
                 DefaultListModel<String> modelEffectuer1 = getModel(menu1.listeEffectuer1);
                 modelEffectuer1.removeElement(selectedTraitementStr);
             }
+        } else if (e.getSource() == menu1.imprimer){
+            imprimerFacture();
         }
+        
     }
 
     private DefaultListModel<String> getModel(JList<String> list) {
@@ -313,6 +283,77 @@ public class Menu1Controleur implements MouseListener , ItemListener {
             menu1.type.addItem(serviceType);
         }
     }
+    // Imprimer
+    private void imprimerFacture() {
+        
+        int selectedRow = menu1.jTable1.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Veuillez sélectionner une facture à imprimer.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) menu1.jTable1.getModel();
+
+        String numFacture = model.getValueAt(selectedRow, 0).toString();
+        String detailsP = model.getValueAt(selectedRow, 1).toString(); // Assuming this contains patient details
+        String montant = model.getValueAt(selectedRow, 2).toString();
+        String date = model.getValueAt(selectedRow, 3).toString();
+
+        // Récupérer la liste des traitements à partir de la base de données
+        List<String> traitements = getTraitementsForFacture(numFacture);
+
+        // Concaténer les traitements dans une chaîne distincte
+        StringBuilder traitementDetailsBuilder = new StringBuilder();
+        for (String traitement : traitements) {
+            traitementDetailsBuilder.append(traitement).append("\n");
+        }
+        String traitementDetails = traitementDetailsBuilder.toString();
+
+        PrintFacture printFacture = new PrintFacture();
+
+        printFacture.numeFacture.setText(numFacture);
+        printFacture.details.setText(traitementDetails); // Set patient details here
+        printFacture.montant.setText(montant);
+        printFacture.date.setText(date);
+        printFacture.infosPatient.setText(detailsP); // Set treatment details here
+
+        printFacture.setVisible(true);
+        printFrame(printFacture);
+    }
+
+    //lISTE DES TRAITEMENTS EFFECTUER
+    private List<String> getTraitementsForFacture(String numFacture) {
+        return facture.getTraitementsForFacture(numFacture);
+    }
+    
+    private void printFrame(PrintFacture printFacture) {
+        PrinterJob job = PrinterJob.getPrinterJob();
+        job.setJobName("Print Facture");
+
+        job.setPrintable(new Printable() {
+            @Override
+            public int print(Graphics pg, PageFormat pf, int pageNum) {
+                if (pageNum > 0) {
+                    return Printable.NO_SUCH_PAGE;
+                }
+
+                Graphics2D g2 = (Graphics2D) pg;
+                g2.translate(pf.getImageableX(), pf.getImageableY());
+                g2.scale(0.7, 0.7); // Adjust the scale as needed
+
+                printFacture.printAll(g2);
+                return Printable.PAGE_EXISTS;
+            }
+        });
+
+        boolean ok = job.printDialog();
+        if (ok) {
+            try {
+                job.print();
+                 printFacture.dispose();
+            } catch (PrinterException ex) {
+            }
+        }
+        printFacture.dispose();
+    }
 }
-    
-    

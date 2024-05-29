@@ -30,7 +30,8 @@ public class Menu2Controleur implements MouseListener {
     public Menu2Controleur(Connection connection , Menu2 menu2){
         this.connection = connection;
         this.menu2 =menu2;
-        this.menu2.chercher.addMouseListener(this);
+        
+        this.menu2.btchercher.addMouseListener(this);
     }
 
      public static Menu2Controleur getInstance(Connection connection,Menu2 menu2){
@@ -50,13 +51,14 @@ public class Menu2Controleur implements MouseListener {
         } else {
             menu2.setVisible(true);
         }
+        
         updateTable();
     }
     
 
     @Override
     public void mouseClicked(MouseEvent e) { 
-        if (e.getSource() == menu2.chercher) {
+        if (e.getSource() == menu2.btchercher) {
             chercherFacture();
         }
     }
@@ -75,16 +77,23 @@ public class Menu2Controleur implements MouseListener {
 
             boolean success = facture.chercherFacturerAll();
             if (success) {
-                JOptionPane.showMessageDialog(null, "Facture Trouvé avec ", "Succès", JOptionPane.INFORMATION_MESSAGE);
-                menu2.details.setText(facture.getDetails() + "\n"+ facture.getMontant());
-            
+                JOptionPane.showMessageDialog(null, "Facture trouvée avec succès", "Succès", JOptionPane.INFORMATION_MESSAGE);
+
+                // Utiliser StringBuilder pour créer les détails ligne par ligne
+                StringBuilder detailsBuilder = new StringBuilder();
+                detailsBuilder.append("Détails de la facture:\n");
+                detailsBuilder.append(facture.getDetails()).append("\n");
+                detailsBuilder.append("Montant: ").append(facture.getMontant()).append(" DHS\n");
+
+                menu2.details.setText(detailsBuilder.toString());
+                EffacerChamps();
             } else {
                 JOptionPane.showMessageDialog(null, "Facture Nom Trouvé", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erreur: " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
-        EffacerChamps();
+        
     }
     
     private void chargementDeFacturePayer() {
@@ -127,7 +136,7 @@ public class Menu2Controleur implements MouseListener {
     }
     
     private void EffacerChamps(){
-        menu2.chercher.setText("");
+        menu2.numerFac.setText("");
     }
     @Override
     public void mousePressed(MouseEvent e) {
