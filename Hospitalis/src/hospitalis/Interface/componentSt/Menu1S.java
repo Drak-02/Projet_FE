@@ -104,11 +104,11 @@ public class Menu1S extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtables);
 
-        jtype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Médicament", "Matriel" }));
+        jtype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Médicament", "Matériel" }));
 
         chercher.setPreferredSize(new java.awt.Dimension(190, 22));
 
-        btChercher.setText("Chercher");
+        btChercher.setText("Rechercher");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,7 +143,7 @@ public class Menu1S extends javax.swing.JInternalFrame {
                         .addGap(116, 116, 116)
                         .addComponent(chercher, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btChercher, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btChercher, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtype, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

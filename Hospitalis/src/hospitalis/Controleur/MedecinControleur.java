@@ -57,7 +57,7 @@ public class MedecinControleur implements MouseListener {
         menu1Controleur = new Menu1Controleur(connection, menu1);
         menu2Controleur = new Menu2Controleur(connection, menu2);
         menu3Controleur = new Menu3Controleur(connection, menu3);
-        menu4Controleur = new Menu4Controleur(connection, menu4);
+        menu4Controleur = new Menu4Controleur(connection, menu4,menu1Controleur);
         menu5Controleur = new Menu5Controleur(connection, menu5);
         menu6Controleur = new Menu6Controleur(connection, menu6);
         

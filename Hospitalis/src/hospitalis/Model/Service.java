@@ -101,7 +101,7 @@ public class Service {
     public boolean modifierService(Connection connection) {
         try {
             //Change le type_service a nom
-            String query = "UPDATE service SET type_service=? ,description = ? Where codeService=? ";
+            String query = "UPDATE service SET type_service=? ,description = ? Where code_service=? ";
             
             PreparedStatement pstmt = connection.prepareStatement(query);
             

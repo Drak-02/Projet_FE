@@ -79,7 +79,7 @@ public class Menu1S2 extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(jtniveau);
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Niveau de Stocke");
+        jLabel8.setText("Niveau de Stock");
         jLabel8.setAlignmentY(0.0F);
 
         Imprimer.setText("Imprimer");

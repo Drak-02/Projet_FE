@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 29 mai 2024 à 13:01
+-- Généré le : mer. 29 mai 2024 à 19:58
 -- Version du serveur : 8.2.0
 -- Version de PHP : 8.3.0
 
@@ -20,6 +20,20 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `test`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `calendar`
+--
+
+DROP TABLE IF EXISTS `calendar`;
+CREATE TABLE IF NOT EXISTS `calendar` (
+  `jour` date NOT NULL,
+  `heure` time NOT NULL,
+  `matricule_med` int NOT NULL,
+  PRIMARY KEY (`jour`,`heure`,`matricule_med`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -43,6 +57,43 @@ CREATE TABLE IF NOT EXISTS `chambre` (
 INSERT INTO `chambre` (`num_chambre`, `type`, `disponibilite`, `categorie`) VALUES
 (12, 'Double', 'Disponible', 'Hospitalisation'),
 (145, 'Simple', 'Disponible', 'Hospitalisation');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `consultation`
+--
+
+DROP TABLE IF EXISTS `consultation`;
+CREATE TABLE IF NOT EXISTS `consultation` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `nom_prenom` varchar(100) NOT NULL,
+  `heure` varchar(50) NOT NULL,
+  `dure` varchar(50) NOT NULL,
+  `contenu` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `dossier`
+--
+
+DROP TABLE IF EXISTS `dossier`;
+CREATE TABLE IF NOT EXISTS `dossier` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idpatient` int NOT NULL,
+  `nom_P` varchar(100) NOT NULL,
+  `prenom_P` varchar(100) NOT NULL,
+  `infos_medi` varchar(50) DEFAULT NULL,
+  `prescription` varchar(50) DEFAULT NULL,
+  `resultats_test` varchar(50) DEFAULT NULL,
+  `date` date NOT NULL,
+  `matricule_med` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -89,6 +140,120 @@ CREATE TABLE IF NOT EXISTS `facturespayees` (
 ,`num_facture` varchar(50)
 ,`status` varchar(15)
 );
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `hospitalisation`
+--
+
+DROP TABLE IF EXISTS `hospitalisation`;
+CREATE TABLE IF NOT EXISTS `hospitalisation` (
+  `id_hospitalisation` int NOT NULL AUTO_INCREMENT,
+  `id_patient` int DEFAULT NULL,
+  `num_chambre` int DEFAULT NULL,
+  `date_admission` date DEFAULT NULL,
+  `date_sortie` date ,
+  PRIMARY KEY (`id_hospitalisation`),
+  KEY `id_patient` (`id_patient`),
+  KEY `num_chambre` (`num_chambre`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `hospitalisation`
+--
+
+INSERT INTO `hospitalisation` (`id_hospitalisation`, `id_patient`, `num_chambre`, `date_admission`, `date_sortie`) VALUES
+(1, 0, 12, '2024-05-29', NULL),
+(2, 0, 12, '2024-05-29', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `notification`
+--
+
+DROP TABLE IF EXISTS `notification`;
+CREATE TABLE IF NOT EXISTS `notification` (
+  `message` text NOT NULL,
+  `date_envoi` date NOT NULL,
+  `matricule_med` int NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `patient`
+--
+
+DROP TABLE IF EXISTS `patient`;
+CREATE TABLE IF NOT EXISTS `patient` (
+  `id` int NOT NULL,
+  `dateNais` date NOT NULL,
+  `nom` varchar(100) NOT NULL,
+  `prenom` varchar(100) NOT NULL,
+  `sexe` varchar(10) NOT NULL,
+  `etatcivil` varchar(20) NOT NULL,
+  `telephone` varchar(20) NOT NULL,
+  `sanguin` varchar(10) NOT NULL,
+  `taille` varchar(50) DEFAULT NULL,
+  `poids` varchar(50) DEFAULT NULL,
+  `lien` varchar(100) DEFAULT NULL,
+  `assureur` varchar(100) DEFAULT NULL,
+  `profession` varchar(100) DEFAULT NULL,
+  `adresse` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `patient`
+--
+
+INSERT INTO `patient` (`id`, `dateNais`, `nom`, `prenom`, `sexe`, `etatcivil`, `telephone`, `sanguin`, `taille`, `poids`, `lien`, `assureur`, `profession`, `adresse`) VALUES
+(1, '2024-05-03', 'Keita', 'ALi', 'Masculin', 'Celibataire', '0614163443', 'A+', '1.70', '70', 'oui', '010', 'etudiant', 'errachidia');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `patient_med`
+--
+
+DROP TABLE IF EXISTS `patient_med`;
+CREATE TABLE IF NOT EXISTS `patient_med` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `dateNais` date NOT NULL,
+  `nom` varchar(100) NOT NULL,
+  `prenom` varchar(100) NOT NULL,
+  `sexe` varchar(10) NOT NULL,
+  `etatcivil` varchar(20) NOT NULL,
+  `telephone` varchar(20) NOT NULL,
+  `sanguin` varchar(10) NOT NULL,
+  `taille` varchar(50) NOT NULL,
+  `poids` varchar(50) NOT NULL,
+  `lien` varchar(100) NOT NULL,
+  `assureur` varchar(100) NOT NULL,
+  `profession` varchar(100) NOT NULL,
+  `adresse` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rendez_vous`
+--
+
+DROP TABLE IF EXISTS `rendez_vous`;
+CREATE TABLE IF NOT EXISTS `rendez_vous` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `date_rdv` date NOT NULL,
+  `heure` varchar(50) NOT NULL,
+  `details_rdv` text,
+  `matricule_med` varchar(50) NOT NULL,
+  `type_rdv` varchar(50) NOT NULL,
+  `statut` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 

@@ -109,7 +109,12 @@ public class Menu2 extends javax.swing.JInternalFrame {
             }
         });
 
-        btchercher.setText("Chercher");
+        btchercher.setText("Rechercher");
+        btchercher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btchercherActionPerformed(evt);
+            }
+        });
 
         details.setColumns(20);
         details.setRows(5);
@@ -133,8 +138,8 @@ public class Menu2 extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(numerFac, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btchercher, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(132, 132, 132)
+                                .addComponent(btchercher, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(116, 116, 116)
                         .addComponent(jScrollPane3)))
                 .addContainerGap())
         );
@@ -155,7 +160,7 @@ public class Menu2 extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -165,6 +170,10 @@ public class Menu2 extends javax.swing.JInternalFrame {
     private void numerFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numerFacActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_numerFacActionPerformed
+
+    private void btchercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btchercherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btchercherActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -2,6 +2,8 @@ package hospitalis.Controleur.MenuAccueil;
 
 import hospitalis.Interface.componentAc.Menu3;
 import hospitalis.Model.Chambre;
+import hospitalis.Model.Patient;
+import hospitalis.Model.Hospitatlisation;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
@@ -9,6 +11,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,9 +37,9 @@ public class Menu3Controleur implements MouseListener {
         this.menu3 = menu3;
         //System.out.println("Appel création menuCont1");
         this.menu3.btajout.addMouseListener(this);
-        this.menu3.btsupp.addMouseListener(this);
+        //this.menu3.btsupp.addMouseListener(this);
         this.menu3.btmodi.addMouseListener(this);
-        fetchDataToTable();
+        //fetchDataToTable();
     }
 
     public static Menu3Controleur getInstance(Connection connection, Menu3 menu3) {
@@ -50,9 +60,7 @@ public class Menu3Controleur implements MouseListener {
             System.out.println("Le menu est null");
         } else {
             System.out.println("Le menu n'est pas null");
-            this.menu3.btajout.addMouseListener(this);
-            this.menu3.btsupp.addMouseListener(this);
-            this.menu3.btmodi.addMouseListener(this);
+            
         }
     }
     
@@ -62,117 +70,129 @@ public class Menu3Controleur implements MouseListener {
         } else {
             menu3.setVisible(true);
         }
+        update();
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
+   
         if (e.getSource() == menu3.btajout) {
-            handleAddChambre();
-        } else if (e.getSource() == menu3.btsupp) {
-            handleDeleteChambre();
+            try {
+                handleAffecterPatient();
+            } catch (ParseException ex) {
+                Logger.getLogger(Menu3Controleur.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (e.getSource() == menu3.btmodi) {
             handleModifyChambre();
         }
     }
 
-    public void handleAddChambre() {
-         if ( menu3.inputNumero.getText().isEmpty() ||  menu3.inputdispochambre.getText().isEmpty() || menu3.inputtypechambre.getText().isEmpty()) {
-    JOptionPane.showMessageDialog(menu3, "Veuillez remplir tous les champs", "Champs vides", JOptionPane.ERROR_MESSAGE);
-}
-         else{
-            // Récupérer les données de la nouvelle chambre depuis l'interface utilisateur
-            String numero = menu3.inputNumero.getText(); // Supposons que le champ s'appelle inputNumero dans l'interface
-            String disponibilite = menu3.inputdispochambre.getText(); // Supposons que le champ s'appelle inputDisponibilite dans l'interface
-            String type = menu3.inputtypechambre.getText(); // Supposons que le champ s'appelle inputType dans l'interface      
-            // Insérer la nouvelle chambre dans la base de données
-            String sql = "INSERT INTO chambre (numero, disponibilite, type) VALUES (?, ?, ?)";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setString(1, numero);
-                preparedStatement.setString(2, disponibilite);
-                preparedStatement.setString(3, type);
-
-                int rowsInserted = preparedStatement.executeUpdate();
-                if (rowsInserted > 0) {
-                    JOptionPane.showMessageDialog(menu3, "Chambre ajoutée avec succès!");
-                    fetchDataToTable(); // Mettre à jour le tableau après l'ajout
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(menu3, "Erreur lors de l'ajout de la chambre.");
-            }
+    public void handleAffecterPatient() throws ParseException {
+        if (menu3.nom.getText().isEmpty() || menu3.prenom.getText().isEmpty() || menu3.Naissance.getDate() == null) {
+            JOptionPane.showMessageDialog(menu3, "Veuillez remplir tous les champs", "Champs vides", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        else{
+            Patient patient = new Patient(connection);
+            
+            String nom = menu3.nom.getText();
+            String prenom = menu3.prenom.getText();
+            
+            String dateNaissance = formatDate(menu3.Naissance.getDate());// Exception
+            //String infosPatient = null;
+            
+            boolean success = patient.verificationPatient(nom ,prenom , dateNaissance);
+            System.out.println("Verification "+ patient.getId_patient());
+            if(success){ 
+                System.out.println("a++++");
+                chambre  = new Chambre(connection);
+                String categori = ((String) menu3.categorie.getSelectedItem());
+                String type = ((String) menu3.type.getSelectedItem());
+                int numChambre = Integer.parseInt(menu3.numeroChambre.getText());
+                
+                boolean verifieChambre = chambre.isDisponibleTexte(type, categori);
+                if(!verifieChambre){
+                    verifieChambre = chambre.isDisponible(numChambre);
+                }
+                if(verifieChambre){
+                    // Si la chambre est disponible mettre a jour la disponibilité de la chambre
+                    boolean su = chambre.updateDisponibilite(numChambre,"Occupée");
+                    
+                    //Effectuer l'hospitalisation
+                    String dateAdmission = formatDate(new Date());
+                    int id_patient = patient.getId_patient();
+                    
+                    boolean operationEffectue = Hospitatlisation.insertHospi(connection, id_patient, numChambre, dateAdmission);
+                    if(operationEffectue){
+                        fetchDataToTable();
+                        JOptionPane.showMessageDialog(menu3, "Patient Affecté à la chambre numéro :" + numChambre+" avec Succès");                 
+                    }else{
+                        JOptionPane.showMessageDialog(menu3, "Erreur Affectation", "Succès", JOptionPane.ERROR_MESSAGE);
+                    }
+                       
+                }else {
+                    JOptionPane.showMessageDialog(menu3, "Chambre Occupé", "occupé", JOptionPane.ERROR_MESSAGE);
+                }                          
+                
+            }else{
+                JOptionPane.showMessageDialog(menu3, "Veuillez Enregistre le Patient", "Enregistrement", JOptionPane.ERROR_MESSAGE);
+            }         
+        }
+        EffacerChamp();
     }
     
-    public void handleDeleteChambre() {
-        // Récupérer le numéro de la chambre sélectionnée
-        int selectedRow = menu3.tablechambre.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(menu3, "Veuillez sélectionner une chambre à supprimer.");
-            return;
+    private String formatDate(Date date) throws ParseException {
+        if (date == null) {
+            return null;
         }
-         Object[] options = {"Oui", "Non"};
-        int response = JOptionPane.showOptionDialog(
-            menu3,
-            "Voulez-vous vraiment supprimer cette chambre ?",
-            "Confirmation de suppression",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            options,
-            options[0]
-         );
-        if(response == JOptionPane.YES_OPTION){
-        String numeroChambre = menu3.tablechambre.getValueAt(selectedRow, 0).toString(); // Supposons que la première colonne contient le numéro de la chambre
-        
-        // Supprimer la chambre de la base de données
-        String sql = "DELETE FROM chambre WHERE numero = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, numeroChambre);
-
-            int rowsDeleted = preparedStatement.executeUpdate();
-            if (rowsDeleted > 0) {
-                JOptionPane.showMessageDialog(menu3, "Chambre supprimée avec succès!");
-                fetchDataToTable(); // Mettre à jour le tableau après la suppression
-            } else {
-                JOptionPane.showMessageDialog(menu3, "Aucune chambre trouvée avec ce numéro.");
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(menu3, "Erreur lors de la suppression de la chambre.");
-        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(date);
     }
-    }
+    
     public void handleModifyChambre() {
-        // Récupérer les nouvelles valeurs de disponibilité et de type depuis l'interface utilisateur
-        String nouvelleDisponibilite = menu3.inputdispochambre.getText(); // Supposons que le champ s'appelle inputDisponibilite dans l'interface
-        String nouveauType = menu3.inputtypechambre.getText(); // Supposons que le champ s'appelle inputType dans l'interface
-        
-        // Récupérer le numéro de la chambre sélectionnée
-        int selectedRow = menu3.tablechambre.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(menu3, "Veuillez sélectionner une chambre à modifier.");
+        // Récupérer les nouvelles valeurs de disponibilité depuis l'interface utilisateur
+        String nouvelleDisponibilite = (String) menu3.status.getSelectedItem();
+
+        // Récupérer le numéro de la chambre sélectionnée ou saisie
+    
+        String numeroChambre;
+        numeroChambre = menu3.numeroChambre.getText();
+
+
+        if (numeroChambre == null || numeroChambre.isEmpty()) {
+            JOptionPane.showMessageDialog(menu3, "Veuillez  entrer le numéro de la chambre.");
             return;
         }
-        String numeroChambre = menu3.tablechambre.getValueAt(selectedRow, 0).toString(); // Supposons que la première colonne contient le numéro de la chambre
-        
-        // Mettre à jour la chambre dans la base de données
-        String sql = "UPDATE chambre SET disponibilite = ?, type = ? WHERE numero = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, nouvelleDisponibilite);
-            preparedStatement.setString(2, nouveauType);
-            preparedStatement.setString(3, numeroChambre);
 
-            int rowsUpdated = preparedStatement.executeUpdate();
-            if (rowsUpdated > 0) {
-                JOptionPane.showMessageDialog(menu3, "Chambre modifiée avec succès!");
-                fetchDataToTable(); // Mettre à jour le tableau après la modification
-            } else {
-                JOptionPane.showMessageDialog(menu3, "Aucune chambre trouvée avec ce numéro.");
+        chambre = new Chambre(connection);
+
+        if (nouvelleDisponibilite.equals("Disponible")) {
+            try {
+                String dateSortie = formatDate(new Date());
+                System.out.println("dare"+dateSortie);
+                boolean success = Hospitatlisation.hospitUpdate(connection, Integer.parseInt(numeroChambre), dateSortie);
+
+                if (!success) {
+                    JOptionPane.showMessageDialog(menu3, "Erreur lors de la mise à jour de la date de sortie.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(Menu3Controleur.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(menu3, "Erreur lors de la conversion de la date.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(menu3, "Erreur lors de la modification de la chambre.");
         }
+
+        // Mettre à jour la disponibilité de la chambre
+        boolean updateSuccess = chambre.updateDisponibilite(Integer.parseInt(numeroChambre), nouvelleDisponibilite);
+
+        if (updateSuccess) {
+            fetchDataToTable();
+            JOptionPane.showMessageDialog(menu3, "Statut de la chambre changé avec succès.");
+        } else {
+            JOptionPane.showMessageDialog(menu3, "Erreur lors de la mise à jour de la disponibilité de la chambre.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+        menu3.numeroChambre.setText("");
     }
 
     @Override
@@ -186,7 +206,8 @@ public class Menu3Controleur implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) { }
-
+    
+    /**************************************************************************/
     public void fetchDataToTable() {
         DefaultTableModel model = (DefaultTableModel) menu3.tablechambre.getModel();
         model.setRowCount(0); // Effacer le tableau avant de le remplir à nouveau
@@ -194,15 +215,58 @@ public class Menu3Controleur implements MouseListener {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM chambre");
             while (resultSet.next()) {
-                String numero = resultSet.getString("numero");
+             
+                int numero = Integer.parseInt(resultSet.getString("num_chambre"));
                 String disponibilite = resultSet.getString("disponibilite");
                 String type = resultSet.getString("type");
+                String categorie = resultSet.getString("categorie");
                 
-                model.addRow(new Object[]{numero, disponibilite, type});
+                model.addRow(new Object[]{numero, type,  categorie ,disponibilite});
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(menu3, "Erreur lors de la récupération des données.");
         }
     }
+    ///------------------------
+    //Chargement de la categorie et le type de chambre
+    private void loadChambreTypes() {
+        List<String> chambreTypes = Chambre.getAllTypesChambre(connection);
+        Set<String> uniquechambreTypes = new HashSet<>(chambreTypes);
+
+        // Efface la JComboBox avant d'ajouter de nouvelles valeurs pour éviter les doublons
+        menu3.type.removeAllItems();
+
+        // Ajouter les types de services uniques à la JComboBox
+        for (String serviceType : uniquechambreTypes) {
+            menu3.type.addItem(serviceType);
+        }
+    }
+    
+    private void loadChambreCategorie() {
+        List<String> chambreCategorie = Chambre.getAllCategorieChambre(connection);
+        Set<String> uniquechambreCategorie = new HashSet<>(chambreCategorie);
+
+        // Efface la JComboBox avant d'ajouter de nouvelles valeurs pour éviter les doublons
+        menu3.categorie.removeAllItems();
+
+        // Ajouter les types de services uniques à la JComboBox
+        for (String serviceType : uniquechambreCategorie) {
+            menu3.categorie.addItem(serviceType);
+        }
+    }
+    
+    private void update(){
+        loadChambreCategorie();
+        loadChambreTypes();
+        fetchDataToTable();
+    }
+    private void EffacerChamp(){
+        menu3.nom.setText("");
+        menu3.prenom.setText("");
+        menu3.numeroChambre.setText("");
+        menu3.Naissance.setDate(null);
+        menu3.numeroChambre.setText("");
+    }
+    
 }

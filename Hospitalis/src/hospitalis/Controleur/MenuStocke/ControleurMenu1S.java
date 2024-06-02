@@ -119,6 +119,7 @@ public class ControleurMenu1S implements MouseListener, ListSelectionListener {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(date);
     }
+    
     private void EffacerChamps() {
         menu1.ipArt.setText("");
         menu1.ipQuant.setText("");
@@ -127,6 +128,7 @@ public class ControleurMenu1S implements MouseListener, ListSelectionListener {
         //menu1A.buttonGroup1.clearSelection();
         menu1.jtype.setSelectedIndex(0);
     }
+    
     //Cette methodes mes permet de chercher les données et afficher
     private void chargementDeStocke() {
         List<Stock> stockList = Stock.getAllStock(connection);
@@ -148,6 +150,7 @@ public class ControleurMenu1S implements MouseListener, ListSelectionListener {
 
     private void updateTable() {
         chargementDeStocke();
+        EffacerChamps();
     }
     //
     @Override

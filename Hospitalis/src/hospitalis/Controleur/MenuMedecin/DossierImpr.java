@@ -79,6 +79,8 @@ public class DossierImpr extends javax.swing.JFrame implements Printable {
         setUndecorated(true);
         setResizable(false);
 
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
         jLabel4.setText("HOPITAL DE REFERENCE");
 
@@ -376,8 +378,9 @@ public class DossierImpr extends javax.swing.JFrame implements Printable {
                 return Printable.NO_SUCH_PAGE;
             }
             Graphics2D g2d = (Graphics2D) graphics;
-            g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
             g2d.setColor(Color.WHITE);
+            g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+            graphics.setColor(Color.WHITE);
             // Obtenez les dimensions de la page imprimable
             double pageWidth = pageFormat.getImageableWidth();
             double pageHeight = pageFormat.getImageableHeight();

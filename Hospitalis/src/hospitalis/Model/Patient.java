@@ -4,6 +4,11 @@
  */
 package hospitalis.Model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+
 /**
  *
  * @author badra
@@ -18,6 +23,7 @@ public class Patient {
     private String sexe; // Sexe du patient
     private String cni;
     private String med;
+    private Connection connection;
 
     public String getMed() {
         return med;
@@ -104,6 +110,9 @@ public class Patient {
         this.telephone = telephone;
         this.sexe = sexe;
     }
+    public Patient(Connection connection){
+        this.connection = connection;
+    }
     // pour la Facturation 
     public Patient(){
         this.nom = "inconnue";
@@ -111,6 +120,7 @@ public class Patient {
         this.dateNaissance = "inconnue";
         this.cni = "inconnue";
     }
+    
     public String detailsFacturePatient() {
         StringBuilder sb = new StringBuilder();
         sb.append("Nom: ").append(nom).append("\n");
@@ -119,6 +129,35 @@ public class Patient {
         sb.append("CNI: ").append(cni).append("\n\n");
         sb.append("Nom: ").append(med).append("\n");
         return sb.toString();
+    }
+    
+    //Permet de vérifier si la patient est enregistre ou pas
+    public boolean verificationPatient(String nom, String prenom, String dateNaissance) {
+        String query = "SELECT * FROM patient WHERE nom = ? AND prenom = ? AND dateNais = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, nom);
+            statement.setString(2, prenom);
+            statement.setString(3, dateNaissance);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    Patient patient = new Patient();
+                    patient.setId_patient(resultSet.getInt("id"));
+                    id_patient = resultSet.getInt("id");
+                    System.out.println("id pate"+ id_patient);
+                    patient.setNom(resultSet.getString("nom"));
+                    patient.setPrenom(resultSet.getString("prenom"));
+                    patient.setDateNaissance(resultSet.getString("dateNais"));
+                    patient.setSexe(resultSet.getString("sexe"));
+                    return true; // Patient trouvé
+                } else {
+                    return false; // Aucun patient trouvé
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
 

@@ -40,7 +40,7 @@ public class Menu1ASControleur implements MouseListener, ListSelectionListener {
         this.menu.btsupprimer.addMouseListener(this);
         this.menu.btmodifier.addMouseListener(this);
         this.menu.jtables.getSelectionModel().addListSelectionListener(this);
-        chargementDeService();
+        //chargementDeService();
         
     }
     
@@ -69,6 +69,7 @@ public class Menu1ASControleur implements MouseListener, ListSelectionListener {
         }else{
             menu.setVisible(true);
         }
+       updateTable();
     }
         //------------------------------------------------------------------------------------
     
@@ -149,6 +150,7 @@ public class Menu1ASControleur implements MouseListener, ListSelectionListener {
                 if (success) {
                     JOptionPane.showMessageDialog(null, "Service modifié avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
                     updateTable(); // Mise à jour de la table après modification
+                    EffacerChamps();
                 } else {
                     JOptionPane.showMessageDialog(null, "Erreur lors de la modification de Service", "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
@@ -180,6 +182,7 @@ public class Menu1ASControleur implements MouseListener, ListSelectionListener {
                 if (success) {
                     JOptionPane.showMessageDialog(null, "Service supprimé avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
                     updateTable(); // Mise à jour de la table après suppression
+                    EffacerChamps();
                 } else {
                     JOptionPane.showMessageDialog(null, "Erreur lors de la suppression du service.", "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
@@ -198,6 +201,7 @@ public class Menu1ASControleur implements MouseListener, ListSelectionListener {
     //***************************************************************************************
     private void updateTable() {
         chargementDeService();
+        EffacerChamps();
     }
    //***************************************************************************************
     private void chargementDeService() {

@@ -29,6 +29,8 @@ public class Menu1Controleur implements MouseListener {
     private DossierImpr pd;
     private Connection connection;
     private Menu1 menu1;
+    private Menu4Controleur menu4;
+    
     private static Menu1Controleur instanceM1;
     private Dossiers dossier;
     private int patientId;
@@ -161,11 +163,6 @@ public class Menu1Controleur implements MouseListener {
             
             pd = new DossierImpr();
             populateFields(selectedRow);
-            //
-   
-            
-            
-            //
             pd.setVisible(true);
              // Imprimer le dossier
         PrinterJob printerJob = PrinterJob.getPrinterJob();

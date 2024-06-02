@@ -41,7 +41,7 @@ public class Menu1ATControleur implements MouseListener, ListSelectionListener {
         this.menu.btsupprimer.addMouseListener(this);
         this.menu.btmodifier.addMouseListener(this);
         this.menu.jtables.getSelectionModel().addListSelectionListener(this);
-        chargementDeTraitement();
+        //chargementDeTraitement();
     
     }
     //Contrôle la creation des instances lors de l'arriver pour ne pas créer a chaque fois une autre instance ( surcharge).
@@ -64,7 +64,8 @@ public class Menu1ATControleur implements MouseListener, ListSelectionListener {
             menu.setVisible(false);
         }else{
             menu.setVisible(true);
-        }   
+        }  
+       updateTable();
     }
     //Methode 
     ///-------------------------------------------------------------------------
@@ -201,11 +202,13 @@ public class Menu1ATControleur implements MouseListener, ListSelectionListener {
         menu.ipNom.setText("");
         menu.jdes.setText("");
         menu.type.setText("");
+        menu.ipPrix1.setText("");
 
     }
     //***************************************************************************************
     private void updateTable() {
        chargementDeTraitement();
+       EffacerChamps();
     }
    //***************************************************************************************
 

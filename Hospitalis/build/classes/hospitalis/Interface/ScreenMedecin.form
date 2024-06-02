@@ -41,27 +41,34 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="462" max="32767" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="142" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="396" max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" pref="988" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="27" max="-2" attributes="0"/>
-                  <EmptySpace pref="22" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel3" pref="58" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Name Application"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Black" size="24" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="M&#xe9;decin"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -165,7 +172,7 @@
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/ressources/icon/8.png"/>
+                  <Image iconType="3" name="/ressources/icon/calendar_icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gestion calendrier"/>
               </Properties>
@@ -212,7 +219,7 @@
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/ressources/icon/8.png"/>
+                  <Image iconType="3" name="/ressources/icon/diagnosis_icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Consulter dossier "/>
               </Properties>
@@ -239,8 +246,8 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jLabel5" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -257,7 +264,7 @@
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/ressources/icon/8.png"/>
+                  <Image iconType="3" name="/ressources/icon/phone_icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Notification et  RDV"/>
               </Properties>
@@ -307,7 +314,7 @@
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/ressources/icon/8.png"/>
+                  <Image iconType="3" name="/ressources/icon/patient_icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ajouter patient"/>
               </Properties>
@@ -357,7 +364,7 @@
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/ressources/icon/8.png"/>
+                  <Image iconType="3" name="/ressources/icon/room_icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gestion chambres"/>
               </Properties>
@@ -407,7 +414,7 @@
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/ressources/icon/8.png"/>
+                  <Image iconType="3" name="/ressources/icon/stethoscope_icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Consultation"/>
               </Properties>

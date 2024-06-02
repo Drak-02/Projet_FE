@@ -118,7 +118,7 @@
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Niveau de Stocke"/>
+        <Property name="text" type="java.lang.String" value="Niveau de Stock"/>
         <Property name="alignmentY" type="float" value="0.0"/>
       </Properties>
     </Component>

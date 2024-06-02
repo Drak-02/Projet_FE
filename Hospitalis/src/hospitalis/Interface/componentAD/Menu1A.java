@@ -143,7 +143,7 @@ public class Menu1A extends javax.swing.JInternalFrame {
             }
         });
 
-        inputRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrateur", "Finance", "Stocke", "Médecin", "Accueil" }));
+        inputRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrateur", "Finance", "Stock", "Médecin", "Accueil" }));
 
         btmodifier.setText("Modifié");
 
@@ -174,10 +174,11 @@ public class Menu1A extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtables.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jtables.setShowGrid(true);
         jScrollPane1.setViewportView(jtables);
 
-        btChercher.setText("Chercher");
+        btChercher.setText("Rechercher");
 
         cherche.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -287,12 +288,13 @@ public class Menu1A extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4)
                     .addComponent(inputNaiss, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btajouter)
-                    .addComponent(btsupprimer)
-                    .addComponent(btmodifier)
-                    .addComponent(cherche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btChercher, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btChercher, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btajouter)
+                        .addComponent(btsupprimer)
+                        .addComponent(btmodifier)
+                        .addComponent(cherche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

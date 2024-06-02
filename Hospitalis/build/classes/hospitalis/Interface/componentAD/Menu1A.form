@@ -150,12 +150,14 @@
                   <Component id="inputNaiss" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btajouter" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btsupprimer" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btmodifier" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cherche" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btChercher" alignment="0" min="-2" pref="21" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btajouter" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btsupprimer" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btmodifier" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cherche" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
@@ -327,7 +329,7 @@
           <StringArray count="5">
             <StringItem index="0" value="Administrateur"/>
             <StringItem index="1" value="Finance"/>
-            <StringItem index="2" value="Stocke"/>
+            <StringItem index="2" value="Stock"/>
             <StringItem index="3" value="M&#xe9;decin"/>
             <StringItem index="4" value="Accueil"/>
           </StringArray>
@@ -439,6 +441,7 @@
                 </Column>
               </TableColumnModel>
             </Property>
+            <Property name="selectionMode" type="int" value="0"/>
             <Property name="showGrid" type="boolean" value="true"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -459,7 +462,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btChercher">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Chercher"/>
+        <Property name="text" type="java.lang.String" value="Rechercher"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

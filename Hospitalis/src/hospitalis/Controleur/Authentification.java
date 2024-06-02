@@ -58,7 +58,6 @@ public class Authentification implements ActionListener {
             break;
         case "Médecin":
             // Redirection pour le médecin
-            // Redirection pour le médecin
             matMed = screenAuthentification.jmatricule.getText();
             MedecinControleur medecinControleur = new MedecinControleur(connection);
             medecinControleur.afficherScreenMedecin();
@@ -70,7 +69,7 @@ public class Authentification implements ActionListener {
             finance.afficherScreenFinance();
             screenAuthentification.dispose();            
             break;
-        case "Stocke":
+        case "Stock":
             // Redirection pour le service stocke
             StockeControleur stockeControleur = new StockeControleur(connection);
             stockeControleur.afficherStockeScreen();

@@ -378,6 +378,9 @@ public void envoyerNotification(String matriculeMed) {
         JOptionPane.showMessageDialog(menu1, "Ereur lors de l'envoi de la notification" ,"Erreur",JOptionPane.ERROR_MESSAGE);
     }  
   }
+    private void EffacerChamps(){
+        
+    }
     //
     @Override
     public void mousePressed(MouseEvent e) {

@@ -49,7 +49,7 @@ public class ScreenMedecin extends javax.swing.JFrame {
     private void initComponents() {
 
         Header = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         Menu = new javax.swing.JPanel();
         menu2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -71,23 +71,26 @@ public class ScreenMedecin extends javax.swing.JFrame {
         Header.setBackground(new java.awt.Color(0, 204, 255));
         Header.setPreferredSize(new java.awt.Dimension(1000, 70));
 
-        jLabel1.setText("Name Application");
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Médecin");
 
         javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
         Header.setLayout(HeaderLayout);
         HeaderLayout.setHorizontalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderLayout.createSequentialGroup()
-                .addContainerGap(462, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(396, 396, 396))
+            .addGroup(HeaderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+                .addContainerGap())
         );
         HeaderLayout.setVerticalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         getContentPane().add(Header, java.awt.BorderLayout.PAGE_START);
@@ -104,7 +107,7 @@ public class ScreenMedecin extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/8.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/calendar_icon.png"))); // NOI18N
         jLabel2.setText("Gestion calendrier");
 
         javax.swing.GroupLayout menu2Layout = new javax.swing.GroupLayout(menu2);
@@ -132,7 +135,7 @@ public class ScreenMedecin extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/8.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/diagnosis_icon.png"))); // NOI18N
         jLabel4.setText("Consulter dossier ");
 
         javax.swing.GroupLayout menu1Layout = new javax.swing.GroupLayout(menu1);
@@ -160,7 +163,7 @@ public class ScreenMedecin extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/8.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/phone_icon.png"))); // NOI18N
         jLabel5.setText("Notification et  RDV");
 
         javax.swing.GroupLayout menu3Layout = new javax.swing.GroupLayout(menu3);
@@ -168,8 +171,8 @@ public class ScreenMedecin extends javax.swing.JFrame {
         menu3Layout.setHorizontalGroup(
             menu3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menu3Layout.createSequentialGroup()
-                .addComponent(jLabel5)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         menu3Layout.setVerticalGroup(
             menu3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,7 +188,7 @@ public class ScreenMedecin extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/8.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/patient_icon.png"))); // NOI18N
         jLabel6.setText("Ajouter patient");
 
         javax.swing.GroupLayout menu4Layout = new javax.swing.GroupLayout(menu4);
@@ -214,7 +217,7 @@ public class ScreenMedecin extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/8.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/room_icon.png"))); // NOI18N
         jLabel7.setText("Gestion chambres");
 
         javax.swing.GroupLayout menu5Layout = new javax.swing.GroupLayout(menu5);
@@ -243,7 +246,7 @@ public class ScreenMedecin extends javax.swing.JFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/8.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/stethoscope_icon.png"))); // NOI18N
         jLabel8.setText("Consultation");
 
         javax.swing.GroupLayout menu6Layout = new javax.swing.GroupLayout(menu6);
@@ -451,8 +454,8 @@ public class ScreenMedecin extends javax.swing.JFrame {
     private javax.swing.JPanel CenterPanel;
     private javax.swing.JPanel Header;
     public javax.swing.JPanel Menu;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

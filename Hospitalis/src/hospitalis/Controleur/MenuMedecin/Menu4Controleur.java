@@ -28,22 +28,21 @@ public class Menu4Controleur implements MouseListener{
     private  Connection connection;
     private Menu4 menu4;
     private static Menu4Controleur instanceM4;
+    private  Menu1Controleur menu1c;
     private int patientId;
-    public Menu4Controleur(Connection connection , Menu4 menu4){
-        this.connection = connection ;
+    public Menu4Controleur(Connection connection, Menu4 menu4, Menu1Controleur menu1Controleur) {
+        this.connection = connection;
         this.menu4 = menu4;
-        this.menu4.btmodi.addMouseListener(this);
+        this.menu1c = menu1Controleur; // Initialisation du champ Menu1Controleur
         this.menu4.btajout.addMouseListener(this);
         this.menu4.btsupp.addMouseListener(this);
         fetchDataToTable();
     }
-    
-    public static Menu4Controleur getInstance(Connection connection,Menu4 menu4){
+    public static Menu4Controleur getInstance(Connection connection,Menu4 menu4 ,Menu1Controleur in){
         if (instanceM4 == null) {
             synchronized (Menu4Controleur.class) {
                 if (instanceM4 == null) {
-                    instanceM4 = new Menu4Controleur(connection,menu4);
-                    //System.out.println("Appel a l'instance de comtr men");
+                    instanceM4 = new Menu4Controleur(connection,menu4,in);
                 }
             }
         }
@@ -67,6 +66,7 @@ public class Menu4Controleur implements MouseListener{
         }
     }   
     public void handleAddPatient() {
+       
     if (menu4.inputdatenais.getDate() == null || menu4.inputnompatient.getText().isEmpty() || menu4.inputetatcivil.getSelectedItem() == null 
         || menu4.inputlien.getText().isEmpty() || menu4.inputadresse.getText().isEmpty() || menu4.inputassureur.getText().isEmpty()
         || menu4.inputtelephone.getText().isEmpty() || menu4.inputpoids.getText().isEmpty() || menu4.inputprofession.getText().isEmpty()
@@ -126,8 +126,9 @@ public class Menu4Controleur implements MouseListener{
                             dossierStatement.setString(8, Authentification.matMed);
                             int dossierInserted = dossierStatement.executeUpdate(); // Ajout du dossier médical
                             if (dossierInserted > 0) {
-                                JOptionPane.showMessageDialog(menu4, "Patient et dossier médical ajoutés avec succès!");
+                                JOptionPane.showMessageDialog(menu4, "Patient ajouté avec succès!");
                                 fetchDataToTable();
+                                menu1c.fetchDataToTable();
                                 menu4.inputdatenais.setDate(null);
                                 menu4.inputnompatient.setText("");
                                 menu4.inputprenompatient.setText("");

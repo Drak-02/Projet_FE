@@ -208,7 +208,7 @@ public class ScreenAdmin extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/traiter.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/icon/chambre-dhopital.png"))); // NOI18N
         jLabel6.setText("Gestion Chambre");
 
         javax.swing.GroupLayout menu4Layout = new javax.swing.GroupLayout(menu4);

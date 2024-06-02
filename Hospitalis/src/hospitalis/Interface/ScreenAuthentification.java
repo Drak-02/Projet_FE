@@ -61,7 +61,7 @@ public class ScreenAuthentification extends javax.swing.JFrame {
         btconnecter.setBackground(new java.awt.Color(102, 102, 102));
         btconnecter.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btconnecter.setForeground(new java.awt.Color(255, 255, 255));
-        btconnecter.setText("Connecter");
+        btconnecter.setText("Se connecter");
         btconnecter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btconnecterActionPerformed(evt);

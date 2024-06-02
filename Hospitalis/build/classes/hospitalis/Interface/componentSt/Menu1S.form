@@ -68,7 +68,7 @@
                       <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
                       <Component id="chercher" min="-2" pref="263" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btChercher" min="-2" pref="90" max="-2" attributes="0"/>
+                      <Component id="btChercher" min="-2" pref="99" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -223,7 +223,7 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="2">
             <StringItem index="0" value="M&#xe9;dicament"/>
-            <StringItem index="1" value="Matriel"/>
+            <StringItem index="1" value="Mat&#xe9;riel"/>
           </StringArray>
         </Property>
       </Properties>
@@ -249,7 +249,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btChercher">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Chercher"/>
+        <Property name="text" type="java.lang.String" value="Rechercher"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

@@ -197,4 +197,91 @@ public class Chambre {
         }
         return listChambre;
     }
+    //*********************************************
+    public static List<String> getAllTypesChambre(Connection connection) {
+        List<String> chambreTypes = new ArrayList<>();
+        String query = "SELECT DISTINCT type FROM chambre";
+
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                chambreTypes.add(resultSet.getString("type"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return chambreTypes;
+    }
+    public static List<String> getAllCategorieChambre(Connection connection) {
+        List<String> chambreCategorie = new ArrayList<>();
+        String query = "SELECT DISTINCT categorie FROM chambre";
+
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                chambreCategorie.add(resultSet.getString("categorie"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return chambreCategorie;
+    }
+    // Affecter un patient ///
+    public boolean updateDisponibilite(int num,String dispo){
+        String query = "UPDATE Chambre SET disponibilite = ? WHERE num_chambre = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, dispo);
+            stmt.setInt(2, num);
+            
+            stmt.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    
+    //
+    public  boolean isDisponible(int numChambre) { /// Numero Chambre
+        String query = "SELECT disponibilite FROM Chambre WHERE num_chambre = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, numChambre);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String disponibilite = rs.getString("disponibilite");
+                if("Disponible".equals(disponibilite)){
+                      Chambre chambre = new Chambre(connection);
+                      chambre.setNumChambre(rs.getInt("num_chambre"));
+                     return true;
+                }  
+            }
+        }catch (SQLException e){
+        }  
+        return false;
+    }
+    public  boolean isDisponibleTexte(String type, String categorie) { /// Numero Chambre
+        String query = "SELECT * FROM Chambre WHERE type = ? AND categorie = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, type);
+            stmt.setString(2, categorie);
+            
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String disponibilite = rs.getString("disponibilite");
+                if("Disponible".equals(disponibilite)){
+                      Chambre chambre = new Chambre(connection);
+                      chambre.setNumChambre(rs.getInt("num_chambre"));
+                     return true;
+                }                
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }
