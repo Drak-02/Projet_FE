@@ -113,7 +113,7 @@ public class Menu1 extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         btajout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btajout.setText("Ajouter");
+        btajout.setText("Générer");
 
         jLabel2.setText("Information Patient");
 

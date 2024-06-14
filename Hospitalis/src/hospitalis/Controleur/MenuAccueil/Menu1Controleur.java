@@ -82,42 +82,45 @@ public class Menu1Controleur implements MouseListener {
         });
     } 
     public void afficherCreneau() {
-    String sql = "SELECT heure, jour FROM calendar WHERE matricule_med=?";
-     boolean hasResults = false;
-    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-        stmt.setString(1, menu1.inputmatrimed.getText());
-        try (ResultSet rs = stmt.executeQuery()) {
-            // Vider le JComboBox et les listes
-            menu1.combocreneau.removeAllItems();
-            creneaux.clear();
-            dates.clear();
-            // Ajouter une option par défaut
-            menu1.combocreneau.addItem("Choisissez un créneau");
-            // Parcourir les résultats
-            while (rs.next()) {
-                hasResults = true; 
-                String creneau = rs.getString("heure");
-                Date date = rs.getDate("jour");
-                // Ajouter le créneau et la date aux listes
-                creneaux.add(creneau);
-                dates.add(date);
-                // Ajouter le créneau au JComboBox
-                menu1.combocreneau.addItem(creneau);
-}
-            if(hasResults){
-               JOptionPane.showMessageDialog(menu1, "Choisisssez un Creneau", "CHOISIR CRENEAU", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                JOptionPane.showMessageDialog(menu1, "Ce medecin n'apparitent pas à la base", "ERREUR", JOptionPane.ERROR_MESSAGE);
+        String val= menu1.inputmatrimed.getText();
+        String sql = "SELECT heure, jour FROM calendar WHERE matricule_med=?";
+         boolean hasResults = false;
+        if(val.length() >=5){
+                try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+                stmt.setString(1,val );
+                try (ResultSet rs = stmt.executeQuery()) {
+                    // Vider le JComboBox et les listes
+                    menu1.combocreneau.removeAllItems();
+                    creneaux.clear();
+                    dates.clear();
+                    // Ajouter une option par défaut
+                    menu1.combocreneau.addItem("Choisissez un créneau");
+                    // Parcourir les résultats
+                    while (rs.next()) {
+                        hasResults = true; 
+                        String creneau = rs.getString("heure");
+                        Date date = rs.getDate("jour");
+                        // Ajouter le créneau et la date aux listes
+                        creneaux.add(creneau);
+                        dates.add(date);
+                        // Ajouter le créneau au JComboBox
+                        menu1.combocreneau.addItem(creneau);
+                    }
+                if(hasResults){
+                   JOptionPane.showMessageDialog(menu1, "Choisisssez un Creneau", "CHOISIR CRENEAU", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(menu1, "Ce medecin n'apparitent pas à la base", "ERREUR", JOptionPane.ERROR_MESSAGE);
+
+                }
 
             }
-            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(menu1, "Erreur à l'affichage des créneaux.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-        JOptionPane.showMessageDialog(menu1, "Erreur à l'affichage des créneaux.", "Erreur", JOptionPane.ERROR_MESSAGE);
-    }
+     }
     
-}
+    }
 // Méthode pour mettre à jour la date dans le JDateChooser lorsqu'un créneau est sélectionné
 public void mettreAJourDate() {
     int selectedIndex = menu1.combocreneau.getSelectedIndex();

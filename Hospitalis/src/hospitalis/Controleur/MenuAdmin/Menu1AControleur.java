@@ -5,7 +5,10 @@
 package hospitalis.Controleur.MenuAdmin;
 
 import hospitalis.Interface.componentAD.Menu1A;
+import hospitalis.Model.Service;
 import hospitalis.Model.Utilisateurs;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,7 +16,9 @@ import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,8 +26,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.crypto.Cipher;
 
-public class Menu1AControleur implements MouseListener ,ListSelectionListener {
+public class Menu1AControleur implements MouseListener , ListSelectionListener, ItemListener {
     private Connection connection;
     private Menu1A menu1A;
     private Utilisateurs users;
@@ -48,6 +54,7 @@ public class Menu1AControleur implements MouseListener ,ListSelectionListener {
         });
         //this.menu1A.jtables.getSelectionModel().addListSelectionListener(this);
         chargementDeUsers();
+        loadServiceTypes();
     }
     
     //Contrôle la creation des instances lors de l'arriver pour ne pas créer a chaque fois une autre instance ( surcharge).
@@ -150,7 +157,7 @@ public class Menu1AControleur implements MouseListener ,ListSelectionListener {
         users.setNom(menu1A.inputNom.getText());
         users.setPrenom(menu1A.inputPrenom.getText());
         users.setDateNaissance(dateNaissanceStr);
-        users.setPassword(new String(menu1A.inputPass.getPassword()));
+        users.setPassword(new String(menu1A.inputPass.getPassword()));//LE Cryptage de la password 
         users.setTelephone(Long.parseLong(menu1A.inputTel.getText())); // Utilisez long ici
         users.setSpecialite(menu1A.inputSpe.getText());
         users.setEmail(menu1A.inputMai.getText());
@@ -309,6 +316,7 @@ public class Menu1AControleur implements MouseListener ,ListSelectionListener {
 
     private void updateTable() {
         chargementDeUsers();
+        loadServiceTypes();
     }
     //-----------------------------------------------------
     private void chercherUser() {
@@ -348,6 +356,41 @@ public class Menu1AControleur implements MouseListener ,ListSelectionListener {
         //EffacerChamps();
     }
     
+    //Liste des services
+    private void loadServiceTypes() {
+        List<String> serviceTypes = Service.getAllServiceTypes(connection);
+        Set<String> uniqueServiceTypes = new HashSet<>(serviceTypes);
+
+        // Efface la JComboBox avant d'ajouter de nouvelles valeurs pour éviter les doublons
+        menu1A.service.removeAllItems();
+
+        // Ajouter les types de services uniques à la JComboBox
+        for (String serviceType : uniqueServiceTypes) {
+            menu1A.service.addItem(serviceType);
+        }
+    }
+    private void chargementDisplay(String mot){
+        List<Utilisateurs> userList = Utilisateurs.getAllUsers(connection);
+        DefaultTableModel model = new DefaultTableModel(
+            new Object[]{"Matricule", "Nom", "Prenom", "Date de Naissance", "Mot de Passe", "Telephone", "Specialite", "Email", "Role", "Sexe"}, 
+            0
+        );
+        for (Utilisateurs user : userList) {
+            model.addRow(new Object[]{
+                user.getMatricule(),
+                user.getNom(),
+                user.getPrenom(),
+                user.getDateNaissance(),
+                user.getPassword(),
+                user.getTelephone(),
+                user.getSpecialite(),
+                user.getEmail(),
+                user.getRole(),
+                user.getSexe()
+            });
+        }
+        menu1A.jtables.setModel(model);
+    }
     
     //-----------------------------------------------------
     @Override
@@ -362,4 +405,11 @@ public class Menu1AControleur implements MouseListener ,ListSelectionListener {
     @Override
     public void mouseExited(MouseEvent e) {}
 
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        if(e.getStateChange() == ItemEvent.SELECTED){
+            String selectItem = (String) menu1A.display.getSelectedItem();
+            chargementDisplay(selectItem);
+        }
+    }
 }
