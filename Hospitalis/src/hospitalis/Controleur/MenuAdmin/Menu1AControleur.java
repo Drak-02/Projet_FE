@@ -54,7 +54,7 @@ public class Menu1AControleur implements MouseListener , ListSelectionListener, 
         });
         //this.menu1A.jtables.getSelectionModel().addListSelectionListener(this);
         chargementDeUsers();
-        loadServiceTypes();
+        //loadServiceTypes();
     }
     
     //Contrôle la creation des instances lors de l'arriver pour ne pas créer a chaque fois une autre instance ( surcharge).
@@ -316,7 +316,7 @@ public class Menu1AControleur implements MouseListener , ListSelectionListener, 
 
     private void updateTable() {
         chargementDeUsers();
-        loadServiceTypes();
+        //loadServiceTypes();
     }
     //-----------------------------------------------------
     private void chercherUser() {
@@ -357,6 +357,7 @@ public class Menu1AControleur implements MouseListener , ListSelectionListener, 
     }
     
     //Liste des services
+    /*
     private void loadServiceTypes() {
         List<String> serviceTypes = Service.getAllServiceTypes(connection);
         Set<String> uniqueServiceTypes = new HashSet<>(serviceTypes);
@@ -368,11 +369,11 @@ public class Menu1AControleur implements MouseListener , ListSelectionListener, 
         for (String serviceType : uniqueServiceTypes) {
             menu1A.service.addItem(serviceType);
         }
-    }
+    }*/
     private void chargementDisplay(String mot){
         List<Utilisateurs> userList = Utilisateurs.getAllUsers(connection);
         DefaultTableModel model = new DefaultTableModel(
-            new Object[]{"Matricule", "Nom", "Prenom", "Date de Naissance", "Mot de Passe", "Telephone", "Specialite", "Email", "Role", "Sexe"}, 
+            new Object[]{"Matricule", "Nom", "Prenom", "Date de Naissance", "Mot de Passe", "Telephone", "Specialite", "Email", "Role", "Sexe"},
             0
         );
         for (Utilisateurs user : userList) {
