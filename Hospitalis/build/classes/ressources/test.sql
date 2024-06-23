@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 29 mai 2024 à 19:58
+-- Généré le : jeu. 20 juin 2024 à 13:56
 -- Version du serveur : 8.2.0
 -- Version de PHP : 8.3.0
 
@@ -134,10 +134,10 @@ INSERT INTO `facture` (`num_facture`, `details`, `montant`, `date`, `listeTraite
 --
 DROP VIEW IF EXISTS `facturespayees`;
 CREATE TABLE IF NOT EXISTS `facturespayees` (
-`date` date
+`num_facture` varchar(50)
 ,`details` varchar(255)
 ,`montant` decimal(10,2)
-,`num_facture` varchar(50)
+,`date` date
 ,`status` varchar(15)
 );
 
@@ -153,19 +153,21 @@ CREATE TABLE IF NOT EXISTS `hospitalisation` (
   `id_patient` int DEFAULT NULL,
   `num_chambre` int DEFAULT NULL,
   `date_admission` date DEFAULT NULL,
-  `date_sortie` date ,
+  `date_sortie` date DEFAULT NULL,
   PRIMARY KEY (`id_hospitalisation`),
   KEY `id_patient` (`id_patient`),
   KEY `num_chambre` (`num_chambre`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `hospitalisation`
 --
 
 INSERT INTO `hospitalisation` (`id_hospitalisation`, `id_patient`, `num_chambre`, `date_admission`, `date_sortie`) VALUES
-(1, 0, 12, '2024-05-29', NULL),
-(2, 0, 12, '2024-05-29', NULL);
+(3, 1, 12, '2024-05-30', '2024-05-30'),
+(2, 1, 12, '2024-05-30', '2024-05-30'),
+(5, 1, 12, '2024-05-30', '2024-05-30'),
+(6, 2, 12, '2024-05-30', '2024-05-30');
 
 -- --------------------------------------------------------
 
@@ -210,7 +212,8 @@ CREATE TABLE IF NOT EXISTS `patient` (
 --
 
 INSERT INTO `patient` (`id`, `dateNais`, `nom`, `prenom`, `sexe`, `etatcivil`, `telephone`, `sanguin`, `taille`, `poids`, `lien`, `assureur`, `profession`, `adresse`) VALUES
-(1, '2024-05-03', 'Keita', 'ALi', 'Masculin', 'Celibataire', '0614163443', 'A+', '1.70', '70', 'oui', '010', 'etudiant', 'errachidia');
+(1, '2024-05-03', 'Keita', 'ALi', 'Masculin', 'Celibataire', '0614163443', 'A+', '1.70', '70', 'oui', '010', 'etudiant', 'errachidia'),
+(2, '2003-07-11', 'Coulibaly', 'Lassine', 'Masculin', 'Celibataire', '0758921235', 'B+', '1.70', '69', 'Moussa', '487', 'Etudiant', 'Errachidia');
 
 -- --------------------------------------------------------
 
@@ -267,16 +270,21 @@ CREATE TABLE IF NOT EXISTS `service` (
   `type_service` varchar(50) DEFAULT NULL,
   `description` text,
   PRIMARY KEY (`code_service`)
-) ENGINE=MyISAM AUTO_INCREMENT=126 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=476 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `service`
 --
 
 INSERT INTO `service` (`code_service`, `type_service`, `description`) VALUES
-(123, 'Urgance', 'je vais change'),
+(123, 'D\'Urgance', 'Le service des urgences est dédié à la prise en charge rapide et efficace des patients présentant des problèmes de santé aigus, potentiellement graves ou menaçant la vie. Ce service est opérationnel 24 heures sur 24, 7 jours sur 7, et est équipé pour répondre à une large gamme de situations médicales urgentes.'),
 (124, 'Administratifs', 'pour le accueil et autre '),
-(125, 'Traumatologie', 'L\'automatique');
+(125, 'Traumatologie', 'Le service de traumatologie est une branche spécialisée de la médecine qui s\'occupe du diagnostic, du traitement et de la réhabilitation des patients ayant subi des blessures physiques, souvent causées par des accidents ou des impacts violents. Ce service traite une variété de blessures, allant des fractures osseuses aux traumatismes crâniens, en passant par les lésions des tissus mous et les blessures articulaires.,'),
+(12, 'Cardiologie', 'Le service de cardiologie est spécialisé dans le diagnostic et le traitement des maladies du cœur et des vaisseaux sanguins. Il traite des conditions telles que les crises cardiaques, l\'insuffisance cardiaque, les arythmies et l\'hypertension. Les cardiologues effectuent des tests diagnostiques tels que les ECG, les échocardiogrammes et les tests de stress cardiaque.'),
+(17, 'Neurologie', 'Le service de neurologie traite les troubles du système nerveux, y compris le cerveau, la moelle épinière et les nerfs périphériques. Les neurologues diagnostiquent et traitent des conditions telles que les accidents vasculaires cérébraux, l\'épilepsie, la sclérose en plaques, la maladie de Parkinson et les migraines.'),
+(475, 'Pédiatrie', ' Le service de pédiatrie est dédié à la santé et au bien-être des nourrissons, des enfants et des adolescents. Les pédiatres fournissent des soins préventifs, diagnostiquent et traitent les maladies infantiles, et gèrent les troubles chroniques chez les enfants.'),
+(148, 'Gynécologie et Obstétrique', 'Ce service couvre la santé reproductive des femmes, y compris la grossesse, l\'accouchement et les troubles gynécologiques. Les obstétriciens-gynécologues (OB-GYN) prennent en charge les grossesses normales et à risque, effectuent des accouchements et traitent des conditions telles que les fibromes utérins, les cancers gynécologiques et les troubles menstruels.'),
+(178, 'Radiologie', 'Le service de radiologie utilise des techniques d\'imagerie médicale pour diagnostiquer et traiter des maladies. Les radiologues interprètent les images obtenues par radiographie, tomodensitométrie (CT), résonance magnétique (IRM), échographie et médecine nucléaire pour aider à diagnostiquer diverses conditions médicales.');
 
 -- --------------------------------------------------------
 
@@ -404,12 +412,12 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
 --
 
 INSERT INTO `utilisateurs` (`Matricule`, `Nom`, `Prenom`, `DateNaissance`, `Password`, `Telephone`, `Specialite`, `Email`, `Role`, `Sexe`) VALUES
-('12345', 'aliou', 'ke', '2020-05-16', '145', '894648935', 'medecin', 'g@gmail.com', 'Administrateur', 'Homme'),
-('12564', 'Ali', 'efz', '2024-05-11', '124', '451361894', '78efkfe', ',l,ke', 'Stocke', 'Homme'),
-('56884', 'bas', 'zez', '2004-05-14', '123', '118853547', 'medecin', 'ba@gmail.com', 'Finance', 'Homme'),
-('75788', 'efz', 'fezf', '2024-05-17', '123', '48965', 'zfef', 'feef', 'Accueil', 'Homme'),
-('12452', 'S', 'Moussa', '2024-05-02', '123', '784595269', 'Medecin', 'moussa@gmail.com', 'Médecin', 'Homme'),
-('234', 'SOUNA', 'ABDOUL', '1764-05-01', '123', '9', 'MONOPOLE', 'abdoul@gmail.com', 'Stocke', 'Homme');
+('12345', 'Keita', 'Badra', '2002-12-09', 'h5ZzYeARgPCmzGKzhOzRMbVt9E+3By4wKEqlHaS8prA=', '614163443', 'Chirugie', 'keitamister@gmail.com', 'Administrateur', 'Homme'),
+('12369', 'sy', 'Kali', '2000-06-01', 'LQpscbUyUINxytxF/HI374o9SI+1Akp1Fap+oZO81aI=', '678895124', 'Docteur', 'sy@gmail.com', 'Administrateur', 'Homme'),
+('56884', 'Bah', 'Demba', '2003-06-05', 'nGHAoWOgnk98+BOmNWv0neKNabPz5p64ghnRzb2l+vk=', '689456235', 'Traumatologue', 'bad@gmail.com', 'Finance', 'Homme'),
+('75788', 'Sissoko', 'Oumou', '2000-06-09', 'Pa1XZUuPKLwGW5JdlKsoE2+io2k1Nl5zoStWr10IwcQ=', '785124896', 'Docteur', 'sissoko@gmail.com', 'Accueil', 'Femme'),
+('12452', 'S', 'Moussa', '2002-06-05', 'khyv3cx0ZkBsbXKNByCoARWHYDfHn3L+iNeLADRH3a8=', '784595269', 'Medecin', 'moussa@gmail.com', 'Médecin', 'Homme'),
+('234', 'Souna', 'Abdoul', '2002-09-11', 'rc6OUaFcUIX4gGROdNRc/1NK7N7m0TgPdSfg3ndtdKI=', '678521124', 'responsable stockage', 'souna@gmail.com', 'Stock', 'Homme');
 
 -- --------------------------------------------------------
 
